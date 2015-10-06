@@ -21,14 +21,13 @@ syntax on
 "----------------------
 nnoremap <C-p> :FZF<CR>
 
-
 "----------------------
 " Colour Things
 "----------------------
+"set t_Co=256
+let g:solarized_termcolors=256
+colorscheme solarized
 set background=dark
-colorscheme vimbrant
-highlight ColorColumn ctermbg=7
-highlight ColorColumn guibg=Gray
 
 "----------------------
 " Syntactic
@@ -43,7 +42,7 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_html_checkers=['']
 
 "----------------------
-" Buffers 
+" Buffers
 "----------------------
 set hidden
 let g:airline#extensions#tabline#enabled = 1
@@ -54,6 +53,7 @@ map <Leader><tab> :bn<CR>
 map <Leader>` :bp<CR>
 map ` :EasyBuffer<CR>
 nnoremap <Leader>tw :call TrimWhitespace()<CR>
+
 "----------------------
 " Status Bar
 "----------------------
@@ -62,11 +62,13 @@ let g:airline#extensions#syntastic#enabled=1
 set laststatus=2
 let g:airline_powerline_fonts = 1
 
-" Functions
-" Trim trailing whitespace
+"----------------------
+" Sneaky Functions
+"----------------------
 function! TrimWhitespace()
   %s/\s\+$//e
 endfunc
+
 "----------------------
 " vim-plug
 "----------------------
