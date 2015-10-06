@@ -40,7 +40,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-let g:syntastic_disabled_filetypes=['html']
+let g:syntastic_html_checkers=['']
 
 "----------------------
 " Buffers 
@@ -53,7 +53,7 @@ let g:airline#extensions#tabline#show_buffers = 1
 map <Leader><tab> :bn<CR>
 map <Leader>` :bp<CR>
 map ` :EasyBuffer<CR>
-
+nnoremap <Leader>tw :call TrimWhitespace()<CR>
 "----------------------
 " Status Bar
 "----------------------
@@ -62,6 +62,11 @@ let g:airline#extensions#syntastic#enabled=1
 set laststatus=2
 let g:airline_powerline_fonts = 1
 
+" Functions
+" Trim trailing whitespace
+function! TrimWhitespace()
+  %s/\s\+$//e
+endfunc
 "----------------------
 " vim-plug
 "----------------------
