@@ -9,11 +9,18 @@ set expandtab
 set smarttab
 set tabstop=2
 set shiftwidth=2
+set hlsearch
+set incsearch
 set ignorecase
 set smartcase
 set ttyfast
 set autoindent
 set ttimeoutlen=50
+set cursorline
+set noerrorbells
+set visualbell
+set scrolloff=10
+set sidescrolloff=10
 syntax on
 
 "----------------------
@@ -96,6 +103,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-rails'
+Plug 'adimit/prolog.vim'
 
 "Syntax Highlighting
 Plug 'scrooloose/syntastic'
