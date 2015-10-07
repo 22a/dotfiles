@@ -19,8 +19,8 @@ set ttimeoutlen=50
 set cursorline
 set noerrorbells
 set visualbell
-set scrolloff=10
-set sidescrolloff=10
+set scrolloff=15
+set sidescrolloff=15
 syntax on
 
 "----------------------
@@ -104,6 +104,7 @@ Plug 'cakebaker/scss-syntax.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-rails'
 Plug 'adimit/prolog.vim'
+Plug 'dag/vim2hs'
 
 "Syntax Highlighting
 Plug 'scrooloose/syntastic'
