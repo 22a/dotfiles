@@ -1,0 +1,7 @@
+alias v='vim'
+alias vi='vim'
+alias emacs='vim'
+alias l='ls -alh'
+alias la='ls -alh'
+alias lt='ls -alrth'
+alias irbs='irb --simple-prompt'
