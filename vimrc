@@ -27,15 +27,19 @@ syntax on
 " Key Bindings
 "----------------------
 
-"Begone foul arrows
+" Begone foul arrows
 for prefix in ['i', 'n', 'v']
   for key in ['<Up>', '<Down>', '<Left>', '<Right>']
     exe prefix . "noremap " . key . " <Nop>"
   endfor
 endfor
 
-"Ctrl-P for fzf
+" Ctrl-P for fzf
 nnoremap <C-p> :FZF<CR>
+
+" Trim Leading WS
+nnoremap <Leader>tw :call TrimWhitespace()<CR>
+
 
 "----------------------
 " Colour Things
@@ -55,7 +59,6 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_html_checkers=['']
-let g:ycm_global_ycm_extra_conf = '~/._ycm_extra_conf.py'
 
 "----------------------
 " Buffers
@@ -64,11 +67,11 @@ set hidden
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#show_buffers = 1
+
 " cycle through buffers
 map <Leader><tab> :bn<CR>
 map <Leader>` :bp<CR>
 map ` :EasyBuffer<CR>
-nnoremap <Leader>tw :call TrimWhitespace()<CR>
 
 "----------------------
 " Status Bar
@@ -86,21 +89,24 @@ function! TrimWhitespace()
 endfunc
 
 "----------------------
-" vim-plug
+" Plugins
 "----------------------
 call plug#begin('~/.vim/plugged')
 
 " git diff in gutter
 Plug 'airblade/vim-gitgutter'
 
-" enhanced netrw
+" enhanced netrw salad
 Plug 'tpope/vim-vinegar'
 
 " Buffer Navigation
 Plug 'troydm/easybuffer.vim'
 
-" auto wizzard completion
-Plug 'Valloric/YouCompleteMe'
+" Wizard Autocompletion
+Plug 'ervandew/supertab'
+
+" Snippets in your bippets
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
 " Languages
 Plug 'kchmck/vim-coffee-script'
@@ -126,4 +132,3 @@ Plug 'tpope/vim-fugitive'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install'  }
 
 call plug#end()
-
