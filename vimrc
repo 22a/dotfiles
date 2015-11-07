@@ -1,27 +1,62 @@
 set nocompatible
 filetype off
 
+
+"----------------------
+" General Wizardry
+"----------------------
+syntax on
+
+" better % skulduggery
+runtime macros/matchit.vim
+
+" civ4 victory by space-race
+let mapleader = " "
+
+" command / status line
+set wildmenu
+set wildmode=longest:list
+set showcmd
+set noshowmode
+set laststatus=2
+
+" text manipulation
+set backspace=indent,eol,start      " backspace everything"
+
+" gutter
 set number
+set cursorline
+
+" files
 set nobackup
 set noswapfile
 set nowritebackup
+
+" tabs
 set expandtab
 set smarttab
 set tabstop=2
 set shiftwidth=2
+set autoindent
+
+" search
 set hlsearch
 set incsearch
 set ignorecase
 set smartcase
-set ttyfast
-set autoindent
+
+" typing
 set ttimeoutlen=50
-set cursorline
+
+" shame
 set noerrorbells
 set visualbell
+
+" scroll
 set scrolloff=15
 set sidescrolloff=15
-syntax on
+set ttyfast
+
 
 "----------------------
 " Key Bindings
@@ -40,6 +75,17 @@ nnoremap <C-p> :FZF<CR>
 " Trim Leading WS
 nnoremap <Leader>tw :call TrimWhitespace()<CR>
 
+" System Clipboard yankyputting
+"  yank to cliploard without motion
+noremap <Leader>c "*y
+"  yank line to clipboard
+noremap <Leader>cl "*yy
+"  yank file to clipboard
+noremap <Leader>cf gg"*yG
+"  paste from system clipboard
+noremap <Leader>p "*p
+noremap <Leader>P "*P
+
 
 "----------------------
 " Colour Things
@@ -47,6 +93,7 @@ nnoremap <Leader>tw :call TrimWhitespace()<CR>
 let g:solarized_termcolors=256
 colorscheme solarized
 set background=dark
+
 
 "----------------------
 " Syntactic
@@ -59,6 +106,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_html_checkers=['']
+
 
 "----------------------
 " Buffers
@@ -73,6 +121,7 @@ map <Leader><tab> :bn<CR>
 map <Leader>` :bp<CR>
 map ` :EasyBuffer<CR>
 
+
 "----------------------
 " Status Bar
 "----------------------
@@ -81,12 +130,14 @@ let g:airline#extensions#syntastic#enabled=1
 set laststatus=2
 let g:airline_powerline_fonts = 1
 
+
 "----------------------
 " Sneaky Functions
 "----------------------
 function! TrimWhitespace()
   %s/\s\+$//e
 endfunc
+
 
 "----------------------
 " Plugins
