@@ -26,12 +26,20 @@ syntax on
 "----------------------
 " Key Bindings
 "----------------------
+
+"Begone foul arrows
+for prefix in ['i', 'n', 'v']
+  for key in ['<Up>', '<Down>', '<Left>', '<Right>']
+    exe prefix . "noremap " . key . " <Nop>"
+  endfor
+endfor
+
+"Ctrl-P for fzf
 nnoremap <C-p> :FZF<CR>
 
 "----------------------
 " Colour Things
 "----------------------
-"set t_Co=256
 let g:solarized_termcolors=256
 colorscheme solarized
 set background=dark
@@ -47,6 +55,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_html_checkers=['']
+let g:ycm_global_ycm_extra_conf = '~/._ycm_extra_conf.py'
 
 "----------------------
 " Buffers
@@ -87,13 +96,11 @@ Plug 'airblade/vim-gitgutter'
 " enhanced netrw
 Plug 'tpope/vim-vinegar'
 
-
 " Buffer Navigation
 Plug 'troydm/easybuffer.vim'
 
 " auto wizzard completion
 Plug 'Valloric/YouCompleteMe'
-
 
 " Languages
 Plug 'kchmck/vim-coffee-script'
