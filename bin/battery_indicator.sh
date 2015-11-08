@@ -19,7 +19,7 @@ if [[ $charged_slots -gt $breakpoints ]]; then
   charged_slots=$breakpoints
 fi
 
-echo -n '#[fg=colour203]'
+echo -n '#[fg=colour46]'
 for i in `seq 1 $charged_slots`; do echo -n "$HEART"; done
 
 if [[ $charged_slots -lt $breakpoints ]]; then
