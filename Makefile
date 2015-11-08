@@ -13,6 +13,7 @@ all:
 
 mac: zprezto zsh vim tmux ghc
 server: bash vim tmux ghc
+.PHONY: vim zsh zprezto
 
 bash:
 	ln -sf $(ROOT_DIR)/bashrc $(HOME)/.bashrc

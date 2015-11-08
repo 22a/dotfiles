@@ -190,10 +190,10 @@ Plug 'tpope/vim-rails'
 Plug 'adimit/prolog.vim'
 Plug 'dag/vim2hs'
 
-"Syntax Highlighting
+" Syntax Highlighting
 Plug 'scrooloose/syntastic'
 
-"Status Bar
+" Status Bar
 Plug 'bling/vim-airline'
 
 " git fuckery
@@ -201,5 +201,6 @@ Plug 'tpope/vim-fugitive'
 
 " fuzzy file search
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install'  }
+
 
 call plug#end()
