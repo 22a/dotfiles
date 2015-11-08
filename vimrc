@@ -98,7 +98,7 @@ nnoremap <Leader>R :so ~/.vimrc<CR>
 nnoremap <Leader>U :PlugInstall<CR>:PlugUpdate<CR>:PlugClean<CR>
 
 " hide pesky hls
-noremap <Esc> :noh<CR><Esc>
+noremap <silent> <Esc> :noh<CR><Esc>
 
 " Toggle case
 nnoremap <Leader>tc g~iw
