@@ -1,7 +1,6 @@
 set nocompatible
 filetype off
 
-
 "----------------------
 " General Wizardry
 "----------------------
@@ -51,11 +50,16 @@ set ttimeoutlen=50
 " shame
 set noerrorbells
 set visualbell
+set t_vb=
 
 " scroll
 set scrolloff=15
 set sidescrolloff=15
 set ttyfast
+
+"sane vim split directions
+set splitright
+set splitbelow
 
 
 "----------------------
@@ -85,6 +89,19 @@ noremap <Leader>cf gg"*yG
 "  paste from system clipboard
 noremap <Leader>p "*p
 noremap <Leader>P "*P
+
+" no EX mode thank you very much
+nnoremap Q <NOP>
+
+" Easily make changes to vimrc
+nnoremap <Leader>R :so ~/.vimrc<CR>
+nnoremap <Leader>U :PlugInstall<CR>:PlugUpdate<CR>:PlugClean<CR>
+
+" hide pesky hls
+noremap <Esc> :noh<CR><Esc>
+
+" Toggle case
+nnoremap <Leader>tc g~iw
 
 
 "----------------------
@@ -135,7 +152,10 @@ let g:airline_powerline_fonts = 1
 " Sneaky Functions
 "----------------------
 function! TrimWhitespace()
+  let l = line('.')
+  let c = col('.')
   %s/\s\+$//e
+  call cursor(l, c)
 endfunc
 
 
