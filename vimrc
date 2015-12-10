@@ -57,9 +57,12 @@ set scrolloff=15
 set sidescrolloff=15
 set ttyfast
 
-"sane vim split directions
+" sane vim split directions
 set splitright
 set splitbelow
+
+" quickscope on fFtT only
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 
 "----------------------
@@ -81,11 +84,11 @@ nnoremap <Leader>tw :call TrimWhitespace()<CR>
 
 " System Clipboard yankyputting
 "  yank to cliploard without motion
-noremap <Leader>c "*y
+noremap <Leader>y "*y
 "  yank line to clipboard
-noremap <Leader>cl "*yy
+noremap <Leader>yl "*yy
 "  yank file to clipboard
-noremap <Leader>cf gg"*yG
+noremap <Leader>yf gg"*yG
 "  paste from system clipboard
 noremap <Leader>p "*p
 noremap <Leader>P "*P
@@ -189,6 +192,9 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-rails'
 Plug 'adimit/prolog.vim'
 Plug 'dag/vim2hs'
+
+" Speedy left right
+Plug 'unblevable/quick-scope'
 
 " Syntax Highlighting
 Plug 'scrooloose/syntastic'
