@@ -19,10 +19,10 @@ prompt nicoulaj
 #aliases
 alias pyserv="python -m SimpleHTTPServer"
 alias irbs="irb --simple-prompt"
-alias v="mvim -v"
-alias vi="mvim -v"
-alias vim="mvim -v"
-alias emacs="mvim -v"
+alias v="nvim"
+alias vi="nvim"
+alias vim="nvim"
+alias emacs="nvim"
 
 # fzf'ing
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
