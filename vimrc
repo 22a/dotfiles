@@ -64,6 +64,13 @@ set splitbelow
 " quickscope on fFtT only
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
+" 80 is a number
+if exists('+colorcolumn')
+  set colorcolumn=80
+else
+  au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+endif
+
 
 "----------------------
 " Key Bindings
@@ -91,7 +98,6 @@ noremap <Leader>yl "*yy
 noremap <Leader>yf gg"*yG
 "  paste from system clipboard
 noremap <Leader>p "*p
-noremap <Leader>P "*P
 
 " no EX mode thank you very much
 nnoremap Q <NOP>
@@ -104,7 +110,10 @@ nnoremap <Leader>U :PlugInstall<CR>:PlugUpdate<CR>:PlugClean<CR>
 noremap <silent> <Esc> :noh<CR><Esc>
 
 " Toggle case
-nnoremap <Leader>tc g~iw
+nnoremap <Leader>tcw g~iw
+
+" fast file rename
+nnoremap <Leader>fr :call RenameFile()<cr>
 
 
 "----------------------
@@ -116,16 +125,10 @@ set background=dark
 
 
 "----------------------
-" Syntactic
+" file save check man
 "----------------------
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_html_checkers=['']
+" -- Neomake
+autocmd! BufWritePost * Neomake
 
 
 "----------------------
@@ -160,6 +163,17 @@ function! TrimWhitespace()
   %s/\s\+$//e
   call cursor(l, c)
 endfunc
+
+
+function! RenameFile()
+  let old_name = expand('%')
+  let new_name = input('New file name: ', expand('%'), 'file')
+  if new_name != '' && new_name != old_name
+    exec ':saveas ' . new_name
+    exec ':silent !rm ' . old_name
+    redraw!
+  endif
+endfunction
 
 
 "----------------------
@@ -197,7 +211,7 @@ Plug 'dag/vim2hs'
 Plug 'unblevable/quick-scope'
 
 " Syntax Highlighting
-Plug 'scrooloose/syntastic'
+Plug 'benekastah/neomake'
 
 " Status Bar
 Plug 'bling/vim-airline'
@@ -206,7 +220,7 @@ Plug 'bling/vim-airline'
 Plug 'tpope/vim-fugitive'
 
 " fuzzy file search
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install'  }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install'  } | Plug 'junegunn/fzf.vim'
 
 
 call plug#end()
