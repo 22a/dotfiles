@@ -20,7 +20,7 @@ bash:
 	ln -sf $(ROOT_DIR)/bashrc $(HOME)/.bashrc
 
 zsh:
-	perl -i -pe 's/nano/nvim/g' .zprofile
+	perl -i -pe 's/nano/vim/g' .zprofile
 	ln -sf $(ROOT_DIR)/zshrc $(HOME)/.zshrc
 
 zprezto:
@@ -50,5 +50,6 @@ nvim:
 	ln -sf $(ROOT_DIR)/vimrc  $(HOME)/.config/nvim/init.vim
 	ln -sf $(ROOT_DIR)/vim/autoload  $(HOME)/.config/nvim/autoload
 	ln -sf $(ROOT_DIR)/vim/colors  $(HOME)/.config/nvim/colors
+	nvim -c PlugInstall -c quitall
 
 help: all

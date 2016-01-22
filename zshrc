@@ -1,20 +1,26 @@
-# Source Prezto
+#
+# Executes commands at the start of an interactive session.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+# Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-#nvm
-export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh
+# Customize to your needs...
 
-#rbenv
-export PATH="$HOME/.rbenv/bin:$PATH"
-if which rbenv > /dev/null; then eval "$(rbenv init - zsh)"; fi
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-#prezto prompt save
-autoload -Uz promptinit
-promptinit
-prompt nicoulaj
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+
+# rvm
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 #aliases
 alias pyserv="python -m SimpleHTTPServer"
@@ -23,6 +29,3 @@ alias v="nvim"
 alias vi="nvim"
 alias vim="nvim"
 alias emacs="nvim"
-
-# fzf'ing
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
