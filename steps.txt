@@ -42,4 +42,4 @@ easy_install neovim
 
 set iterm profile, maybe export this profile for future use?
 
-
+npm install -g ngrok
