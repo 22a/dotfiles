@@ -1,4 +1,3 @@
-set nocompatible
 filetype off
 
 "----------------------
@@ -50,12 +49,10 @@ set ttimeoutlen=50
 " shame
 set noerrorbells
 set visualbell
-set t_vb=
 
 " scroll
 set scrolloff=15
 set sidescrolloff=15
-set ttyfast
 
 " sane vim split directions
 set splitright
@@ -153,6 +150,10 @@ let g:airline#extensions#syntastic#enabled=1
 set laststatus=2
 let g:airline_powerline_fonts = 1
 
+"----------------------
+" html tag autoclose
+"----------------------
+let g:closetag_filenames = "*.html,*.erb"
 
 "----------------------
 " Sneaky Functions
@@ -184,9 +185,6 @@ call plug#begin('~/.vim/plugged')
 " git diff in gutter
 Plug 'airblade/vim-gitgutter'
 
-" enhanced netrw salad
-Plug 'tpope/vim-vinegar'
-
 " Buffer Navigation
 Plug 'troydm/easybuffer.vim'
 
@@ -199,6 +197,7 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 " Languages
 Plug 'kchmck/vim-coffee-script'
 Plug 'othree/html5.vim'
+Plug 'alvan/vim-closetag'
 Plug 'vim-ruby/vim-ruby'
 Plug 'pangloss/vim-javascript'
 Plug 'cakebaker/scss-syntax.vim'
@@ -207,6 +206,9 @@ Plug 'tpope/vim-rails'
 Plug 'adimit/prolog.vim'
 Plug 'dag/vim2hs'
 
+" WOW
+Plug 'tpope/vim-dispatch'
+
 " Speedy left right
 Plug 'unblevable/quick-scope'
 
@@ -214,13 +216,13 @@ Plug 'unblevable/quick-scope'
 Plug 'benekastah/neomake'
 
 " Status Bar
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " git fuckery
 Plug 'tpope/vim-fugitive'
 
 " fuzzy file search
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install'  } | Plug 'junegunn/fzf.vim'
-
 
 call plug#end()
