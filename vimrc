@@ -119,6 +119,7 @@ nnoremap <Leader>fr :call RenameFile()<cr>
 let g:solarized_termcolors=256
 colorscheme solarized
 set background=dark
+highlight ExtraWhitespace ctermbg=red
 
 
 "----------------------
@@ -208,6 +209,12 @@ Plug 'dag/vim2hs'
 
 " WOW
 Plug 'tpope/vim-dispatch'
+
+" Commenting out code is fun
+Plug 'tpope/vim-commentary'
+
+" Seeing whitespace is fun
+Plug 'ntpeters/vim-better-whitespace'
 
 " Speedy left right
 Plug 'unblevable/quick-scope'
