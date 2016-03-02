@@ -24,6 +24,12 @@ set backspace=indent,eol,start      " backspace everything"
 " gutter
 set number
 set cursorline
+silent! if emoji#available()
+  let g:gitgutter_sign_added = emoji#for('eight_spoked_asterisk')
+  let g:gitgutter_sign_modified = emoji#for('zap')
+  let g:gitgutter_sign_removed = emoji#for('no_entry')
+  let g:gitgutter_sign_modified_removed = emoji#for('collision')
+endif
 
 " files
 set nobackup
@@ -209,6 +215,9 @@ Plug 'dag/vim2hs'
 
 " WOW
 Plug 'tpope/vim-dispatch'
+
+" Emoji are great
+Plug 'junegunn/vim-emoji'
 
 " Commenting out code is fun
 Plug 'tpope/vim-commentary'
