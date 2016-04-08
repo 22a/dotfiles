@@ -34,9 +34,10 @@ zprezto:
 	ln -sf $(ROOT_DIR)/zpreztorc $(HOME)/.zpreztorc
 
 vim:
+	if [ -f $(HOME)/.vimrc ]; then mv $(HOME)/.vimrc $(HOME)/.vimrc.old; fi
 	ln -sf $(ROOT_DIR)/vimrc $(HOME)/.vimrc
-	rm -rf ~/.vim
-	cp -r $(ROOT_DIR)/vim $(HOME)/.vim
+	if [ -f $(HOME)/.vim ]; then mv $(HOME)/.vim $(HOME)/.vim.old; fi
+	ln -sf $(ROOT_DIR)/vim $(HOME)/.vim
 	vim -c PlugInstall -c quitall
 
 tmux:

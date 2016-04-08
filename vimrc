@@ -1,8 +1,67 @@
-filetype off
+"----------------------
+" Plugins
+"----------------------
+call plug#begin('~/.vim/plugged')
+
+" git diff in gutter
+Plug 'airblade/vim-gitgutter'
+
+" Buffer Navigation
+Plug 'troydm/easybuffer.vim'
+
+" Wizard Autocompletion
+Plug 'ervandew/supertab'
+
+" Snippets in your bippets
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+
+" Languages
+Plug 'kchmck/vim-coffee-script'
+Plug 'othree/html5.vim'
+Plug 'alvan/vim-closetag'
+Plug 'vim-ruby/vim-ruby'
+Plug 'pangloss/vim-javascript'
+Plug 'cakebaker/scss-syntax.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-rails'
+Plug 'adimit/prolog.vim'
+Plug 'dag/vim2hs'
+
+" WOW
+Plug 'tpope/vim-dispatch'
+
+" Emoji are great
+Plug 'junegunn/vim-emoji'
+
+" Commenting out code is fun
+Plug 'tpope/vim-commentary'
+
+" Seeing whitespace is fun
+Plug 'ntpeters/vim-better-whitespace'
+
+" Speedy left right
+Plug 'unblevable/quick-scope'
+
+" Syntax Highlighting
+Plug 'benekastah/neomake'
+
+" Status Bar
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" git fuckery
+Plug 'tpope/vim-fugitive'
+
+" fuzzy file search
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install'  } | Plug 'junegunn/fzf.vim'
+
+call plug#end()
+
 
 "----------------------
 " General Wizardry
 "----------------------
+filetype off
 syntax on
 
 " better % skulduggery
@@ -24,12 +83,6 @@ set backspace=indent,eol,start      " backspace everything"
 " gutter
 set number
 set cursorline
-silent! if emoji#available()
-  let g:gitgutter_sign_added = emoji#for('eight_spoked_asterisk')
-  let g:gitgutter_sign_modified = emoji#for('zap')
-  let g:gitgutter_sign_removed = emoji#for('no_entry')
-  let g:gitgutter_sign_modified_removed = emoji#for('collision')
-endif
 
 " files
 set nobackup
@@ -137,7 +190,6 @@ highlight ExtraWhitespace ctermbg=red
 " -- Neomake
 autocmd! BufWritePost * Neomake
 
-
 "----------------------
 " Buffers
 "----------------------
@@ -187,61 +239,3 @@ function! RenameFile()
 endfunction
 
 
-"----------------------
-" Plugins
-"----------------------
-call plug#begin('~/.vim/plugged')
-
-" git diff in gutter
-Plug 'airblade/vim-gitgutter'
-
-" Buffer Navigation
-Plug 'troydm/easybuffer.vim'
-
-" Wizard Autocompletion
-Plug 'ervandew/supertab'
-
-" Snippets in your bippets
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-
-" Languages
-Plug 'kchmck/vim-coffee-script'
-Plug 'othree/html5.vim'
-Plug 'alvan/vim-closetag'
-Plug 'vim-ruby/vim-ruby'
-Plug 'pangloss/vim-javascript'
-Plug 'cakebaker/scss-syntax.vim'
-Plug 'jiangmiao/auto-pairs'
-Plug 'tpope/vim-rails'
-Plug 'adimit/prolog.vim'
-Plug 'dag/vim2hs'
-
-" WOW
-Plug 'tpope/vim-dispatch'
-
-" Emoji are great
-Plug 'junegunn/vim-emoji'
-
-" Commenting out code is fun
-Plug 'tpope/vim-commentary'
-
-" Seeing whitespace is fun
-Plug 'ntpeters/vim-better-whitespace'
-
-" Speedy left right
-Plug 'unblevable/quick-scope'
-
-" Syntax Highlighting
-Plug 'benekastah/neomake'
-
-" Status Bar
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
-" git fuckery
-Plug 'tpope/vim-fugitive'
-
-" fuzzy file search
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install'  } | Plug 'junegunn/fzf.vim'
-
-call plug#end()
