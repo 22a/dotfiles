@@ -118,6 +118,9 @@ nnoremap <Leader>tcw g~iw
 " fast file rename
 nnoremap <Leader>fr :call RenameFile()<cr>
 
+" closing buffers is too slow
+nnoremap <Leader>c :bd<CR>
+
 
 "----------------------
 " Colour Things
