@@ -10,7 +10,11 @@ Plug 'airblade/vim-gitgutter'
 Plug 'troydm/easybuffer.vim'
 
 " Wizard Autocompletion
-Plug 'ervandew/supertab'
+if has('nvim')
+  Plug 'shougo/deoplete.nvim'
+else
+  Plug 'ajh17/VimCompletesMe'
+end
 
 " Snippets in your bippets
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
@@ -127,6 +131,13 @@ else
   au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 endif
 
+
+"----------------------
+" Autocomplete
+"----------------------
+if has('nvim')
+  let g:deoplete#enable_at_startup = 1
+end
 
 "----------------------
 " Key Bindings
