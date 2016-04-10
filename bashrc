@@ -85,5 +85,5 @@ alias lt='ls -alrth'
 alias ll='ls -alF'
 alias irbs='irb --simple-prompt'
 alias mkdir="mkdir -p -v" #create parents verbosely
-alias psg="ps aux | grep "
-alias tmns="tmux new -s"
+alias psg="ps aux | grep"
+alias tn="tmux new -s"

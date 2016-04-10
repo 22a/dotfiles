@@ -22,6 +22,7 @@ bash:
 zsh:
 	perl -i -pe 's/nano/vim/g' .zprofile
 	ln -sf $(ROOT_DIR)/zshrc $(HOME)/.zshrc
+	git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
 
 zprezto:
 	zsh

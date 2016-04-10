@@ -188,7 +188,7 @@ nnoremap <Leader>c :bd<CR>
 "----------------------
 " Colour Things
 "----------------------
-"let base16colorspace=256
+let base16colorspace=256
 colorscheme base16-google
 set background=dark
 highlight ExtraWhitespace ctermbg=red

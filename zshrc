@@ -22,6 +22,10 @@ export NVM_DIR="$HOME/.nvm"
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
+# iterm2 colours
+BASE16_SHELL="$HOME/.config/base16-shell/base16-google.dark.sh"
+[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+
 #aliases
 alias pyserv="python -m SimpleHTTPServer"
 alias irbs="irb --simple-prompt"
@@ -29,3 +33,5 @@ alias v="nvim"
 alias vi="nvim"
 alias vim="nvim"
 alias emacs="nvim"
+alias tn="tmux new -s"
+alias psg="ps aux | grep"
