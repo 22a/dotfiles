@@ -35,6 +35,7 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'adimit/prolog.vim'
 Plug 'dag/vim2hs'
+Plug 'elixir-lang/vim-elixir'
 
 " tpope is dispatching whiz
 Plug 'tpope/vim-dispatch'
