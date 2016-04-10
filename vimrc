@@ -10,6 +10,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'troydm/easybuffer.vim'
 
 " Wizard Autocompletion
+Plug 'tpope/vim-endwise'
+Plug 'jiangmiao/auto-pairs'
 if has('nvim')
   Plug 'shougo/deoplete.nvim'
 else
@@ -19,26 +21,23 @@ end
 " Snippets in your bippets
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
+" Text mangeling
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-commentary'
+
 " Languages
-Plug 'kchmck/vim-coffee-script'
-Plug 'othree/html5.vim'
-Plug 'alvan/vim-closetag'
-Plug 'vim-ruby/vim-ruby'
 Plug 'pangloss/vim-javascript'
+Plug 'kchmck/vim-coffee-script'
 Plug 'cakebaker/scss-syntax.vim'
-Plug 'jiangmiao/auto-pairs'
+Plug 'othree/html5.vim'
+Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'adimit/prolog.vim'
 Plug 'dag/vim2hs'
 
-" WOW
+" tpope is dispatching whiz
 Plug 'tpope/vim-dispatch'
-
-" Emoji are great
-Plug 'junegunn/vim-emoji'
-
-" Commenting out code is fun
-Plug 'tpope/vim-commentary'
 
 " Seeing whitespace is fun
 Plug 'ntpeters/vim-better-whitespace'
@@ -53,7 +52,7 @@ Plug 'benekastah/neomake'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-" git fuckery
+" Git swizzeling
 Plug 'tpope/vim-fugitive'
 
 " fuzzy file search
@@ -219,7 +218,6 @@ map ` :EasyBuffer<CR>
 " Status Bar
 "----------------------
 let g:airline_theme='murmur'
-let g:airline#extensions#syntastic#enabled=1
 set laststatus=2
 let g:airline_powerline_fonts = 1
 
@@ -248,5 +246,3 @@ function! RenameFile()
     redraw!
   endif
 endfunction
-
-
