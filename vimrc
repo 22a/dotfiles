@@ -138,10 +138,10 @@ if has('nvim')
   let g:deoplete#enable_at_startup = 1
 end
 
+
 "----------------------
 " Key Bindings
 "----------------------
-
 " Begone foul arrows
 for prefix in ['i', 'n', 'v']
   for key in ['<Up>', '<Down>', '<Left>', '<Right>']
@@ -151,6 +151,20 @@ endfor
 
 " Ctrl-P for fzf
 nnoremap <C-p> :FZF<CR>
+
+" no EX mode thank you very much
+nnoremap Q <NOP>
+
+" hide pesky hls
+noremap <silent> <Esc> :noh<CR><Esc>
+
+
+"----------------------
+" Leader
+"----------------------
+" Easily make changes to vimrc
+nnoremap <Leader>R :so ~/.vimrc<CR>
+nnoremap <Leader>U :PlugInstall<CR>:PlugUpdate<CR>:PlugClean<CR>
 
 " Trim Leading WS
 nnoremap <Leader>tw :call TrimWhitespace()<CR>
@@ -165,25 +179,25 @@ noremap <Leader>yf gg"*yG
 "  paste from system clipboard
 noremap <Leader>p "*p
 
-" no EX mode thank you very much
-nnoremap Q <NOP>
-
-" Easily make changes to vimrc
-nnoremap <Leader>R :so ~/.vimrc<CR>
-nnoremap <Leader>U :PlugInstall<CR>:PlugUpdate<CR>:PlugClean<CR>
-
-" hide pesky hls
-noremap <silent> <Esc> :noh<CR><Esc>
-
 " Toggle case
 nnoremap <Leader>tcw g~iw
 
 " fast file rename
-nnoremap <Leader>fr :call RenameFile()<cr>
+nnoremap <Leader>rf :call RenameFile()<cr>
 
 " closing buffers is too slow
 nnoremap <Leader>c :bd<CR>
+nnoremap <Leader>C :bd!<CR>
 
+" colsing everything is too slow
+nnoremap <Leader>q :q<CR>
+nnoremap <Leader>Q :q!<CR>
+
+" fingers
+command! Wq wq
+command! WQ wq
+command! W w
+command! Q q
 
 "----------------------
 " Colour Things
@@ -195,9 +209,8 @@ highlight ExtraWhitespace ctermbg=red
 
 
 "----------------------
-" file save check man
+" sytntax check on write
 "----------------------
-" -- Neomake
 autocmd! BufWritePost * Neomake
 
 "----------------------
