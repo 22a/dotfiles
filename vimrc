@@ -188,8 +188,8 @@ nnoremap <Leader>c :bd<CR>
 "----------------------
 " Colour Things
 "----------------------
-let g:solarized_termcolors=256
-colorscheme solarized
+"let base16colorspace=256
+colorscheme base16-google
 set background=dark
 highlight ExtraWhitespace ctermbg=red
 
