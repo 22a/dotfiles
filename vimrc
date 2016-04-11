@@ -56,6 +56,9 @@ Plug 'vim-airline/vim-airline-themes'
 " Git swizzeling
 Plug 'tpope/vim-fugitive'
 
+" Directory exploration
+Plug 'justinmk/vim-dirvish'
+
 " fuzzy file search
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install'  } | Plug 'junegunn/fzf.vim'
 
