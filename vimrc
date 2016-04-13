@@ -184,7 +184,9 @@ noremap <Leader>yf gg"*yG
 noremap <Leader>p "*p
 
 " Toggle case
-nnoremap <Leader>tcw g~iw
+nnoremap <Leader>t g~
+nnoremap <Leader>tc ~h
+nnoremap <Leader>tl g~~
 
 " fast file rename
 nnoremap <Leader>rf :call RenameFile()<cr>
@@ -202,6 +204,7 @@ command! Wq wq
 command! WQ wq
 command! W w
 command! Q q
+
 
 "----------------------
 " Colour Things
