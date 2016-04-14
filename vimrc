@@ -62,6 +62,9 @@ Plug 'justinmk/vim-dirvish'
 " fuzzy file search
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install'  } | Plug 'junegunn/fzf.vim'
 
+" tranquil poetry mode
+Plug 'junegunn/goyo.vim'
+
 call plug#end()
 
 
@@ -168,7 +171,9 @@ noremap <silent> <Esc> :noh<CR><Esc>
 "----------------------
 " Easily make changes to vimrc
 nnoremap <Leader>R :so ~/.vimrc<CR>
-nnoremap <Leader>U :PlugInstall<CR>:PlugUpdate<CR>:PlugClean<CR>
+nnoremap <Leader>PI :PlugInstall<CR>
+nnoremap <Leader>PU :PlugUpdate<CR>
+nnoremap <Leader>PC :PlugClean<CR>
 
 " Trim Leading WS
 nnoremap <Leader>tw :call TrimWhitespace()<CR>
@@ -204,6 +209,9 @@ command! Wq wq
 command! WQ wq
 command! W w
 command! Q q
+
+" easy poetry
+nnoremap <Leader>g :Goyo<CR>
 
 
 "----------------------
