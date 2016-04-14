@@ -145,24 +145,19 @@ if has('nvim')
   let g:deoplete#enable_at_startup = 1
 
   " deoplete <Tab> completion:
-  " 1. If popup menu is visible, select and insert next item
-  " 2. Otherwise, if preceding chars are whitespace, insert tab char
-  " 3. Otherwise, start manual autocomplete
-  imap <silent><expr><Tab> pumvisible() ? "\<C-n>"
-        \ : (<SID>is_whitespace() ? "\<Tab>"
-        \ : deoplete#mappings#manual_complete())
-  smap <silent><expr><Tab> pumvisible() ? "\<C-n>"
-        \ : (<SID>is_whitespace() ? "\<Tab>"
-        \ : deoplete#mappings#manual_complete())
+  " If popup menu is visible, select and insert next item, else insert tab char
+  imap <silent><expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+  smap <silent><expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 
-  " shift tab, select and insert the previous item
+  " shift tab, select and insert the previous item, else <C-h>
   inoremap <expr><S-Tab>  pumvisible() ? "\<C-p>" : "\<C-h>"
 
-  function! s:is_whitespace()
-    let col = col('.') - 1
-    return ! col || getline('.')[col - 1] =~? '\s'
-  endfunction
 end
+
+" Snippet expansion
+let g:UltiSnipsExpandTrigger="<C-j>"
+let g:UltiSnipsJumpForwardTrigger="<C-j>"
+let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 
 
 "----------------------
