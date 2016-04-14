@@ -143,6 +143,25 @@ endif
 "----------------------
 if has('nvim')
   let g:deoplete#enable_at_startup = 1
+
+  " deoplete <Tab> completion:
+  " 1. If popup menu is visible, select and insert next item
+  " 2. Otherwise, if preceding chars are whitespace, insert tab char
+  " 3. Otherwise, start manual autocomplete
+  imap <silent><expr><Tab> pumvisible() ? "\<C-n>"
+        \ : (<SID>is_whitespace() ? "\<Tab>"
+        \ : deoplete#mappings#manual_complete())
+  smap <silent><expr><Tab> pumvisible() ? "\<C-n>"
+        \ : (<SID>is_whitespace() ? "\<Tab>"
+        \ : deoplete#mappings#manual_complete())
+
+  " shift tab, select and insert the previous item
+  inoremap <expr><S-Tab>  pumvisible() ? "\<C-p>" : "\<C-h>"
+
+  function! s:is_whitespace()
+    let col = col('.') - 1
+    return ! col || getline('.')[col - 1] =~? '\s'
+  endfunction
 end
 
 
