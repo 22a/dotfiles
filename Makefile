@@ -54,5 +54,6 @@ nvim:
 	ln -sf $(ROOT_DIR)/vim/autoload  $(HOME)/.config/nvim/autoload
 	ln -sf $(ROOT_DIR)/vim/colors  $(HOME)/.config/nvim/colors
 	nvim -c PlugInstall -c quitall
+	sudo pip install neovim
 
 help: all
