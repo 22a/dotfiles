@@ -31,15 +31,21 @@ Plug 'pangloss/vim-javascript'
 Plug 'kchmck/vim-coffee-script'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'leafgarland/typescript-vim'
+Plug 'Quramy/vim-js-pretty-template'
 Plug 'othree/html5.vim'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'adimit/prolog.vim'
 Plug 'dag/vim2hs'
 Plug 'elixir-lang/vim-elixir'
+Plug 'slashmili/alchemist.vim'
+Plug 'alvan/vim-closetag'
 
 " tpope is dispatching whiz
 Plug 'tpope/vim-dispatch'
+
+" a unix is a useful
+Plug 'tpope/vim-eunuch'
 
 " Seeing whitespace is fun
 Plug 'ntpeters/vim-better-whitespace'
@@ -66,6 +72,10 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install'  } | Plug 'june
 " tranquil poetry mode
 Plug 'junegunn/goyo.vim'
 
+" tmux
+Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'tmux-plugins/vim-tmux'
+
 call plug#end()
 
 
@@ -80,6 +90,9 @@ runtime macros/matchit.vim
 
 " civ4 victory by space-race
 let mapleader = " "
+
+" people won't hire me if my commit messages are gibberish
+autocmd FileType gitcommit setlocal spell
 
 " command / status line
 set wildmenu
@@ -268,6 +281,12 @@ let g:airline_powerline_fonts = 1
 " html tag autoclose
 "----------------------
 let g:closetag_filenames = "*.html,*.erb"
+
+"----------------------
+" Typescript html string syntax highlighting
+"----------------------
+autocmd FileType typescript JsPreTmpl html
+autocmd FileType typescript syn clear foldBraces
 
 "----------------------
 " Sneaky Functions
