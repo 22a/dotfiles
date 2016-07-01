@@ -1,3 +1,6 @@
+" let's get some things straight
+let s:darwin = has('mac')
+
 "----------------------
 " Plugins
 "----------------------
@@ -9,22 +12,34 @@ Plug 'airblade/vim-gitgutter'
 " Buffer Navigation
 Plug 'troydm/easybuffer.vim'
 
+" Syntax Highlighting
+Plug 'benekastah/neomake'
+
 " Wizard Autocompletion
 Plug 'tpope/vim-endwise'
 Plug 'jiangmiao/auto-pairs'
+Plug 'alvan/vim-closetag'
 if has('nvim')
-  Plug 'shougo/deoplete.nvim'
+  function! DoRemote(arg)
+    UpdateRemotePlugins
+  endfunction
+  Plug 'shougo/deoplete.nvim', { 'do': function('DoRemote') }
 else
   Plug 'ajh17/VimCompletesMe'
 end
 
 " Snippets in your bippets
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
+
 
 " Text mangeling
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-repeat'
+
 
 " Languages
 Plug 'pangloss/vim-javascript'
@@ -35,46 +50,64 @@ Plug 'Quramy/vim-js-pretty-template'
 Plug 'othree/html5.vim'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
+Plug 'tpope/vim-markdown'
 Plug 'adimit/prolog.vim'
 Plug 'dag/vim2hs'
 Plug 'elixir-lang/vim-elixir'
 Plug 'slashmili/alchemist.vim'
-Plug 'alvan/vim-closetag'
+Plug 'honza/dockerfile.vim'
+Plug 'Valloric/MatchTagAlways'
 
+
+" junegunn 🙏
+" register peeks
+Plug 'junegunn/vim-peekaboo'
+" fuzzy file search <C-p>
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install'  } | Plug 'junegunn/fzf.vim'
+" tranquil poetry mode
+Plug 'junegunn/goyo.vim'
+" target text AFTER a text object
+Plug 'junegunn/vim-after-object'
+
+
+" Movement Enhancements
+" speedy navigation
+Plug 'easymotion/vim-easymotion'
+" Speedy left right
+Plug 'unblevable/quick-scope'
+
+
+" Vim is your home now
+" a unix is a useful
+Plug 'tpope/vim-eunuch'
+" Directory exploration
+Plug 'justinmk/vim-dirvish'
+" Git swizzeling
+Plug 'tpope/vim-fugitive'
 " tpope is dispatching whiz
 Plug 'tpope/vim-dispatch'
 
-" a unix is a useful
-Plug 'tpope/vim-eunuch'
+" forgive my wayward fingers
+Plug 'EinfachToll/DidYouMean'
+
+
+" Status Bar TODO: Consider moving to lightline
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" visual indentation
+Plug 'nathanaelkane/vim-indent-guides'
 
 " Seeing whitespace is fun
 Plug 'ntpeters/vim-better-whitespace'
 
-" Speedy left right
-Plug 'unblevable/quick-scope'
-
-" Syntax Highlighting
-Plug 'benekastah/neomake'
-
-" Status Bar
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
-" Git swizzeling
-Plug 'tpope/vim-fugitive'
-
-" Directory exploration
-Plug 'justinmk/vim-dirvish'
-
-" fuzzy file search
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install'  } | Plug 'junegunn/fzf.vim'
-
-" tranquil poetry mode
-Plug 'junegunn/goyo.vim'
+" open finder/terminal where current file lives
+Plug 'justinmk/vim-gtfo'
 
 " tmux
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tmux-plugins/vim-tmux'
+
 
 call plug#end()
 
@@ -89,9 +122,10 @@ syntax on
 runtime macros/matchit.vim
 
 " civ4 victory by space-race
-let mapleader = " "
+let mapleader = "\<Space>"
 
-" people won't hire me if my commit messages are gibberish
+" people won't hire me if my commit messages and readmes are gibberish
+autocmd BufRead,BufNewFile *.md setlocal spell
 autocmd FileType gitcommit setlocal spell
 
 " command / status line
@@ -143,6 +177,11 @@ set splitbelow
 
 " quickscope on fFtT only
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+" quickscope colors
+let g:qs_first_occurrence_highlight_color = '#afff5f' " gui vim
+let g:qs_first_occurrence_highlight_color = 155       " terminal vim
+let g:qs_second_occurrence_highlight_color = '#5fffff'  " gui vim
+let g:qs_second_occurrence_highlight_color = 81         " terminal vim
 
 " 80 is a number
 if exists('+colorcolumn')
@@ -151,6 +190,11 @@ else
   au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 endif
 
+" Default peekaboo window
+let g:peekaboo_window = 'vertical botright 30new'
+
+" vim after object objects
+autocmd VimEnter * call after_object#enable('=', ':', ';', '-', '#', ' ')
 
 "----------------------
 " Autocomplete
@@ -192,6 +236,12 @@ nnoremap Q <NOP>
 
 " hide pesky hls
 noremap <silent> <Esc> :noh<CR><Esc>
+
+" Move across wrapped lines like regular lines
+" Go to the first non-blank character of a line
+noremap 0 ^
+" Just in case you need to go to the very beginning of a line
+noremap ^ 0
 
 
 "----------------------
@@ -249,6 +299,11 @@ let base16colorspace=256
 colorscheme base16-google
 set background=dark
 highlight ExtraWhitespace ctermbg=red
+
+hi IndentGuidesOdd  ctermbg=235
+hi IndentGuidesEven ctermbg=236
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
 
 
 "----------------------
