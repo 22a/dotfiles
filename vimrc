@@ -259,13 +259,14 @@ nnoremap <Leader>tw :call TrimWhitespace()<CR>
 
 " System Clipboard yankyputting
 "  yank to cliploard without motion
-noremap <Leader>y "*y
+noremap <Leader>y "+y
 "  yank line to clipboard
-noremap <Leader>yl "*yy
+noremap <Leader>yl "+yy
 "  yank file to clipboard
-noremap <Leader>yf gg"*yG
+noremap <Leader>yf gg"+yG
 "  paste from system clipboard
-noremap <Leader>p "*p
+noremap <Leader>p "+p
+
 
 " Toggle case
 nnoremap <Leader>t g~
