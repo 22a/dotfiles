@@ -57,6 +57,7 @@ Plug 'elixir-lang/vim-elixir'
 Plug 'slashmili/alchemist.vim'
 Plug 'honza/dockerfile.vim'
 Plug 'Valloric/MatchTagAlways'
+Plug 'vim-scripts/applescript.vim'
 
 
 " junegunn 🙏
