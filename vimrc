@@ -25,6 +25,7 @@ if has('nvim')
   endfunction
   Plug 'shougo/deoplete.nvim', { 'do': function('DoRemote') }
 else
+  set nocompatible
   Plug 'ajh17/VimCompletesMe'
 end
 
@@ -48,6 +49,7 @@ Plug 'cakebaker/scss-syntax.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'Quramy/vim-js-pretty-template'
 Plug 'othree/html5.vim'
+Plug 'digitaltoad/vim-pug'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-markdown'
@@ -97,7 +99,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " visual indentation
-Plug 'nathanaelkane/vim-indent-guides'
+Plug 'Yggdroot/indentLine'
 
 " Seeing whitespace is fun
 Plug 'ntpeters/vim-better-whitespace'
@@ -280,9 +282,12 @@ nnoremap <Leader>rf :call RenameFile()<cr>
 nnoremap <Leader>c :bd<CR>
 nnoremap <Leader>C :bd!<CR>
 
-" colsing everything is too slow
+" closing everything is too slow
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>Q :q!<CR>
+
+" toggle indent visual lines
+nnoremap <Leader>i :IndentLinesToggle<CR>
 
 " fingers
 command! Wq wq
@@ -301,11 +306,7 @@ let base16colorspace=256
 colorscheme base16-google
 set background=dark
 highlight ExtraWhitespace ctermbg=red
-
-hi IndentGuidesOdd  ctermbg=235
-hi IndentGuidesEven ctermbg=236
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 1
+highlight MatchTag ctermfg=black ctermbg=lightgreen guifg=black guibg=lightgreen
 
 
 "----------------------
