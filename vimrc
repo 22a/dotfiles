@@ -12,7 +12,7 @@ Plug 'airblade/vim-gitgutter'
 " Buffer Navigation
 Plug 'troydm/easybuffer.vim'
 
-" Syntax Highlighting
+" Linty lint
 Plug 'benekastah/neomake'
 
 " Wizard Autocompletion
@@ -31,8 +31,6 @@ end
 
 " Snippets in your bippets
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
 
 
 " Text mangeling
@@ -44,22 +42,18 @@ Plug 'tpope/vim-repeat'
 
 " Languages
 Plug 'pangloss/vim-javascript'
-Plug 'kchmck/vim-coffee-script'
+Plug 'elzr/vim-json'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'leafgarland/typescript-vim'
-Plug 'Quramy/vim-js-pretty-template'
 Plug 'othree/html5.vim'
 Plug 'digitaltoad/vim-pug'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-markdown'
-Plug 'adimit/prolog.vim'
 Plug 'dag/vim2hs'
 Plug 'elixir-lang/vim-elixir'
 Plug 'slashmili/alchemist.vim'
 Plug 'honza/dockerfile.vim'
-Plug 'Valloric/MatchTagAlways'
-Plug 'vim-scripts/applescript.vim'
 
 
 " junegunn 🙏
@@ -69,30 +63,18 @@ Plug 'junegunn/vim-peekaboo'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install'  } | Plug 'junegunn/fzf.vim'
 " tranquil poetry mode
 Plug 'junegunn/goyo.vim'
-" target text AFTER a text object
-Plug 'junegunn/vim-after-object'
 
 
 " Movement Enhancements
-" speedy navigation
-Plug 'easymotion/vim-easymotion'
 " Speedy left right
 Plug 'unblevable/quick-scope'
 
 
 " Vim is your home now
-" a unix is a useful
-Plug 'tpope/vim-eunuch'
 " Directory exploration
 Plug 'justinmk/vim-dirvish'
 " Git swizzeling
 Plug 'tpope/vim-fugitive'
-" tpope is dispatching whiz
-Plug 'tpope/vim-dispatch'
-
-" forgive my wayward fingers
-Plug 'EinfachToll/DidYouMean'
-
 
 " Status Bar TODO: Consider moving to lightline
 Plug 'vim-airline/vim-airline'
@@ -104,12 +86,12 @@ Plug 'Yggdroot/indentLine'
 " Seeing whitespace is fun
 Plug 'ntpeters/vim-better-whitespace'
 
-" open finder/terminal where current file lives
-Plug 'justinmk/vim-gtfo'
-
 " tmux
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tmux-plugins/vim-tmux'
+
+" speed grep things
+Plug 'mhinz/vim-grepper'
 
 
 call plug#end()
@@ -120,6 +102,8 @@ call plug#end()
 "----------------------
 filetype off
 syntax on
+
+set nofoldenable    " stupid folding
 
 " better % skulduggery
 runtime macros/matchit.vim
@@ -163,6 +147,9 @@ set incsearch
 set ignorecase
 set smartcase
 
+" don't hide my damn json quotes
+let g:vim_json_syntax_conceal = 0
+
 " typing
 set ttimeoutlen=50
 
@@ -195,9 +182,6 @@ endif
 
 " Default peekaboo window
 let g:peekaboo_window = 'vertical botright 30new'
-
-" vim after object objects
-autocmd VimEnter * call after_object#enable('=', ':', ';', '-', '#', ' ')
 
 "----------------------
 " Autocomplete
@@ -295,6 +279,9 @@ command! WQ wq
 command! W w
 command! Q q
 
+" shorten the speed grep command
+cnoreabbrev Rg GrepperRg
+
 " easy poetry
 nnoremap <Leader>g :Goyo<CR>
 
@@ -306,7 +293,6 @@ let base16colorspace=256
 colorscheme base16-google
 set background=dark
 highlight ExtraWhitespace ctermbg=red
-highlight MatchTag ctermfg=black ctermbg=lightgreen guifg=black guibg=lightgreen
 
 
 "----------------------
@@ -340,11 +326,6 @@ let g:airline_powerline_fonts = 1
 "----------------------
 let g:closetag_filenames = "*.html,*.erb"
 
-"----------------------
-" Typescript html string syntax highlighting
-"----------------------
-autocmd FileType typescript JsPreTmpl html
-autocmd FileType typescript syn clear foldBraces
 
 "----------------------
 " Sneaky Functions
