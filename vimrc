@@ -93,6 +93,9 @@ Plug 'tmux-plugins/vim-tmux'
 " speed grep things
 Plug 'mhinz/vim-grepper'
 
+" hex colours inline
+Plug 'chrisbra/Colorizer'
+
 
 call plug#end()
 

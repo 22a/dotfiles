@@ -22,7 +22,7 @@ export NVM_DIR="$HOME/.nvm"
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
-export FZF_DEFAULT_COMMAND='rg -l ""'
+export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git/*"'
 
 # iterm2 colours
 BASE16_SHELL="$HOME/.config/base16-shell/base16-google.dark.sh"
