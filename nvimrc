@@ -1,86 +1,79 @@
-" let's get some things straight
-let s:darwin = has('mac')
-
 "----------------------
 " Plugins
 "----------------------
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.local/share/nvim/plugged')
 
-" git diff in gutter
+" Git bits
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
 
 " Buffer Navigation
 Plug 'troydm/easybuffer.vim'
 
-" Linty lint
-Plug 'benekastah/neomake'
+" Wizard autocompletion
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'  }
 
-" Wizard Autocompletion
+" snippets
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+
+" less keystrokes
 Plug 'tpope/vim-endwise'
 Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
-if has('nvim')
-  function! DoRemote(arg)
-    UpdateRemotePlugins
-  endfunction
-  Plug 'shougo/deoplete.nvim', { 'do': function('DoRemote') }
-else
-  set nocompatible
-  Plug 'ajh17/VimCompletesMe'
-end
 
-" Snippets in your bippets
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+" Linty lint
+Plug 'neomake/neomake'
 
-
-" Text mangeling
+" Text swizzeling
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 
+" JS + Html unmangeling
+Plug 'maksimr/vim-jsbeautify'
 
 " Languages
+Plug 'othree/yajs.vim'
+Plug 'othree/es.next.syntax.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'elzr/vim-json'
 Plug 'cakebaker/scss-syntax.vim'
-Plug 'leafgarland/typescript-vim'
 Plug 'othree/html5.vim'
 Plug 'digitaltoad/vim-pug'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-markdown'
-Plug 'dag/vim2hs'
 Plug 'elixir-lang/vim-elixir'
 Plug 'slashmili/alchemist.vim'
+Plug 'neovimhaskell/haskell-vim'
 Plug 'honza/dockerfile.vim'
 
-
 " junegunn 🙏
-" register peeks
+" see contents of registers real quick
 Plug 'junegunn/vim-peekaboo'
-" fuzzy file search <C-p>
+" fuzzy file search
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install'  } | Plug 'junegunn/fzf.vim'
 " tranquil poetry mode
 Plug 'junegunn/goyo.vim'
 
+" pretty colours
+Plug 'chriskempson/base16-vim'
 
-" Movement Enhancements
-" Speedy left right
+" font icon yokeys
+Plug 'ryanoasis/vim-devicons'
+
+" highlight first occurrences for fFtT
 Plug 'unblevable/quick-scope'
 
-
-" Vim is your home now
 " Directory exploration
 Plug 'justinmk/vim-dirvish'
-" Git swizzeling
-Plug 'tpope/vim-fugitive'
 
-" Status Bar TODO: Consider moving to lightline
+" Status Bar + Buffer Bar
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-" visual indentation
+" visual indentation levels
 Plug 'Yggdroot/indentLine'
 
 " Seeing whitespace is fun
@@ -96,7 +89,6 @@ Plug 'mhinz/vim-grepper'
 " hex colours inline
 Plug 'chrisbra/Colorizer'
 
-
 call plug#end()
 
 
@@ -106,30 +98,29 @@ call plug#end()
 filetype off
 syntax on
 
-set nofoldenable    " stupid folding
+" Only highlight the first 200 columns, no more minified spookery
+set synmaxcol=200
 
 " better % skulduggery
 runtime macros/matchit.vim
 
-" civ4 victory by space-race
-let mapleader = "\<Space>"
-
-" people won't hire me if my commit messages and readmes are gibberish
+" spelling is hard
 autocmd BufRead,BufNewFile *.md setlocal spell
 autocmd FileType gitcommit setlocal spell
 
-" command / status line
+" command line bits
+set showcmd
 set wildmenu
 set wildmode=longest:list
-set showcmd
-set noshowmode
-set laststatus=2
 
-" text manipulation
-set backspace=indent,eol,start      " backspace everything"
+" backspace everything
+set backspace=indent,eol,start
 
 " gutter
+set relativenumber
 set number
+
+" cursor
 set cursorline
 
 " files
@@ -137,30 +128,27 @@ set nobackup
 set noswapfile
 set nowritebackup
 
-" tabs
+" soft-tabs
 set expandtab
 set smarttab
 set tabstop=2
 set shiftwidth=2
 set autoindent
 
-" search
+" / is v powerful
 set hlsearch
 set incsearch
 set ignorecase
 set smartcase
 
-" don't hide my damn json quotes
-let g:vim_json_syntax_conceal = 0
-
-" typing
-set ttimeoutlen=50
+" key repeat delay?
+set ttimeoutlen=0
 
 " shame
 set noerrorbells
 set visualbell
 
-" scroll
+" scroll padding
 set scrolloff=15
 set sidescrolloff=15
 
@@ -168,39 +156,24 @@ set sidescrolloff=15
 set splitright
 set splitbelow
 
-" quickscope on fFtT only
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-" quickscope colors
-let g:qs_first_occurrence_highlight_color = '#afff5f' " gui vim
-let g:qs_first_occurrence_highlight_color = 155       " terminal vim
-let g:qs_second_occurrence_highlight_color = '#5fffff'  " gui vim
-let g:qs_second_occurrence_highlight_color = 81         " terminal vim
-
-" 80 is a number
-if exists('+colorcolumn')
-  set colorcolumn=80
-else
-  au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-endif
-
 " Default peekaboo window
 let g:peekaboo_window = 'vertical botright 30new'
+
 
 "----------------------
 " Autocomplete
 "----------------------
-if has('nvim')
-  let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 1
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+inoremap <expr><s-tab> pumvisible() ? "\<c-p>" : "\<tab>"
 
-  " deoplete <Tab> completion:
-  " If popup menu is visible, select and insert next item, else insert tab char
-  imap <silent><expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-  smap <silent><expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" spelling is nice too
+set complete+=kspell
 
-  " shift tab, select and insert the previous item, else <C-h>
-  inoremap <expr><S-Tab>  pumvisible() ? "\<C-p>" : "\<C-h>"
 
-end
+"----------------------
+" Snippets
+"----------------------
 
 " Snippet expansion
 let g:UltiSnipsExpandTrigger="<C-j>"
@@ -208,10 +181,18 @@ let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 
 
+
+"----------------------
+" Linting
+"----------------------
+autocmd! BufWritePost * Neomake
+let g:neomake_javascript_enabled_makers = ['eslint']
+
+
 "----------------------
 " Key Bindings
 "----------------------
-" Begone foul arrows
+" Cold turkey is best turkey, arrow keys are slow
 for prefix in ['i', 'n', 'v']
   for key in ['<Up>', '<Down>', '<Left>', '<Right>']
     exe prefix . "noremap " . key . " <Nop>"
@@ -224,21 +205,54 @@ nnoremap <C-p> :FZF<CR>
 " no EX mode thank you very much
 nnoremap Q <NOP>
 
+" easier split nav
+map <C-h>  <C-w>h
+map <C-j>  <C-w>j
+map <C-k>  <C-w>k
+map <C-l>  <C-w>l
+
 " hide pesky hls
 noremap <silent> <Esc> :noh<CR><Esc>
 
-" Move across wrapped lines like regular lines
-" Go to the first non-blank character of a line
+" swap 0 and ^, 0 goes to the first non-blank character of a line
 noremap 0 ^
-" Just in case you need to go to the very beginning of a line
+" in case you need to go to the very beginning of a line, make that ^
 noremap ^ 0
 
+" pls let me leave terminal :'(
+tnoremap <Esc> <C-\><C-n>
+
 
 "----------------------
-" Leader
+" Commands
 "----------------------
+
+" fingers are difficult, make all typos work
+command! Wq wq
+command! WQ wq
+command! W w
+command! Q q
+
+" shorten the speed grep command
+cnoreabbrev Rg GrepperRg
+
+" beautify things quickly
+command! Jsbeautify call JsBeautify()
+command! Jsonbeautify call JsonBeautify()
+command! Htmlbeautify call HtmlBeautify()
+command! Cssbeautify call CSSBeautify()
+
+
+"----------------------
+" Leader Commands
+"----------------------
+
+" civ4 victory by space-race
+let mapleader = "\<Space>"
+
 " Easily make changes to vimrc
-nnoremap <Leader>R :so ~/.vimrc<CR>
+nnoremap <Leader>R :so ~/.config/nvim/init.vim<CR>
+" Easily do plugin things
 nnoremap <Leader>PI :PlugInstall<CR>
 nnoremap <Leader>PU :PlugUpdate<CR>
 nnoremap <Leader>PC :PlugClean<CR>
@@ -246,24 +260,23 @@ nnoremap <Leader>PC :PlugClean<CR>
 " Trim Leading WS
 nnoremap <Leader>tw :call TrimWhitespace()<CR>
 
-" System Clipboard yankyputting
-"  yank to cliploard without motion
-noremap <Leader>y "+y
-"  yank line to clipboard
-noremap <Leader>yl "+yy
-"  yank file to clipboard
-noremap <Leader>yf gg"+yG
-"  paste from system clipboard
-noremap <Leader>p "+p
-
-
-" Toggle case
-nnoremap <Leader>t g~
-nnoremap <Leader>tc ~h
-nnoremap <Leader>tl g~~
-
 " fast file rename
 nnoremap <Leader>rf :call RenameFile()<cr>
+
+"  yank to system clipboard without motion
+nnoremap <Leader>y "+y
+"  yank line to system clipboard
+nnoremap <Leader>yl "+yy
+"  yank file to system clipboard
+nnoremap <Leader>yf gg"+yG
+"  paste from system clipboard
+nnoremap <Leader>p "+p
+
+" Toggle cases
+nnoremap <Leader>t g~
+nnoremap <Leader>tc ~h
+nnoremap <Leader>tiw g~iw
+nnoremap <Leader>tl g~~
 
 " closing buffers is too slow
 nnoremap <Leader>c :bd<CR>
@@ -276,40 +289,34 @@ nnoremap <Leader>Q :q!<CR>
 " toggle indent visual lines
 nnoremap <Leader>i :IndentLinesToggle<CR>
 
-" fingers
-command! Wq wq
-command! WQ wq
-command! W w
-command! Q q
-
-" shorten the speed grep command
-cnoreabbrev Rg GrepperRg
-
-" easy poetry
+" no distractions mode
 nnoremap <Leader>g :Goyo<CR>
 
 
 "----------------------
 " Colour Things
 "----------------------
-let base16colorspace=256
-colorscheme base16-google
-set background=dark
-highlight ExtraWhitespace ctermbg=red
 
+" true colours awwww yeeee
+set termguicolors
+colorscheme base16-spacemacs
 
-"----------------------
-" sytntax check on write
-"----------------------
-autocmd! BufWritePost * Neomake
+" show filthy whitespace in red
+highlight ExtraWhitespace guibg=red
+
+" 80 is a number that people care about
+set colorcolumn=80
+
+" quickscope on fFtT only
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
 
 "----------------------
 " Buffers
 "----------------------
+
+" hop from file to file without saving
 set hidden
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline#extensions#tabline#show_buffers = 1
 
 " cycle through buffers
 map <Leader><tab> :bn<CR>
@@ -320,26 +327,25 @@ map ` :EasyBuffer<CR>
 "----------------------
 " Status Bar
 "----------------------
-let g:airline_theme='murmur'
+set noshowmode " don't show the plain mode text when we have fancy
 set laststatus=2
+let g:airline_theme='murmur'
+let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-
-"----------------------
-" html tag autoclose
-"----------------------
-let g:closetag_filenames = "*.html,*.erb"
+let g:webdevicons_enable_airline_tabline = 1
+let g:webdevicons_enable_airline_statusline = 1
 
 
 "----------------------
-" Sneaky Functions
+" Helpful Functions
 "----------------------
+
 function! TrimWhitespace()
   let l = line('.')
   let c = col('.')
   %s/\s\+$//e
   call cursor(l, c)
 endfunc
-
 
 function! RenameFile()
   let old_name = expand('%')
