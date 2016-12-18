@@ -146,7 +146,7 @@ yarn global add eslint
 
 NOT WORKING:
 "+y inside vim in tmux
-v selection with tmux-yank
+v selection with tmux-yank, perhaps tm-yank is unnecessary
 
 
 ### GLOBAL GITIGNORE
@@ -173,6 +173,10 @@ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 ```
 
 investigate ssh-agent
+
+### Signed Commits
+
+https://help.github.com/articles/signing-commits-using-gpg/
 
 
 ### NTFS

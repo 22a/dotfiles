@@ -89,6 +89,9 @@ Plug 'mhinz/vim-grepper'
 " hex colours inline
 Plug 'chrisbra/Colorizer'
 
+" numbered search matches
+Plug 'henrik/vim-indexed-search'
+
 call plug#end()
 
 
@@ -222,6 +225,9 @@ noremap ^ 0
 " pls let me leave terminal :'(
 tnoremap <Esc> <C-\><C-n>
 
+" make the cursor play nice with wrapped lines
+noremap <silent> k gk
+noremap <silent> j gj
 
 "----------------------
 " Commands
