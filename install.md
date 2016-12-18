@@ -138,7 +138,7 @@ nvm install stable
 ### Yarn Packages
 
 ```bash
-yarn global add eslint
+yarn global add eslint git-open
 ```
 
 -------------------------------------
