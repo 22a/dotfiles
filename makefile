@@ -14,7 +14,10 @@ hushlogin:
 	touch $(HOME)/.hushlogin
 
 brew:
-	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	echo '/usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"' > $(ROOT_DIR)/brew_install.sh
+	chmod +x $(ROOT_DIR)/brew_install.sh
+	$(ROOT_DIR)/brew_install.sh
+	rm -rf $(ROOT_DIR)/brew_install.sh
 
 dev-brews:
 	brew install neovim/neovim/neovim tmux wget ripgrep htop erlang elixir zsh git fzf python3 yarn
@@ -27,12 +30,6 @@ dev-casks:
 
 other-casks:
 	brew cask install transmission vlc tunnelblick imageoptim spectacle
-
-tmux-plugins:
-	if [ ! -d "$(HOME)/.tmux/plugins/tpm" ]; then \
-		git clone https://github.com/tmux-plugins/tpm $(HOME)/.tmux/plugins/tpm; \
-		$(HOME)/.tmux/plugins/tpm/bin/install_plugins; \
-	fi
 
 vim-plug:
 	curl -fLo $(HOME)/.local/share/nvim/site/autoload/plug.vim --create-dirs \
@@ -69,3 +66,9 @@ dotfiles:
 	ln -sf $(ROOT_DIR)/zpreztorc $(HOME)/.zpreztorc
 	ln -sf $(ROOT_DIR)/zshrc $(HOME)/.zshrc
 	ln -sf $(ROOT_DIR)/tmux.conf $(HOME)/.tmux.conf
+
+tmux-plugins:
+	if [ ! -d "$(HOME)/.tmux/plugins/tpm" ]; then \
+		git clone https://github.com/tmux-plugins/tpm $(HOME)/.tmux/plugins/tpm; \
+		$(HOME)/.tmux/plugins/tpm/bin/install_plugins; \
+	fi
