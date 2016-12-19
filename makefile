@@ -1,11 +1,10 @@
-.PHONY: all mac-bits hushlogin brew dev-brews caskroom dev-casks other-casks tmux-plugins vim-plug nvim node yarn-globals font prezto dotfiles
-.SILENT: all mac-bits hushlogin brew dev-brews caskroom dev-casks other-casks tmux-plugins vim-plug nvim node yarn-globals font prezto dotfiles
+.PHONY: all mac-bits hushlogin brew dev-brews caskroom dev-casks other-casks vim-plug nvim nvm yarn-globals font prezto dotfiles tmux-plugins node
+.SILENT: all mac-bits hushlogin brew dev-brews caskroom dev-casks other-casks vim-plug nvim nvm yarn-globals font prezto dotfiles tmux-plugins node
 
 ROOT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
-all: mac-bits hushlogin brew dev-brews caskroom dev-casks other-casks tmux-plugins vim-plug nvim node yarn-globals font prezto dotfiles
-	@printf "is this how this works?"
-	@printf "\n\n"
+all: mac-bits hushlogin brew dev-brews caskroom dev-casks other-casks vim-plug nvim yarn-globals font prezto dotfiles tmux-plugins node
+	@printf "You're all set\n"
 
 mac-bits:
 	defaults write com.apple.dashboard mcx-disabled -boolean YES && killall Dock
@@ -14,10 +13,7 @@ hushlogin:
 	touch $(HOME)/.hushlogin
 
 brew:
-	echo '/usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"' > $(ROOT_DIR)/brew_install.sh
-	chmod +x $(ROOT_DIR)/brew_install.sh
-	$(ROOT_DIR)/brew_install.sh
-	rm -rf $(ROOT_DIR)/brew_install.sh
+	/usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 dev-brews:
 	brew install neovim/neovim/neovim tmux wget ripgrep htop erlang elixir zsh git fzf python3 yarn
@@ -42,9 +38,6 @@ nvim:
 nvm:
 	curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
 
-node:
-	nvm install stable
-
 yarn-globals:
 	yarn global add eslint git-open
 
@@ -52,12 +45,13 @@ font:
 	cp $(ROOT_DIR)/theme/Sauce\ Code\ Pro\ Light\ Nerd\ Font\ Complete\ Mono.ttf $(HOME)/Library/Fonts/
 
 prezto:
-	zsh
-	git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
-	setopt EXTENDED_GLOB
-	for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
-	ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-	done
+	touch $(HOME)/.zshrc
+	echo 'git clone --recursive https://github.com/sorin-ionescu/prezto.git "$${ZDOTDIR:-$$HOME}/.zprezto";\
+		setopt EXTENDED_GLOB;\
+		for rcfile in "$${ZDOTDIR:-$$HOME}"/.zprezto/runcoms/^README.md(.N); do;\
+		ln -sf "$$rcfile" "$${ZDOTDIR:-$$HOME}/.$${rcfile:t}";\
+		done;
+		exit 0' | zsh
 	chsh -s /bin/zsh
 
 dotfiles:
@@ -72,3 +66,6 @@ tmux-plugins:
 		git clone https://github.com/tmux-plugins/tpm $(HOME)/.tmux/plugins/tpm; \
 		$(HOME)/.tmux/plugins/tpm/bin/install_plugins; \
 	fi
+
+node:
+	nvm install stable
