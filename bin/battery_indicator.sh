@@ -1,28 +1,12 @@
 #!/bin/bash
-# modified from http://ficate.com/blog/2012/10/15/battery-life-in-the-land-of-tmux/
 
-HEART=' ♥'
+battery_info=`ioreg -rc AppleSmartBattery`
+current_charge=$(echo $battery_info | grep -o '"CurrentCapacity" = [0-9]\+' | awk '{print $3}')
+total_charge=$(echo $battery_info | grep -o '"MaxCapacity" = [0-9]\+' | awk '{print $3}')
+mah_fraction=$(echo "$current_charge/$total_charge mAh")
+percentage=`pmset -g batt | grep -o "[0-9]\{1,3\}%"`
+remaining=`pmset -g batt | grep -o '[0-9]\{1,2\}:[0-9]\{1,2\}'`
 
-if [[ `uname` == 'Linux'  ]]; then
-  current_charge=$(cat /proc/acpi/battery/BAT1/state | grep 'remaining capacity' | awk '{print $3}')
-  total_charge=$(cat /proc/acpi/battery/BAT1/info | grep 'last full capacity' | awk '{print $4}')
-else
-  battery_info=`ioreg -rc AppleSmartBattery`
-  current_charge=$(echo $battery_info | grep -o '"CurrentCapacity" = [0-9]\+' | awk '{print $3}')
-  total_charge=$(echo $battery_info | grep -o '"MaxCapacity" = [0-9]\+' | awk '{print $3}')
-fi
-
-breakpoints=10
-charged_slots=$(echo "((($current_charge/$total_charge)*100)/(100/$breakpoints))+1" | bc -l | cut -d '.' -f 1)
-
-if [[ $charged_slots -gt $breakpoints ]]; then
-  charged_slots=$breakpoints
-fi
-
-echo -n '#[fg=colour46]'
-for i in `seq 1 $charged_slots`; do echo -n "$HEART"; done
-
-if [[ $charged_slots -lt $breakpoints ]]; then
-  echo -n '#[fg=colour254]'
-  for i in `seq 1 $(echo "$breakpoints-$charged_slots" | bc)`; do echo -n "$HEART"; done
-fi
+echo $percentage\
+	$remaining\
+	$mah_fraction
