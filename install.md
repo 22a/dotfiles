@@ -174,6 +174,8 @@ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 
 investigate ssh-agent
 
+https://apple.stackexchange.com/questions/254468/macos-sierra-doesn-t-seem-to-remember-ssh-keys-between-reboots/264974#264974
+
 ### Signed Commits
 
 https://help.github.com/articles/signing-commits-using-gpg/
