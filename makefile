@@ -16,16 +16,16 @@ brew:
 	/usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 dev-brews:
-	brew install neovim/neovim/neovim tmux wget ripgrep htop erlang elixir zsh git fzf python3 yarn
+	brew install neovim/neovim/neovim tmux wget ripgrep htop erlang elixir zsh git fzf python3 yarn gpg
 
 caskroom:
 	brew tap caskroom/cask
 
 dev-casks:
-	brew cask install iterm2 google-chrome firefox slack spotify dropbox alfred bartender istat-menus ngrok
+	brew cask install iterm2 google-chrome firefox slack spotify dropbox alfred bartender istat-menus ngrok gpgtools
 
 other-casks:
-	brew cask install transmission vlc tunnelblick imageoptim spectacle
+	brew cask install transmission vlc tunnelblick imageoptim
 
 yarn-globals:
 	yarn global add eslint git-open
