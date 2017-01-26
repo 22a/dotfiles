@@ -52,6 +52,7 @@ dotfiles:
 	ln -sf $(ROOT_DIR)/nvimrc $(HOME)/.config/nvim/init.vim
 	ln -sf $(ROOT_DIR)/zpreztorc $(HOME)/.zpreztorc
 	ln -sf $(ROOT_DIR)/zshrc $(HOME)/.zshrc
+	ln -sf $(ROOT_DIR)/zprofile $(HOME)/.zprofile
 	ln -sf $(ROOT_DIR)/tmux.conf $(HOME)/.tmux.conf
 
 nvim:
