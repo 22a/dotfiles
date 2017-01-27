@@ -12,7 +12,7 @@ These dotfiles have been designed solely for neovim in iTerm2 on macOS. For \*ni
 
 The install script has been setup with a fresh macOS install in mind, it assumes a blank canvas. **It will forcably symlink over your dotfiles** if you let it.
 
-I have tested this on macOS Sierra 10.12.1, brew had a falling out with sierra at the beginning and may do the same with future versions of OSX.
+I have tested this on macOS Sierra 10.12.3, brew had a falling out with sierra at the beginning and may do the same with future versions of OSX.
 
 
 ## Installation
@@ -34,15 +34,14 @@ cd dotfiles; make
 ```
 
 ### Other misc bits that haven't been automated yet:
-
-* Configure iTerm2 font + colourscheme
 * git config
 
 ### Things to do manually
-* gen ssh keys, configure ssh-agent keychain stuff
-* disable spotlight keyboard shortcuts
-* set alfred keyboard shortcuts
-* remove shit from dock, add useful things
+* Generate ssh + gpg keypairs, Configure ssh-agent + gpgtools
+* Disable spotlight keyboard shortcuts, Set alfred keyboard shortcut
+* Tell iTerm2 to use the config file in `iterm2/`
+```
+General -> Preferences -> Load preferences from a custom foler or URL
+```
 
-
-# More readme bits + screenshots coming soon.
+# More readme bits + screenshots coming at some point.
