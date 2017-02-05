@@ -13,6 +13,9 @@ export NVM_DIR="$HOME/.nvm"
 # use rg for fzf
 export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git/*"'
 
+# source yarn globals
+export PATH="$PATH:`yarn global bin`"
+
 # Speedy Esc
 KEYTIMEOUT=1
 

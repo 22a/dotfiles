@@ -3,7 +3,7 @@
 
 ROOT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
-all: mac-bits hushlogin brew dev-brews caskroom dev-casks other-casks yarn-globals font prezto vim-plug dotfiles nvim tmux-plugins nvm node
+all: mac-bits hushlogin brew dev-brews caskroom dev-casks other-casks font prezto vim-plug dotfiles nvim tmux-plugins nvm node yarn-globals
 	@printf "You're all set\n"
 
 mac-bits:
