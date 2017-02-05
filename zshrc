@@ -19,13 +19,17 @@ export PATH="$PATH:`yarn global bin`"
 # Speedy Esc
 KEYTIMEOUT=1
 
+tn () {
+  tmux new -s $(~/dotfiles/scripts/random_word.sh)
+}
+
 # Aliases
 alias pyserv="python -m SimpleHTTPServer"
 alias v="nvim"
 alias vi="nvim"
 alias vim="nvim"
 alias emacs="nvim"
-alias tn="tmux new -s"
+alias tns="tmux new -s"
 alias tls="tmux ls"
 alias ta="tmux a"
 alias tk="tmux kill-session -t"
