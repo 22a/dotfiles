@@ -7,6 +7,4 @@ mah_fraction=$(echo "$current_charge/$total_charge mAh")
 percentage=`pmset -g batt | grep -o "[0-9]\{1,3\}%"`
 remaining=`pmset -g batt | grep -o '[0-9]\{1,2\}:[0-9]\{1,2\}'`
 
-echo $percentage\
-	$remaining\
-	$mah_fraction
+echo $percentage' '$remaining' '$mah_fraction
