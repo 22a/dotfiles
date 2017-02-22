@@ -16,7 +16,7 @@ brew:
 	/usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 dev-brews:
-	brew install neovim/neovim/neovim tmux wget ripgrep htop erlang elixir zsh git fzf python3 yarn gpg
+	brew install neovim/neovim/neovim tmux wget ripgrep htop erlang elixir zsh git fzf python3 yarn gpg reattach-to-user-namespace
 
 caskroom:
 	brew tap caskroom/cask
