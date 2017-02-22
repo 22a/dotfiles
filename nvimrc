@@ -47,7 +47,8 @@ Plug 'tpope/vim-markdown'
 Plug 'elixir-lang/vim-elixir'
 Plug 'slashmili/alchemist.vim'
 Plug 'neovimhaskell/haskell-vim'
-Plug 'honza/dockerfile.vim'
+Plug 'ekalinin/Dockerfile.vim'
+Plug 'jceb/vim-orgmode'
 
 " junegunn 🙏
 " see contents of registers real quick
