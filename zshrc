@@ -19,29 +19,58 @@ export PATH="$PATH:`yarn global bin`"
 # Speedy Esc
 KEYTIMEOUT=1
 
+# new tmux session with random name
 tn () {
   tmux new -s $(~/dotfiles/scripts/random_word.sh)
 }
 
 # Aliases
-alias pyserv="python -m SimpleHTTPServer"
+
+# editors
 alias v="nvim"
 alias vi="nvim"
 alias vim="nvim"
 alias emacs="nvim"
+
+# tmux
 alias tns="tmux new -s"
 alias tls="tmux ls"
 alias ta="tmux a"
-alias tk="tmux kill-session -t"
-alias psg="ps aux | grep"
-alias cls="clear; ls"
-alias exs="exec $SHELL"
-alias brewu="brew -v update; brew upgrade --force-bottle --cleanup; brew cleanup; brew cask cleanup; brew prune; brew doctor;"
+alias tks="tmux kill-session -t"
+
+# internet
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias digg="dig +nocmd any +multiline +noall +answer"
-alias dps="docker ps"
-alias dpsa="docker ps -a"
+
+# docker
+alias dps="docker ps --format \"table {{.Names}}\t{{.Status}}\t{{.ID}}\t{{.Ports}}\""
+alias dpsa="docker ps -a --format \"table {{.Names}}\t{{.Status}}\t{{.ID}}\t{{.Ports}}\""
+alias dpsq="docker ps -q"
+alias dpsaq="docker ps -a -q"
+alias dpsl="docker ps"
+alias dpsal="docker ps -a"
+alias dim="docker images"
+alias drmi="docker rmi"
+alias drmiA="docker rmi $(docker images -q)"
 alias drm="docker rm"
+alias dsA="docker stop \$(docker ps -a -q)"
+alias drmA="docker rm \$(docker ps -a -q)"
+alias drmAf="docker rm -f \$(docker ps -a -q)"
 alias da="docker attach"
-alias dex="docker exec -it"
+alias dprune="docker system prune --all"
+
+# git
+alias gp="git pull"
+alias gP="git push"
+alias gPo="git push origin"
+alias gPom="git push origin master"
+alias gbd="git branch -d"
+alias gbD="git branch -D"
 alias gwdc="gwd --cached"
+
+# misc
+alias pyserv="python -m SimpleHTTPServer"
+alias psg="ps aux | grep"
+alias cls="clear; ls"
+alias exs="source ~/.zshrc" # happy now, Eoin?
+alias brewu="brew -v update; brew upgrade --force-bottle --cleanup; brew cleanup; brew cask cleanup; brew prune; brew doctor;"
