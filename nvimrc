@@ -26,7 +26,6 @@ Plug 'neomake/neomake'
 
 " Text swizzeling
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 
@@ -116,6 +115,7 @@ autocmd FileType gitcommit setlocal spell
 set showcmd
 set wildmenu
 set wildmode=longest:list
+set wildignorecase
 
 " backspace everything
 set backspace=indent,eol,start
@@ -285,6 +285,9 @@ nnoremap <Leader>tc ~h
 nnoremap <Leader>tiw g~iw
 nnoremap <Leader>tl g~~
 
+" writing files is too slow
+nnoremap <Leader>w :w<CR>
+
 " closing buffers is too slow
 nnoremap <Leader>c :bd<CR>
 nnoremap <Leader>C :bd!<CR>
@@ -299,6 +302,10 @@ nnoremap <Leader>i :IndentLinesToggle<CR>
 " no distractions mode
 nnoremap <Leader>g :Goyo<CR>
 
+" easy toggle things
+nnoremap <Leader>W :set wrap!<CR>
+nnoremap <Leader>S :set spell!<CR>
+nnoremap <Leader>P :set paste!<CR>
 
 "----------------------
 " Colour Things
