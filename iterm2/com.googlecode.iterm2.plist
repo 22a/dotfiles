@@ -291,6 +291,13 @@
 			<key>Text</key>
 			<string></string>
 		</dict>
+		<key>0x72-0x100000</key>
+		<dict>
+			<key>Action</key>
+			<integer>13</integer>
+			<key>Text</key>
+			<string></string>
+		</dict>
 		<key>0x9-0x40000</key>
 		<dict>
 			<key>Action</key>
@@ -430,9 +437,9 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>330 305 620 392 0 0 1280 777 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>128 183 937 465 0 0 1280 777 </string>
+	<string>128 191 796 473 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 78 1130 699 0 0 1280 777 </string>
+	<string>0 89 1130 688 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>150 78 1130 699 0 0 1280 777 </string>
 	<key>New Bookmarks</key>
@@ -1102,6 +1109,8 @@
 			<true/>
 			<key>Use Bright Bold</key>
 			<true/>
+			<key>Use HFS Plus Mapping</key>
+			<true/>
 			<key>Use Italic Font</key>
 			<true/>
 			<key>Use Non-ASCII Font</key>
@@ -1183,7 +1192,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-02-22T01:01:36Z</date>
+	<date>2017-03-20T00:52:58Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowBookmarkName</key>
@@ -1196,6 +1205,10 @@
 	<false/>
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
+	<key>findIgnoreCase_iTerm</key>
+	<true/>
+	<key>findRegex_iTerm</key>
+	<false/>
 	<key>iTerm Version</key>
 	<string>3.0.14</string>
 </dict>

@@ -13,7 +13,10 @@ Plug 'troydm/easybuffer.vim'
 " Wizard autocompletion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'  }
 
-" snippets
+" make tab do all
+Plug 'ervandew/supertab'
+
+" text snippets
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
 " less keystrokes
@@ -32,22 +35,24 @@ Plug 'tpope/vim-repeat'
 " JS + Html unmangeling
 Plug 'maksimr/vim-jsbeautify'
 
-" Languages
+" Javascript
 Plug 'othree/yajs.vim'
 Plug 'othree/es.next.syntax.vim'
-Plug 'pangloss/vim-javascript'
-Plug 'elzr/vim-json'
-Plug 'cakebaker/scss-syntax.vim'
+Plug '1995eaton/vim-better-javascript-completion'
+Plug 'ternjs/tern_for_vim', { 'for': ['javascript'], 'do': 'yarn global add tern' }
+Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript'] }
+Plug 'othree/jspc.vim', { 'for': ['javascript'] }
+
+" Other Languages
 Plug 'othree/html5.vim'
-Plug 'digitaltoad/vim-pug'
-Plug 'vim-ruby/vim-ruby'
-Plug 'tpope/vim-rails'
+Plug 'cakebaker/scss-syntax.vim'
 Plug 'tpope/vim-markdown'
 Plug 'elixir-lang/vim-elixir'
 Plug 'slashmili/alchemist.vim'
-Plug 'neovimhaskell/haskell-vim'
 Plug 'ekalinin/Dockerfile.vim'
-Plug 'jceb/vim-orgmode'
+Plug 'elzr/vim-json'
+
+
 
 " junegunn 🙏
 " see contents of registers real quick
@@ -56,6 +61,8 @@ Plug 'junegunn/vim-peekaboo'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install'  } | Plug 'junegunn/fzf.vim'
 " tranquil poetry mode
 Plug 'junegunn/goyo.vim'
+" emoji, the blood of life
+Plug 'junegunn/vim-emoji'
 
 " pretty colours
 Plug 'chriskempson/base16-vim'
@@ -63,18 +70,15 @@ Plug 'chriskempson/base16-vim'
 " font icon yokeys
 Plug 'ryanoasis/vim-devicons'
 
-" highlight first occurrences for fFtT
-Plug 'unblevable/quick-scope'
-
 " Directory exploration
 Plug 'justinmk/vim-dirvish'
 
 " Status Bar + Buffer Bar
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug '22a/vim-airline-themes'
 
 " visual indentation levels
-Plug 'Yggdroot/indentLine'
+Plug 'nathanaelkane/vim-indent-guides'
 
 " Seeing whitespace is fun
 Plug 'ntpeters/vim-better-whitespace'
@@ -101,11 +105,11 @@ call plug#end()
 filetype off
 syntax on
 
-" Only highlight the first 200 columns, no more minified spookery
-set synmaxcol=200
-
 " better % skulduggery
 runtime macros/matchit.vim
+
+" Only highlight the first 200 columns, no more minified spookery
+set synmaxcol=160
 
 " spelling is hard
 autocmd BufRead,BufNewFile *.md setlocal spell
@@ -168,11 +172,28 @@ let g:peekaboo_window = 'vertical botright 30new'
 " Autocomplete
 "----------------------
 let g:deoplete#enable_at_startup = 1
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-inoremap <expr><s-tab> pumvisible() ? "\<c-p>" : "\<tab>"
+let g:deoplete#omni#functions= {}
+let g:deoplete#omni#functions.javascript = [
+  \ 'tern#Complete',
+  \ 'jspc#omni'
+\]
+let g:tern#command = ['tern']
+let g:tern#arguments = ['--persistent']
+
+set completeopt=longest,menuone,preview
+autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" make supertab close the tern preview
+let g:SuperTabClosePreviewOnPopupClose = 1
+" make supertab move down instead of up
+let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " spelling is nice too
 set complete+=kspell
+
+" C-x, C-u emoji completion :dog:
+set completefunc=emoji#complete
 
 
 "----------------------
@@ -183,7 +204,6 @@ set complete+=kspell
 let g:UltiSnipsExpandTrigger="<C-j>"
 let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsJumpBackwardTrigger="<C-k>"
-
 
 
 "----------------------
@@ -296,9 +316,6 @@ nnoremap <Leader>C :bd!<CR>
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>Q :q!<CR>
 
-" toggle indent visual lines
-nnoremap <Leader>i :IndentLinesToggle<CR>
-
 " no distractions mode
 nnoremap <Leader>g :Goyo<CR>
 
@@ -315,14 +332,17 @@ nnoremap <Leader>P :set paste!<CR>
 set termguicolors
 colorscheme base16-spacemacs
 
-" show filthy whitespace in red
-highlight ExtraWhitespace guibg=red
+" show filthy whitespace in white
+highlight ExtraWhitespace guibg=white
 
 " 80 is a number that people care about
 set colorcolumn=80
 
-" quickscope on fFtT only
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+" indent guide colors
+" base16 bg is #1F2022, so i've just bumped up to #222426 and #242628
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#242628
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#222426
 
 
 "----------------------
@@ -343,7 +363,7 @@ map ` :EasyBuffer<CR>
 "----------------------
 set noshowmode " don't show the plain mode text when we have fancy
 set laststatus=2
-let g:airline_theme='murmur'
+let g:airline_theme='base16_spacemacs'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:webdevicons_enable_airline_tabline = 1
