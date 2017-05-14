@@ -437,11 +437,15 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>330 305 620 392 0 0 1280 777 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>128 191 796 473 0 0 1280 777 </string>
+	<string>128 169 918 495 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 89 1130 688 0 0 1280 777 </string>
+	<string>0 68 1130 699 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>150 78 1130 699 0 0 1280 777 </string>
+	<string>150 73 1130 699 0 0 1280 777 </string>
+	<key>NeverWarnAboutShortLivedSessions_10A7AC91-4850-402F-9418-EB1ACB7019D0</key>
+	<true/>
+	<key>NeverWarnAboutShortLivedSessions_10A7AC91-4850-402F-9418-EB1ACB7019D0_selection</key>
+	<integer>0</integer>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1192,7 +1196,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-03-20T00:52:58Z</date>
+	<date>2017-05-01T15:41:46Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowBookmarkName</key>
@@ -1210,6 +1214,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.0.14</string>
+	<string>3.0.15</string>
 </dict>
 </plist>

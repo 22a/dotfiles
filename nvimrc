@@ -39,7 +39,7 @@ Plug 'maksimr/vim-jsbeautify'
 Plug 'othree/yajs.vim'
 Plug 'othree/es.next.syntax.vim'
 Plug '1995eaton/vim-better-javascript-completion'
-Plug 'ternjs/tern_for_vim', { 'for': ['javascript'], 'do': 'yarn global add tern' }
+Plug 'ternjs/tern_for_vim', { 'for': ['javascript'] }
 Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript'] }
 Plug 'othree/jspc.vim', { 'for': ['javascript'] }
 

@@ -1,6 +1,6 @@
 ![snoopWoop](https://upload.wikimedia.org/wikipedia/commons/3/37/Female_dalmatian_head_shot.jpg)
 # Dotfiles
-### aka. Spooky Wizzard Incantation Configuration
+### aka. Spooky Wizard Incantation Configuration
 
 My spooky configuration of zsh, prezto, tmux, and neovim.
 
@@ -10,7 +10,7 @@ These dotfiles have been designed solely for neovim in iTerm2 on macOS. For \*ni
 
 ## Warnings
 
-The install script has been setup with a fresh macOS install in mind, it assumes a blank canvas. **It will forcably symlink over your dotfiles** if you let it.
+The install script has been setup with a fresh macOS install in mind, it assumes a blank canvas. **It will forcibly symlink over your dotfiles** if you let it.
 
 I have tested this on macOS Sierra 10.12.3, brew had a falling out with sierra at the beginning and may do the same with future versions of OSX.
 
@@ -25,7 +25,7 @@ Click accept, accept, etc.
 
 Clone this repo:
 ```bash
-git clone git@github.com:22a/dotfiles.git
+git clone https://github.com/22a/dotfiles.git
 ```
 
 Run the install scripts:
@@ -37,11 +37,23 @@ cd dotfiles; make
 * git config
 
 ### Things to do manually
-* Generate ssh + gpg keypairs, Configure ssh-agent + gpgtools
-* Disable spotlight keyboard shortcuts, Set alfred keyboard shortcut
-* Tell iTerm2 to use the config file in `iterm2/`
+
+#### Generate ssh + gpg keypairs, Configure ssh-agent + gpgtools
+
+#### Disable spotlight keyboard shortcuts, Set alfred keyboard shortcut
+
+#### Tell iTerm2 to use the config file in `iterm2/`
+Open iTerm and set the iterm preferences directory:
 ```
 General -> Preferences -> Load preferences from a custom foler or URL
 ```
+The close iTerm entirely: `cmd + alt + q` and open it again.
 
-# More readme bits + screenshots coming at some point.
+#### Change the dotfiles remote
+If you decided to clone this repo over HTTPS as opposed to SSH (because setting up ssh keys in plain old terminal is no fun) you'll want to change the repo's remote.
+
+```
+git remote set-url origin git@github.com:22a/dotfiles.git
+```
+
+# More readme bits + screenshots coming at some point...

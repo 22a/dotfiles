@@ -28,10 +28,10 @@ other-casks:
 	brew cask install transmission vlc tunnelblick imageoptim
 
 yarn-globals:
-	yarn global add eslint git-open
+	yarn global add eslint git-open tern
 
 font:
-	cp $(ROOT_DIR)/theme/Sauce\ Code\ Pro\ Light\ Nerd\ Font\ Complete\ Mono.ttf $(HOME)/Library/Fonts/
+	cp $(ROOT_DIR)/iterm2/Sauce\ Code\ Pro\ Light\ Nerd\ Font\ Complete\ Mono.ttf $(HOME)/Library/Fonts/
 
 prezto:
 	touch $(HOME)/.zshrc
