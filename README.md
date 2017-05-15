@@ -47,7 +47,7 @@ Open iTerm and set the iterm preferences directory:
 ```
 General -> Preferences -> Load preferences from a custom foler or URL
 ```
-The close iTerm entirely: `cmd + alt + q` and open it again.
+Then close iTerm entirely: `cmd + alt + q` and open it again.
 
 #### Change the dotfiles remote
 If you decided to clone this repo over HTTPS as opposed to SSH (because setting up ssh keys in plain old terminal is no fun) you'll want to change the repo's remote.
@@ -56,4 +56,4 @@ If you decided to clone this repo over HTTPS as opposed to SSH (because setting 
 git remote set-url origin git@github.com:22a/dotfiles.git
 ```
 
-# More readme bits + screenshots coming at some point...
+## More readme bits + screenshots coming at some point...
