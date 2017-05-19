@@ -41,6 +41,7 @@ cd dotfiles; make
 #### Generate ssh + gpg keypairs, Configure ssh-agent + gpgtools
 
 #### Disable spotlight keyboard shortcuts, Set alfred keyboard shortcut
+`System Preferences... -> Keyboard -> Shortcuts -> Spotlight -> Untick both`
 
 #### Tell iTerm2 to use the config file in `iterm2/`
 Open iTerm and set the iterm preferences directory:

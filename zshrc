@@ -69,7 +69,7 @@ alias gwdc="gwd --cached"
 
 # misc
 alias pyserv="python -m SimpleHTTPServer"
-alias psg="ps aux | grep"
+alias psg="ps aux | head -n 1; ps aux | rg"
 alias cls="clear; ls"
 alias exs="source ~/.zshrc" # happy now, Eoin?
 alias brewu="brew -v update; brew upgrade --force-bottle --cleanup; brew cleanup; brew cask cleanup; brew doctor; brew prune;"

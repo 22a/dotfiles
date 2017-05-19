@@ -54,6 +54,8 @@ dotfiles:
 	ln -sf $(ROOT_DIR)/zshrc $(HOME)/.zshrc
 	ln -sf $(ROOT_DIR)/zprofile $(HOME)/.zprofile
 	ln -sf $(ROOT_DIR)/tmux.conf $(HOME)/.tmux.conf
+	ln -sf $(ROOT_DIR)/gitconfig $(HOME)/.config/git/config
+	ln -sf $(ROOT_DIR)/gitignore $(HOME)/.config/git/ignore
 
 nvim:
 	pip3 install neovim

@@ -1,0 +1,20 @@
+[user]
+  email = meehanp2@tcd.ie
+  name = Peter Meehan
+
+[core]
+  editor = nvim
+  excludesfile = ~/.config/git/ignore
+
+[alias]
+  undo-commit = reset --soft HEAD^
+  unstage = reset HEAD --
+
+[pull]
+  default = current
+
+[push]
+  default = current
+
+[status]
+  showUntrackedFiles = all
