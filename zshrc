@@ -60,9 +60,9 @@ alias da="docker attach"
 alias dprune="docker system prune --all"
 
 # git
-alias gp="git pull"
-alias gP="git push"
-alias gPo="git push && git open"
+alias gpull="git pull"
+alias gpush="git push"
+alias gpusho="git push && git open"
 alias gbd="git branch -d"
 alias gbD="git branch -D"
 alias gwdc="gwd --cached"
