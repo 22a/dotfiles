@@ -290,6 +290,9 @@ nnoremap <Leader>tw :call TrimWhitespace()<CR>
 " fast file rename
 nnoremap <Leader>rf :call RenameFile()<cr>
 
+" ye, system clip pls
+set clipboard=unnamed
+
 "  yank to system clipboard without motion
 nnoremap <Leader>y "+y
 "  yank line to system clipboard
