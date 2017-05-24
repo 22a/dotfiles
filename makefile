@@ -1,9 +1,9 @@
-.PHONY: all mac-bits hushlogin brew dev-brews caskroom dev-casks other-casks yarn-globals font prezto vim-plug dotfiles nvim tmux-plugins nvm node
-.SILENT: all mac-bits hushlogin brew dev-brews caskroom dev-casks other-casks yarn-globals font prezto vim-plug dotfiles nvim tmux-plugins nvm node
+.PHONY: all mac-bits hushlogin brew dev-brews caskroom dev-casks other-casks yarn-globals font prezto vim-plug dotfiles nvim  nvm node
+.SILENT: all mac-bits hushlogin brew dev-brews caskroom dev-casks other-casks yarn-globals font prezto vim-plug dotfiles nvim  nvm node
 
 ROOT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
-all: mac-bits hushlogin brew dev-brews caskroom dev-casks other-casks font prezto vim-plug dotfiles nvim tmux-plugins nvm node yarn-globals
+all: mac-bits hushlogin brew dev-brews caskroom dev-casks other-casks font prezto vim-plug dotfiles nvim  nvm node yarn-globals
 	@printf "You're all set\n"
 
 mac-bits:
@@ -60,12 +60,6 @@ dotfiles:
 nvim:
 	pip3 install neovim
 	nvim -c PlugInstall -c quitall
-
-tmux-plugins:
-	if [ ! -d "$(HOME)/.tmux/plugins/tpm" ]; then \
-		git clone https://github.com/tmux-plugins/tpm $(HOME)/.tmux/plugins/tpm; \
-		$(HOME)/.tmux/plugins/tpm/bin/install_plugins; \
-	fi
 
 nvm:
 	curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
