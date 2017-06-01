@@ -16,6 +16,11 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git/*"'
 # source yarn globals
 export PATH="$PATH:`yarn global bin`"
 
+# docker-machine away!
+eval $(docker-machine env default)
+
+# source autojump
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 # Speedy Esc
 KEYTIMEOUT=1
 
@@ -37,6 +42,9 @@ alias tns="tmux new -s"
 alias tls="tmux ls"
 alias ta="tmux a"
 alias tks="tmux kill-session -t"
+
+# tree
+alias tree="tree -a -I 'node_modules*|.git*'"
 
 # internet
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"

@@ -51,8 +51,8 @@ Plug 'elixir-lang/vim-elixir'
 Plug 'slashmili/alchemist.vim'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'elzr/vim-json'
-
-
+Plug 'zplug/vim-zplug'
+Plug 'saltstack/salt-vim'
 
 " junegunn 🙏
 " see contents of registers real quick
@@ -257,7 +257,7 @@ noremap <silent> j gj
 " fingers are difficult, make all typos work
 command! Wq wq
 command! WQ wq
-command! W w
+command! W w !sudo tee %
 command! Q q
 
 " shorten the speed grep command
