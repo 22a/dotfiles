@@ -210,7 +210,7 @@ let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 " Linting
 "----------------------
 autocmd! BufWritePost * Neomake
-let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_javascript_enabled_makers = ['standard']
 
 
 "----------------------
@@ -320,7 +320,9 @@ nnoremap <Leader>q :q<CR>
 nnoremap <Leader>Q :q!<CR>
 
 " no distractions mode
-nnoremap <Leader>g :Goyo<CR>
+nnoremap <leader>g :Grepper -tool rg<CR>
+nnoremap <leader>G :Grepper -tool rg -buffers<cr>
+nnoremap <leader>* :Grepper -tool rg -cword -noprompt<cr>
 
 " easy toggle things
 nnoremap <Leader>W :set wrap!<CR>
