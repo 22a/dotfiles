@@ -1,6 +1,7 @@
 [user]
   email = meehanp2@tcd.ie
   name = Peter Meehan
+  signingkey = DF7C74AFDC99DF7C
 
 [core]
   editor = nvim
@@ -9,6 +10,12 @@
 [alias]
   undo-commit = reset --soft HEAD^
   unstage = reset HEAD --
+
+[commit]
+  gpgsign = true
+
+[gpg]
+  program = gpg2
 
 [pull]
   default = current

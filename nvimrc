@@ -42,6 +42,7 @@ Plug '1995eaton/vim-better-javascript-completion'
 Plug 'ternjs/tern_for_vim', { 'for': ['javascript'] }
 Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript'] }
 Plug 'othree/jspc.vim', { 'for': ['javascript'] }
+Plug 'mxw/vim-jsx'
 
 " Other Languages
 Plug 'othree/html5.vim'
@@ -347,6 +348,7 @@ let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#242628
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#222426
 
+let g:jsx_ext_required = 0
 
 "----------------------
 " Buffers

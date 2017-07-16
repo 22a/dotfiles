@@ -17,10 +17,10 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git/*"'
 export PATH="$PATH:`yarn global bin`"
 
 # docker-machine away!
-eval $(docker-machine env default)
+# eval $(docker-machine env default)
 
 # source autojump
-[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+# [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 # Speedy Esc
 KEYTIMEOUT=1
 
