@@ -12,6 +12,8 @@ Plug 'troydm/easybuffer.vim'
 
 " Wizard autocompletion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'  }
+" Emoji autocompletion for commit messages and markdown
+Plug 'fszymanski/deoplete-emoji'
 
 " make tab do all
 Plug 'ervandew/supertab'
@@ -38,11 +40,11 @@ Plug 'maksimr/vim-jsbeautify'
 " Javascript
 Plug 'othree/yajs.vim'
 Plug 'othree/es.next.syntax.vim'
-Plug '1995eaton/vim-better-javascript-completion'
-Plug 'ternjs/tern_for_vim', { 'for': ['javascript'] }
-Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript'] }
-Plug 'othree/jspc.vim', { 'for': ['javascript'] }
-Plug 'mxw/vim-jsx'
+" Plug '1995eaton/vim-better-javascript-completion'
+" Plug 'ternjs/tern_for_vim', { 'for': ['javascript'] }
+" Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript'] }
+" Plug 'othree/jspc.vim', { 'for': ['javascript'] }
+Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript'] }
 
 " Other Languages
 Plug 'othree/html5.vim'
@@ -109,8 +111,8 @@ syntax on
 " better % skulduggery
 runtime macros/matchit.vim
 
-" Only highlight the first 200 columns, no more minified spookery
-set synmaxcol=160
+" Only highlight the first 120 columns, no more minified spookery
+set synmaxcol=120
 
 " spelling is hard
 autocmd BufRead,BufNewFile *.md setlocal spell
@@ -206,6 +208,8 @@ let g:UltiSnipsExpandTrigger="<C-j>"
 let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 
+let g:jsdoc_allow_input_prompt = 1
+
 
 "----------------------
 " Linting
@@ -239,7 +243,7 @@ map <C-l>  <C-w>l
 " hide pesky hls
 noremap <silent> <Esc> :noh<CR><Esc>
 
-" swap 0 and ^, 0 goes to the first non-blank character of a line
+" swap 0 and ^. 0 now goes to the first non-blank character of a line
 noremap 0 ^
 " in case you need to go to the very beginning of a line, make that ^
 noremap ^ 0
@@ -329,6 +333,9 @@ nnoremap <leader>* :Grepper -tool rg -cword -noprompt<cr>
 nnoremap <Leader>W :set wrap!<CR>
 nnoremap <Leader>S :set spell!<CR>
 nnoremap <Leader>P :set paste!<CR>
+
+" jsdoc
+nnoremap <Leader>jd :JsDoc<CR>
 
 "----------------------
 " Colour Things
