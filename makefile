@@ -25,10 +25,10 @@ dev-casks:
 	brew cask install iterm2 google-chrome firefox slack spotify dropbox alfred bartender istat-menus ngrok gpgtools
 
 other-casks:
-	brew cask install transmission vlc tunnelblick imageoptim
+	brew cask install transmission vlc imageoptim
 
 yarn-globals:
-	yarn global add eslint git-open tern
+	yarn global add standard
 
 font:
 	cp $(ROOT_DIR)/iterm2/Sauce\ Code\ Pro\ Light\ Nerd\ Font\ Complete\ Mono.ttf $(HOME)/Library/Fonts/
@@ -49,6 +49,7 @@ vim-plug:
 
 dotfiles:
 	mkdir -p $(HOME)/.config/nvim
+	mkdir -p $(HOME)/.config/git
 	ln -sf $(ROOT_DIR)/nvimrc $(HOME)/.config/nvim/init.vim
 	ln -sf $(ROOT_DIR)/zpreztorc $(HOME)/.zpreztorc
 	ln -sf $(ROOT_DIR)/zshrc $(HOME)/.zshrc
@@ -67,4 +68,4 @@ nvm:
 node:
 	echo 'export NVM_DIR="$$HOME/.nvm"; \
 	[ -s "$$NVM_DIR/nvm.sh" ] && . "$$NVM_DIR/nvm.sh"; \
-	nvm install stable' | bash
+	nvm install stable' | zsh
