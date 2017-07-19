@@ -1,9 +1,9 @@
-.PHONY: all mac-bits hushlogin brew dev-brews caskroom dev-casks other-casks yarn-globals font prezto vim-plug dotfiles nvim  nvm node
-.SILENT: all mac-bits hushlogin brew dev-brews caskroom dev-casks other-casks yarn-globals font prezto vim-plug dotfiles nvim  nvm node
+.PHONY: all mac-bits hushlogin brew dev-brews caskroom dev-casks other-casks yarn-globals font vim-plug dotfiles nvim zplug nvm node
+.SILENT: all mac-bits hushlogin brew dev-brews caskroom dev-casks other-casks yarn-globals font vim-plug dotfiles nvim zplug nvm node
 
 ROOT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
-all: mac-bits hushlogin brew dev-brews caskroom dev-casks other-casks font prezto vim-plug dotfiles nvim  nvm node yarn-globals
+all: mac-bits hushlogin brew dev-brews caskroom dev-casks other-casks font vim-plug dotfiles nvim zplug nvm node yarn-globals
 	@printf "You're all set\n"
 
 mac-bits:
@@ -33,16 +33,6 @@ yarn-globals:
 font:
 	cp $(ROOT_DIR)/iterm2/Sauce\ Code\ Pro\ Light\ Nerd\ Font\ Complete\ Mono.ttf $(HOME)/Library/Fonts/
 
-prezto:
-	touch $(HOME)/.zshrc
-	echo 'git clone --recursive https://github.com/sorin-ionescu/prezto.git "$${ZDOTDIR:-$$HOME}/.zprezto";\
-		setopt EXTENDED_GLOB;\
-		for rcfile in "$${ZDOTDIR:-$$HOME}"/.zprezto/runcoms/^README.md(.N); do;\
-		ln -sf "$$rcfile" "$${ZDOTDIR:-$$HOME}/.$${rcfile:t}";\
-		done;\
-		exit 0' | zsh
-	chsh -s /bin/zsh
-
 vim-plug:
 	curl -fLo $(HOME)/.local/share/nvim/site/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -54,6 +44,7 @@ dotfiles:
 	ln -sf $(ROOT_DIR)/zpreztorc $(HOME)/.zpreztorc
 	ln -sf $(ROOT_DIR)/zshrc $(HOME)/.zshrc
 	ln -sf $(ROOT_DIR)/zprofile $(HOME)/.zprofile
+	ln -sf $(ROOT_DIR)/zshenv $(HOME)/.zshenv
 	ln -sf $(ROOT_DIR)/tmux.conf $(HOME)/.tmux.conf
 	ln -sf $(ROOT_DIR)/gitconfig $(HOME)/.config/git/config
 	ln -sf $(ROOT_DIR)/gitignore $(HOME)/.config/git/ignore
@@ -61,6 +52,10 @@ dotfiles:
 nvim:
 	pip3 install neovim
 	nvim -c PlugInstall -c quitall
+
+zplug:
+	curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+	zplug install
 
 nvm:
 	curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash

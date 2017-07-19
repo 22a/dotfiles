@@ -1,14 +1,17 @@
 export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
+# Theme
 zplug "mafredri/zsh-async"
-zplug "dfurnes/purer"
+zplug "22a/purer"
+
 zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-history-substring-search"
 zplug "plugins/colored-man-pages", from:oh-my-zsh
-# zplug "plugins/docker", from:oh-my-zsh
+zplug "modules/completion", from:prezto
+zplug "paulirish/git-open", as:plugin
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
@@ -19,7 +22,8 @@ if ! zplug check --verbose; then
 fi
 
 # Then, source plugins and add commands to $PATH
-zplug load --verbose
+# zplug load --verbose
+zplug load
 
 # source NVM
 export NVM_DIR="$HOME/.nvm"
@@ -81,12 +85,18 @@ alias da="docker attach"
 alias dprune="docker system prune --all"
 
 # git
-alias gpull="git pull"
-alias gpush="git push"
-alias gpusho="git push && git open"
+alias gl='git log --topo-order --pretty=format:"%C(bold)Commit:%C(reset) %C(green)%H%C(red)%d%n%C(bold)Author:%C(reset) %C(cyan)%an <%ae>%n%C(bold)Date:%C(reset)   %C(blue)%ai (%ar)%C(reset)%n%+B"'
+alias gwd='git diff --no-ext-diff'
+alias gwdc="gwd --cached"
+alias gws='git status --short'
+alias gco='git checkout'
+alias gcm='git commit --message'
+alias gc='git commit --verbose'
+alias gcF='git commit --verbose --amend'
+alias gcf='git commit --amend --reuse-message HEAD'
+alias gb='git branch'
 alias gbd="git branch -d"
 alias gbD="git branch -D"
-alias gwdc="gwd --cached"
 
 # misc
 alias pyserv="python -m SimpleHTTPServer"
@@ -94,3 +104,12 @@ alias psg="ps aux | head -n 1; ps aux | rg"
 alias cls="clear; ls"
 alias exs="source ~/.zshrc" # happy now, Eoin?
 alias brewu="brew -v update; brew upgrade --force-bottle --cleanup; brew cleanup; brew cask cleanup; brew doctor; brew prune;"
+
+alias cask='brew cask'
+alias cls='clear; ls'
+
+alias ls='ls -Gh'
+alias l='ls -1A'
+alias ll='ls -lh'
+alias la='ll -A'
+alias lk='ll -Sr'
