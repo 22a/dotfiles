@@ -40,10 +40,7 @@ Plug 'maksimr/vim-jsbeautify'
 " Javascript
 Plug 'othree/yajs.vim'
 Plug 'othree/es.next.syntax.vim'
-" Plug '1995eaton/vim-better-javascript-completion'
-" Plug 'ternjs/tern_for_vim', { 'for': ['javascript'] }
-" Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript'] }
-" Plug 'othree/jspc.vim', { 'for': ['javascript'] }
+Plug '1995eaton/vim-better-javascript-completion'
 Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript'] }
 
 " Other Languages
@@ -54,8 +51,9 @@ Plug 'elixir-lang/vim-elixir'
 Plug 'slashmili/alchemist.vim'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'elzr/vim-json'
-Plug 'zplug/vim-zplug'
+Plug 'tpope/vim-rails'
 Plug 'saltstack/salt-vim'
+Plug 'mxw/vim-jsx'
 
 " junegunn 🙏
 " see contents of registers real quick
@@ -357,6 +355,7 @@ let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#242628
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#222426
 
+" react jsx highlighting
 let g:jsx_ext_required = 0
 
 "----------------------
