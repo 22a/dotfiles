@@ -16,7 +16,7 @@ brew:
 	/usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 dev-brews:
-	brew install neovim/neovim/neovim tmux wget ripgrep htop erlang elixir zsh git fzf python3 yarn gpg reattach-to-user-namespace
+	brew install neovim/neovim/neovim tmux wget ripgrep htop erlang elixir zsh zplug git fzf python3 yarn gpg reattach-to-user-namespace coreutils
 
 caskroom:
 	brew tap caskroom/cask
@@ -41,10 +41,9 @@ dotfiles:
 	mkdir -p $(HOME)/.config/nvim
 	mkdir -p $(HOME)/.config/git
 	ln -sf $(ROOT_DIR)/nvimrc $(HOME)/.config/nvim/init.vim
-	ln -sf $(ROOT_DIR)/zpreztorc $(HOME)/.zpreztorc
 	ln -sf $(ROOT_DIR)/zshrc $(HOME)/.zshrc
-	ln -sf $(ROOT_DIR)/zprofile $(HOME)/.zprofile
 	ln -sf $(ROOT_DIR)/zshenv $(HOME)/.zshenv
+	ln -sf $(ROOT_DIR)/zprofile $(HOME)/.zprofile
 	ln -sf $(ROOT_DIR)/tmux.conf $(HOME)/.tmux.conf
 	ln -sf $(ROOT_DIR)/gitconfig $(HOME)/.config/git/config
 	ln -sf $(ROOT_DIR)/gitignore $(HOME)/.config/git/ignore

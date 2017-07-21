@@ -2,7 +2,7 @@
 # Dotfiles
 ### aka. Spooky Wizard Incantation Configuration
 
-My spooky configuration of zsh, prezto, tmux, and neovim.
+My spooky configuration of zsh, tmux, and neovim.
 
 ## Prerequisites
 
