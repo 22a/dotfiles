@@ -29,6 +29,9 @@ bindkey "^[[B" history-substring-search-down
 # vi mode?
 bindkey -v
 
+# command history please
+SAVEHIST=100000
+
 # 10ms escape
 KEYTIMEOUT=1
 
