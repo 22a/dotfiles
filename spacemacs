@@ -335,8 +335,10 @@ you should place your code here."
   ;; Disable js2 semicolon warning
   (setq-default js2-strict-missing-semi-warning nil)
 
-  ;; Use left alt key
-  (setq mac-left-option-modifier nil)
+  ;; Left alt key can be used as character modifier
+  (setq-default
+    mac-option-modifier nil
+    mac-right-option-modifier 'meta)
 
   ;; Highlight current line
   (setq nlinum-highlight-current-line t)
