@@ -1,9 +1,9 @@
-.PHONY: all mac-bits hushlogin brew dev-brews caskroom dev-casks other-casks yarn-globals font vim-plug dotfiles nvim zplug nvm node
-.SILENT: all mac-bits hushlogin brew dev-brews caskroom dev-casks other-casks yarn-globals font vim-plug dotfiles nvim zplug nvm node
+.PHONY: all mac-bits hushlogin brew yarn-globals vim-plug dotfiles nvim zplug nvm node
+.SILENT: all mac-bits hushlogin brew yarn-globals vim-plug dotfiles nvim zplug nvm node
 
 ROOT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
-all: mac-bits hushlogin brew dev-brews caskroom dev-casks other-casks font vim-plug dotfiles nvim zplug nvm node yarn-globals
+all: mac-bits hushlogin brew vim-plug dotfiles nvim zplug nvm node yarn-globals
 	@printf "You're all set\n"
 
 mac-bits:
@@ -14,24 +14,11 @@ hushlogin:
 
 brew:
 	/usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-
-dev-brews:
-	brew install neovim/neovim/neovim tmux wget ripgrep htop erlang elixir zsh zplug git fzf python3 yarn gpg reattach-to-user-namespace coreutils
-
-caskroom:
-	brew tap caskroom/cask
-
-dev-casks:
-	brew cask install iterm2 google-chrome firefox slack spotify dropbox alfred bartender istat-menus ngrok gpgtools
-
-other-casks:
-	brew cask install transmission vlc imageoptim
+	brew tap Homebrew/bundle
+	brew bundle
 
 yarn-globals:
 	yarn global add standard
-
-font:
-	cp $(ROOT_DIR)/iterm2/Sauce\ Code\ Pro\ Light\ Nerd\ Font\ Complete\ Mono.ttf $(HOME)/Library/Fonts/
 
 vim-plug:
 	curl -fLo $(HOME)/.local/share/nvim/site/autoload/plug.vim --create-dirs \
