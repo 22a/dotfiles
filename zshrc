@@ -43,7 +43,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # use rg for fzf
-export FZF_DEFAULT_COMMAND="rg --files --hidden --glob "!.git/*""
+export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/*'"
 
 # source yarn globals
 export PATH="$PATH:`yarn global bin`"
