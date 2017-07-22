@@ -95,28 +95,26 @@ alias dsA="docker stop \$(docker ps -a -q)"
 
 # git
 alias gb="git branch"
-alias gbD="git branch -D"
-alias gbd="git branch -d"
+alias gbD="gb -D"
+alias gbd="gb -d"
 alias gc="git commit --verbose"
-alias gcF="git commit --verbose --amend"
-alias gcf="git commit --amend --reuse-message HEAD"
+alias gcam="gc --amend"
+alias gcf="gcam --reuse-message HEAD"
 alias gcm="git commit --message"
 alias gco="git checkout"
-alias gd="git diff-index --quiet HEAD -- || clear; git diff --patch-with-stat"
 alias gl="git log --topo-order --pretty=format:'%C(bold)Commit:%C(reset) %C(green)%H%C(red)%d%n%C(bold)Author:%C(reset) %C(cyan)%an <%ae>%n%C(bold)Date:%C(reset)   %C(blue)%ai (%ar)%C(reset)%n%+B'"
-alias glog="log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"
-alias gwd="git diff --no-ext-diff"
+alias glog="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"
+alias gwd="git diff --no-ext-diff --patch-with-stat"
 alias gwdc="gwd --cached"
 alias gws="git status --short"
 
 # misc
 alias brewu="brew -v update; brew upgrade --force-bottle --cleanup; brew cleanup; brew cask cleanup; brew doctor; brew prune;"
 alias cls="clear; ls"
-alias cls="clear; ls"
-alias exs="source ~/.zshrc" # happy now, Eoin?
+alias exs="source ~/.zshrc"
 alias hosts="sudo $EDITOR /etc/hosts"
 alias psg="ps aux | head -n 1; ps aux | rg"
-alias pyserv="python -m SimpleHTTPServer"
+alias pyserv="python3 -m http.server"
 
 # clumsy fingers
 alias ..="cd .."
@@ -126,10 +124,10 @@ alias cd..="cd .."
 alias cask="brew cask"
 
 # listing
-alias ls="gls -AFh --color --group-directories-first"
+alias ls="gls -Fh --color --group-directories-first"
 alias l="ls -1A"
-alias la="ls -lh"
-alias lk="ll -Sr"
+alias la="ls -lA"
+alias lk="la -S"
 
 # dotfile editing
 alias nvimrc="$EDITOR ~/dotfiles/nvimrc"

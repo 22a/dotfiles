@@ -1,9 +1,10 @@
-.PHONY: all mac-bits hushlogin brew yarn-globals vim-plug dotfiles nvim zplug nvm node
-.SILENT: all mac-bits hushlogin brew yarn-globals vim-plug dotfiles nvim zplug nvm node
+.PHONY: all brew-install dotfiles homebrew hushlogin mac-bits node nvim nvm vim-plug yarn-globals zplug zsh
+
+.SILENT: all brew-install dotfiles homebrew hushlogin mac-bits node nvim nvm vim-plug yarn-globals zplug zsh
 
 ROOT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
-all: mac-bits hushlogin brew vim-plug dotfiles nvim zplug nvm node yarn-globals
+all: homebrew brew-install dotfiles hushlogin mac-bits node nvim nvm vim-plug yarn-globals zplug zsh
 	@printf "You're all set\n"
 
 mac-bits:
@@ -12,8 +13,10 @@ mac-bits:
 hushlogin:
 	touch $(HOME)/.hushlogin
 
-brew:
+homebrew:
 	/usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+brew-install:
 	brew tap Homebrew/bundle
 	brew bundle
 
@@ -39,12 +42,15 @@ nvim:
 	pip3 install neovim
 	nvim -c PlugInstall -c quitall
 
+zsh:
+	chsh -s /bin/zsh
+
 zplug:
 	curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 	zplug install
 
 nvm:
-	curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
+	curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | zsh
 
 node:
 	echo 'export NVM_DIR="$$HOME/.nvm"; \
