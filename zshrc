@@ -30,7 +30,12 @@ bindkey "^[[B" history-substring-search-down
 bindkey -v
 
 # command history please
+HISTSIZE=100000
 SAVEHIST=100000
+setopt APPEND_HISTORY
+setopt SHARE_HISTORY # share history between sessions
+setopt EXTENDED_HISTORY # add timestamps to history
+setopt HIST_REDUCE_BLANKS
 
 # 10ms escape
 KEYTIMEOUT=1
