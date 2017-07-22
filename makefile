@@ -1,10 +1,10 @@
-.PHONY: all brew-install dotfiles homebrew hushlogin mac-bits node nvim nvm vim-plug yarn-globals zplug zsh
+.PHONY: all brew-install dotfiles homebrew hushlogin mac-bits node nvim nvm vim-plug yarn-globals zplug zsh spacemacs
 
-.SILENT: all brew-install dotfiles homebrew hushlogin mac-bits node nvim nvm vim-plug yarn-globals zplug zsh
+.SILENT: all brew-install dotfiles homebrew hushlogin mac-bits node nvim nvm vim-plug yarn-globals zplug zsh spacemacs
 
 ROOT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
-all: homebrew brew-install dotfiles hushlogin mac-bits node nvim nvm vim-plug yarn-globals zplug zsh
+all: homebrew brew-install dotfiles hushlogin mac-bits node nvim nvm vim-plug yarn-globals zplug zsh spacemacs
 	@printf "You're all set\n"
 
 mac-bits:
@@ -38,15 +38,19 @@ dotfiles:
 	ln -sf $(ROOT_DIR)/gitconfig $(HOME)/.config/git/config
 	ln -sf $(ROOT_DIR)/gitignore $(HOME)/.config/git/ignore
 
+spacemacs:
+	git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+	echo "ask Eoin what that defaults write natural titlebar is"
+
 nvim:
 	pip3 install neovim
 	nvim -c PlugInstall -c quitall
 
 zsh:
-	chsh -s /bin/zsh
+	sudo sh -c "echo '# homebrew zsh\n/usr/local/bin/zsh' >> /etc/shells"
+	chsh -s /usr/local/bin/zsh
 
 zplug:
-	curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 	zplug install
 
 nvm:

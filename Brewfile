@@ -1,13 +1,7 @@
-cask_args appdir: "/Applications"
-
-tap "homebrew/core"
-tap "homebrew/bundle"
-
 tap "caskroom/cask"
 tap "caskroom/fonts"
 
 tap "beeftornado/rmtree"
-tap "neovim/neovim"
 tap "railwaycat/emacsmacport"
 
 brew "awscli"
@@ -27,7 +21,8 @@ brew "tmux"
 brew "wget"
 brew "yarn"
 brew "zplug"
-brew "zsh"
+brew "zsh", args: ["without-etcdir"]
+
 
 cask "1password"
 cask "alfred"
