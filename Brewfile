@@ -2,12 +2,13 @@ cask_args appdir: "/Applications"
 
 tap "homebrew/core"
 tap "homebrew/bundle"
-tap "beeftornado/rmtree"
 
 tap "caskroom/cask"
 tap "caskroom/fonts"
 
+tap "beeftornado/rmtree"
 tap "neovim/neovim"
+tap "railwaycat/emacsmacport"
 
 brew "awscli"
 brew "coreutils"
@@ -19,6 +20,7 @@ brew "htop"
 brew "imagemagick"
 brew "neovim"
 brew "python3"
+brew "emacs-mac", args: ["with-gnutls", "with-imagemagick", "with-natural-title-bar", "with-spacemacs-icon", "with-xml2"]
 brew "reattach-to-user-namespace"
 brew "ripgrep"
 brew "tmux"
