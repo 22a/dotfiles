@@ -39,7 +39,7 @@ dotfiles:
 	ln -sf $(ROOT_DIR)/gitignore $(HOME)/.config/git/ignore
 
 spacemacs:
-	git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+	git clone https://github.com/syl20bnr/spacemacs $(HOME)/.emacs.d
 	echo "ask Eoin what that defaults write natural titlebar is"
 
 nvim:
