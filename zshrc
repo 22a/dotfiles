@@ -107,6 +107,7 @@ alias glog="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%
 alias gwd="git diff --no-ext-diff --patch-with-stat"
 alias gwdc="gwd --cached"
 alias gws="git status --short"
+alias gpa="gls | xargs -P10 -I{} sh -c 'git -C {} pull --all; git -C {} checkout master; git -C {} checkout stable'"
 
 # misc
 alias brewu="brew -v update; brew upgrade --force-bottle --cleanup; brew cleanup; brew cask cleanup; brew doctor; brew prune;"
