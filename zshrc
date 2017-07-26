@@ -33,7 +33,8 @@ bindkey -v
 HISTSIZE=100000
 SAVEHIST=100000
 setopt APPEND_HISTORY
-setopt SHARE_HISTORY # share history between sessions
+setopt SHARE_HISTORY
+setopt INC_APPEND_HISTORY # share history between sessions
 setopt EXTENDED_HISTORY # add timestamps to history
 setopt HIST_REDUCE_BLANKS
 
@@ -53,6 +54,9 @@ export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/*'"
 # source yarn globals
 export PATH="$PATH:`yarn global bin`"
 
+# source local executables
+export PATH="$PATH:$HOME/.local/bin"
+
 # new tmux session with random name
 tn () {
   tmux new -s $(~/dotfiles/scripts/random_word.sh)
@@ -64,7 +68,7 @@ tn () {
 alias v="nvim"
 alias vi="nvim"
 alias vim="nvim"
-# alias emacs="nvim"
+alias emacs="open -a Emacs"
 
 # tmux
 alias tns="tmux new -s"
@@ -78,6 +82,7 @@ alias tree="tree -a -I 'node_modules*|.git*'"
 # internet
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias digg="dig +nocmd any +multiline +noall +answer"
+alias dns="sudo killall -hUP mDNSResponder"
 
 # docker
 alias dim="docker images"
