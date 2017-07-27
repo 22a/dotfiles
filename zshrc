@@ -30,6 +30,7 @@ bindkey "^[[B" history-substring-search-down
 bindkey -v
 
 # command history please
+HISTFILE=~/.zhistory
 HISTSIZE=100000
 SAVEHIST=100000
 setopt APPEND_HISTORY
