@@ -5,7 +5,6 @@
 
 [core]
   editor = nvim
-  excludesfile = ~/.config/git/ignore
 
 [alias]
   undo-commit = reset --soft HEAD^

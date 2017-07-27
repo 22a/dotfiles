@@ -1,4 +1,3 @@
-tap "caskroom/cask"
 tap "caskroom/fonts"
 
 tap "beeftornado/rmtree"
@@ -13,6 +12,7 @@ brew "gnupg"
 brew "htop"
 brew "imagemagick"
 brew "neovim"
+brew "nvm"
 brew "python3"
 brew "emacs-mac", args: ["with-gnutls", "with-imagemagick", "with-natural-title-bar", "with-spacemacs-icon", "with-xml2"]
 brew "reattach-to-user-namespace"

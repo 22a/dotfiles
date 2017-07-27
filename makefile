@@ -1,10 +1,10 @@
-.PHONY: all brew-install dotfiles homebrew hushlogin mac-bits node nvim nvm vim-plug yarn-globals zplug zsh spacemacs
+.PHONY: all brew-install dotfiles homebrew hushlogin mac-bits node nvim vim-plug yarn-globals zplug zsh spacemacs
 
-.SILENT: all brew-install dotfiles homebrew hushlogin mac-bits node nvim nvm vim-plug yarn-globals zplug zsh spacemacs
+.SILENT: all brew-install dotfiles homebrew hushlogin mac-bits node nvim vim-plug yarn-globals zplug zsh spacemacs
 
 ROOT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
-all: homebrew brew-install dotfiles hushlogin mac-bits node nvim nvm vim-plug yarn-globals zplug zsh spacemacs
+all: homebrew brew-install dotfiles hushlogin mac-bits node nvim vim-plug yarn-globals zplug zsh spacemacs
 	@printf "You're all set\n"
 
 mac-bits:
@@ -17,7 +17,6 @@ homebrew:
 	/usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 brew-install:
-	brew tap Homebrew/bundle
 	brew bundle
 
 yarn-globals:
@@ -39,8 +38,9 @@ dotfiles:
 	ln -sf $(ROOT_DIR)/gitignore $(HOME)/.config/git/ignore
 
 spacemacs:
-	git clone https://github.com/syl20bnr/spacemacs $(HOME)/.emacs.d
-	echo "ask Eoin what that defaults write natural titlebar is"
+	git clone https://github.com/syl20bnr/spacemacs --branch develop $(HOME)/.emacs.d
+	brew linkapps emacs-mac
+	defaults write org.gnu.Emacs TransparentTitleBar DARK
 
 nvim:
 	pip3 install neovim
@@ -52,9 +52,6 @@ zsh:
 
 zplug:
 	zplug install
-
-nvm:
-	curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | zsh
 
 node:
 	echo 'export NVM_DIR="$$HOME/.nvm"; \
