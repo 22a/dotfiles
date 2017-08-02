@@ -110,7 +110,11 @@ syntax on
 runtime macros/matchit.vim
 
 " Only highlight the first 120 columns, no more minified spookery
-set synmaxcol=120
+set synmaxcol=256
+
+set mouse=a
+
+autocmd! bufreadpost *.min.* syntax off
 
 " spelling is hard
 autocmd BufRead,BufNewFile *.md setlocal spell
@@ -266,6 +270,8 @@ command! Q q
 " shorten the speed grep command
 cnoreabbrev Rg GrepperRg
 
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+
 " beautify things quickly
 command! Jsbeautify call JsBeautify()
 command! Jsonbeautify call JsonBeautify()
@@ -323,7 +329,7 @@ nnoremap <Leader>q :q<CR>
 nnoremap <Leader>Q :q!<CR>
 
 " no distractions mode
-nnoremap <leader>g :Grepper -tool rg<CR>
+nnoremap <leader>g :Find<cr>
 nnoremap <leader>G :Grepper -tool rg -buffers<cr>
 nnoremap <leader>* :Grepper -tool rg -cword -noprompt<cr>
 
