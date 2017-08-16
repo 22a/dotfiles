@@ -12,6 +12,7 @@ zplug "modules/completion", from:prezto
 zplug "plugins/colored-man-pages", from:oh-my-zsh
 zplug "paulirish/git-open", as:plugin
 zplug "djui/alias-tips"
+zplug "rupa/z", use:z.sh
 
 if ! zplug check --verbose; then
     printf "Install zplug plugins? [y/N]: "
@@ -48,6 +49,9 @@ export NVM_DIR="$HOME/.nvm"
 
 # source FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+#
+# source RVM
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 # use rg for fzf
 export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/*'"
@@ -57,6 +61,9 @@ export PATH="$PATH:`yarn global bin`"
 
 # source local executables
 export PATH="$PATH:$HOME/.local/bin"
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
 
 # new tmux session with random name
 tn () {
@@ -113,7 +120,7 @@ alias glog="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%
 alias gwd="git diff --no-ext-diff --patch-with-stat"
 alias gwdc="gwd --cached"
 alias gws="git status --short"
-alias gpa="gls | xargs -P10 -I{} sh -c 'git -C {} pull --all; git -C {} checkout master; git -C {} checkout stable; git -C {} pull --all'"
+alias gpa="gls | xargs -P8 -I{} sh -c 'git -C {} pull --all && git -C {} checkout master; git -C {} pull; git -C {} checkout stable; git -C {} pull; echo {}'"
 
 # misc
 alias brewu="brew -v update; brew upgrade --force-bottle --cleanup; brew cleanup; brew cask cleanup; brew doctor; brew prune;"
@@ -122,6 +129,7 @@ alias exs="source ~/.zshrc"
 alias hosts="sudo $EDITOR /etc/hosts"
 alias psg="ps aux | head -n 1; ps aux | rg"
 alias pyserv="python3 -m http.server"
+alias j="z"
 
 # clumsy fingers
 alias ..="cd .."
