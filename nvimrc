@@ -43,6 +43,11 @@ Plug 'othree/es.next.syntax.vim'
 Plug '1995eaton/vim-better-javascript-completion'
 Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript'] }
 
+" Typescript
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'Quramy/tsuquyomi'
+Plug 'HerringtonDarkholme/yats.vim'
+
 " Other Languages
 Plug 'othree/html5.vim'
 Plug 'cakebaker/scss-syntax.vim'
