@@ -102,6 +102,9 @@ Plug 'chrisbra/Colorizer'
 " numbered search matches
 Plug 'henrik/vim-indexed-search'
 
+" editor config
+Plug 'editorconfig/editorconfig-vim'
+
 call plug#end()
 
 
@@ -222,7 +225,8 @@ let g:jsdoc_allow_input_prompt = 1
 " Linting
 "----------------------
 autocmd! BufWritePost * Neomake
-let g:neomake_javascript_enabled_makers = ['standard']
+" let g:neomake_javascript_enabled_makers = ['standard']
+let g:neomake_javascript_enabled_makers = ['eslint']
 
 
 "----------------------
