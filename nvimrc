@@ -27,7 +27,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
 
 " Linty lint
-Plug 'neomake/neomake'
+Plug 'w0rp/ale'
 
 " Text swizzeling
 Plug 'tpope/vim-surround'
@@ -224,10 +224,9 @@ let g:jsdoc_allow_input_prompt = 1
 "----------------------
 " Linting
 "----------------------
-autocmd! BufWritePost * Neomake
-" let g:neomake_javascript_enabled_makers = ['standard']
-let g:neomake_javascript_enabled_makers = ['eslint']
-
+let g:ale_linters = {'javascript': ['eslint']}
+let g:ale_sign_error = '👺'
+let g:ale_sign_warning = '😕'
 
 "----------------------
 " Key Bindings
@@ -279,7 +278,7 @@ command! Q q
 " shorten the speed grep command
 cnoreabbrev Rg GrepperRg
 
-command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+" command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 
 " beautify things quickly
 command! Jsbeautify call JsBeautify()
@@ -338,7 +337,7 @@ nnoremap <Leader>q :q<CR>
 nnoremap <Leader>Q :q!<CR>
 
 " no distractions mode
-nnoremap <leader>g :Find<cr>
+nnoremap <leader>g :Grepper -tool rg<CR>
 nnoremap <leader>G :Grepper -tool rg -buffers<cr>
 nnoremap <leader>* :Grepper -tool rg -cword -noprompt<cr>
 

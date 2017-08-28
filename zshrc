@@ -58,6 +58,8 @@ export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
 
 # source yarn globals
 export PATH="$PATH:`yarn global bin`"
+# pls yarn
+export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"
 
 # source local executables
 export PATH="$PATH:$HOME/.local/bin"
