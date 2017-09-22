@@ -6,6 +6,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Git bits
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 
 " Buffer Navigation
 Plug 'troydm/easybuffer.vim'
@@ -224,7 +225,10 @@ let g:jsdoc_allow_input_prompt = 1
 "----------------------
 " Linting
 "----------------------
-let g:ale_linters = {'javascript': ['eslint']}
+let g:ale_linters = {
+      \'javascript': ['eslint'],
+      \'ruby': ['rubocop']
+      \}
 let g:ale_sign_error = '👺'
 let g:ale_sign_warning = '😕'
 
@@ -300,6 +304,9 @@ nnoremap <Leader>R :so ~/.config/nvim/init.vim<CR>
 nnoremap <Leader>PI :PlugInstall<CR>
 nnoremap <Leader>PU :PlugUpdate<CR>
 nnoremap <Leader>PC :PlugClean<CR>
+
+" sneaky snake to camel case
+nnoremap <Leader>s :s#_\(\l\)#\u\1#g<CR>
 
 " Trim Leading WS
 nnoremap <Leader>tw :call TrimWhitespace()<CR>
