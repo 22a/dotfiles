@@ -50,20 +50,23 @@ export NVM_DIR="$HOME/.nvm"
 # source FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 #
-# source RVM
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-
 # use rg for fzf
 export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/*'"
 
+# mysql
+export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
+
 # source yarn globals
 export PATH="$PATH:`yarn global bin`"
+# pls yarn
+export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"
 
 # source local executables
 export PATH="$PATH:$HOME/.local/bin"
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
+# rbenv
+export PATH=$HOME/.rbenv/bin:$PATH
+eval "$(rbenv init -)"
 
 # new tmux session with random name
 tn () {

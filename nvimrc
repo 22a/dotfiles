@@ -6,6 +6,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Git bits
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 
 " Buffer Navigation
 Plug 'troydm/easybuffer.vim'
@@ -27,7 +28,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
 
 " Linty lint
-Plug 'neomake/neomake'
+Plug 'w0rp/ale'
 
 " Text swizzeling
 Plug 'tpope/vim-surround'
@@ -101,6 +102,9 @@ Plug 'chrisbra/Colorizer'
 
 " numbered search matches
 Plug 'henrik/vim-indexed-search'
+
+" editor config
+Plug 'editorconfig/editorconfig-vim'
 
 call plug#end()
 
@@ -221,9 +225,12 @@ let g:jsdoc_allow_input_prompt = 1
 "----------------------
 " Linting
 "----------------------
-autocmd! BufWritePost * Neomake
-let g:neomake_javascript_enabled_makers = ['standard']
-
+let g:ale_linters = {
+      \'javascript': ['eslint'],
+      \'ruby': ['rubocop']
+      \}
+let g:ale_sign_error = '👺'
+let g:ale_sign_warning = '😕'
 
 "----------------------
 " Key Bindings
@@ -275,7 +282,7 @@ command! Q q
 " shorten the speed grep command
 cnoreabbrev Rg GrepperRg
 
-command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+" command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 
 " beautify things quickly
 command! Jsbeautify call JsBeautify()
@@ -297,6 +304,9 @@ nnoremap <Leader>R :so ~/.config/nvim/init.vim<CR>
 nnoremap <Leader>PI :PlugInstall<CR>
 nnoremap <Leader>PU :PlugUpdate<CR>
 nnoremap <Leader>PC :PlugClean<CR>
+
+" sneaky snake to camel case
+nnoremap <Leader>s :s#_\(\l\)#\u\1#g<CR>
 
 " Trim Leading WS
 nnoremap <Leader>tw :call TrimWhitespace()<CR>
@@ -334,7 +344,7 @@ nnoremap <Leader>q :q<CR>
 nnoremap <Leader>Q :q!<CR>
 
 " no distractions mode
-nnoremap <leader>g :Find<cr>
+nnoremap <leader>g :Grepper -tool rg<CR>
 nnoremap <leader>G :Grepper -tool rg -buffers<cr>
 nnoremap <leader>* :Grepper -tool rg -cword -noprompt<cr>
 
