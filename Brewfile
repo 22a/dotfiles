@@ -1,7 +1,6 @@
 tap "caskroom/fonts"
 
 tap "beeftornado/rmtree"
-tap "railwaycat/emacsmacport"
 
 brew "awscli"
 brew "coreutils"
@@ -14,7 +13,6 @@ brew "imagemagick"
 brew "neovim"
 brew "nvm"
 brew "python3"
-brew "emacs-mac", args: ["with-gnutls", "with-imagemagick", "with-natural-title-bar", "with-spacemacs-icon", "with-xml2"]
 brew "reattach-to-user-namespace"
 brew "ripgrep"
 brew "tmux"

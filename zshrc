@@ -79,7 +79,7 @@ tn () {
 alias v="nvim"
 alias vi="nvim"
 alias vim="nvim"
-alias emacs="open -a Emacs"
+alias emacs="nvim"
 
 # tmux
 alias tns="tmux new -s"

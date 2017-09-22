@@ -4,7 +4,7 @@
 
 ROOT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
-all: homebrew brew-install dotfiles hushlogin mac-bits node nvim vim-plug yarn-globals zplug zsh spacemacs
+all: homebrew brew-install dotfiles hushlogin mac-bits node nvim vim-plug yarn-globals zplug zsh
 	@printf "You're all set\n"
 
 mac-bits:
