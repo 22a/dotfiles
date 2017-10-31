@@ -111,6 +111,8 @@ alias dsA="docker stop \$(docker ps -a -q)"
 
 # git
 alias gb="git branch"
+alias gbc="git branch | grep \* | cut -d ' ' -f2"
+alias gbsu="git branch --set-upstream-to=origin/$(gbc) $(gbc)"
 alias gbD="gb -D"
 alias gbd="gb -d"
 alias gbDi="gb | fzf -m | xargs git branch -D"

@@ -178,6 +178,9 @@ set sidescrolloff=15
 set splitright
 set splitbelow
 
+" incremental things
+set inccommand=nosplit
+
 " Default peekaboo window
 let g:peekaboo_window = 'vertical botright 30new'
 
@@ -313,6 +316,9 @@ nnoremap <Leader>tw :call TrimWhitespace()<CR>
 
 " fast file rename
 nnoremap <Leader>rf :call RenameFile()<cr>
+
+" fast edit nvim rc
+nnoremap <Leader>rc :e ~/dotfiles/nvimrc<CR>
 
 " ye, system clip pls
 set clipboard=unnamed
