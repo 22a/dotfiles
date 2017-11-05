@@ -60,6 +60,7 @@ Plug 'elzr/vim-json'
 Plug 'tpope/vim-rails'
 Plug 'saltstack/salt-vim'
 Plug 'mxw/vim-jsx'
+Plug 'rust-lang/rust.vim'
 
 " junegunn 🙏
 " see contents of registers real quick
