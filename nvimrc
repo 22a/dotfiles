@@ -61,6 +61,7 @@ Plug 'tpope/vim-rails'
 Plug 'saltstack/salt-vim'
 Plug 'mxw/vim-jsx'
 Plug 'rust-lang/rust.vim'
+Plug 'rgrinberg/vim-ocaml'
 
 " junegunn 🙏
 " see contents of registers real quick
@@ -230,11 +231,10 @@ let g:jsdoc_allow_input_prompt = 1
 " Linting
 "----------------------
 let g:ale_linters = {
-      \'javascript': ['eslint'],
-      \'ruby': ['rubocop']
+      \'javascript': ['standard']
       \}
-let g:ale_sign_error = '👺'
-let g:ale_sign_warning = '😕'
+" let g:ale_sign_error = '👺'
+" let g:ale_sign_warning = '😕'
 
 "----------------------
 " Key Bindings
