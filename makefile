@@ -26,6 +26,9 @@ vim-plug:
 	curl -fLo $(HOME)/.local/share/nvim/site/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
+vs-code:
+	defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+
 dotfiles:
 	mkdir -p $(HOME)/.config/nvim
 	mkdir -p $(HOME)/.config/git
