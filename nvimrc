@@ -49,10 +49,13 @@ Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'Quramy/tsuquyomi'
 Plug 'HerringtonDarkholme/yats.vim'
 
+" Markdown
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+
 " Other Languages
 Plug 'othree/html5.vim'
 Plug 'cakebaker/scss-syntax.vim'
-Plug 'tpope/vim-markdown'
 Plug 'elixir-lang/vim-elixir'
 Plug 'slashmili/alchemist.vim'
 Plug 'ekalinin/Dockerfile.vim'
@@ -60,6 +63,8 @@ Plug 'elzr/vim-json'
 Plug 'tpope/vim-rails'
 Plug 'saltstack/salt-vim'
 Plug 'mxw/vim-jsx'
+Plug 'jceb/vim-orgmode'
+Plug 'derekwyatt/vim-scala'
 Plug 'rust-lang/rust.vim'
 Plug 'rgrinberg/vim-ocaml'
 
@@ -116,6 +121,10 @@ call plug#end()
 "----------------------
 filetype off
 syntax on
+
+" no folding please
+set nofoldenable
+
 
 " better % skulduggery
 runtime macros/matchit.vim
@@ -186,6 +195,9 @@ set inccommand=nosplit
 " Default peekaboo window
 let g:peekaboo_window = 'vertical botright 30new'
 
+let g:vim_markdown_conceal = 0
+let g:vim_markdown_fenced_languages = ['viml=vim', 'bash=sh']
+
 
 "----------------------
 " Autocomplete
@@ -253,10 +265,10 @@ nnoremap <C-p> :FZF<CR>
 nnoremap Q <NOP>
 
 " easier split nav
-map <C-h>  <C-w>h
-map <C-j>  <C-w>j
-map <C-k>  <C-w>k
-map <C-l>  <C-w>l
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
 
 " hide pesky hls
 noremap <silent> <Esc> :noh<CR><Esc>
