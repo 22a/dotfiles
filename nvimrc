@@ -67,6 +67,7 @@ Plug 'jceb/vim-orgmode'
 Plug 'derekwyatt/vim-scala'
 Plug 'rust-lang/rust.vim'
 Plug 'rgrinberg/vim-ocaml'
+Plug 'martinda/jenkinsfile-vim-syntax'
 
 " junegunn 🙏
 " see contents of registers real quick
