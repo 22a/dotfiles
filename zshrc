@@ -155,3 +155,6 @@ alias lk="la -S"
 # dotfile editing
 alias nvimrc="$EDITOR ~/dotfiles/nvimrc"
 alias zshrc="$EDITOR ~/dotfiles/zshrc"
+
+
+source ~/.work_aliases
