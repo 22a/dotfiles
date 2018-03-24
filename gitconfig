@@ -40,3 +40,6 @@
 
 [stash]
   showPatch = true
+
+[credential]
+  helper = osxkeychain
