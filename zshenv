@@ -1,10 +1,7 @@
 export EDITOR='nvim'
 export VISUAL='nvim'
 export PAGER='less'
-
-if [[ "$OSTYPE" == darwin* ]]; then
-  export BROWSER='open'
-fi
+export BROWSER='open'
 
 if [[ -z "$LANG" ]]; then
   export LANG='en_US.UTF-8'
