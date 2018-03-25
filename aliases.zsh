@@ -69,6 +69,8 @@ alias gwdc="gwd --cached"
 alias gws="git status --short"
 # git pull all
 alias gpa="gls | xargs -P8 -I{} sh -c 'git -C {} pull --all && git -C {} checkout master; git -C {} pull; git -C {} checkout stable; git -C {} pull; echo {}'"
+# git set remote
+alias gsr="git remote set-url origin"
 
 # misc
 alias brewu="brew -v update; brew upgrade --force-bottle --cleanup; brew cleanup; brew cask cleanup; brew doctor; brew prune;"
