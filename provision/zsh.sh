@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # use brew zsh instead of bash
-sudo bash -c "echo '\n# homebrew zsh\n/usr/local/bin/zsh' >> /etc/shells"
+sudo tee -a /etc/shells < '/usr/local/bin/zsh'
 chsh -s /usr/local/bin/zsh
 
 # install zsh plugins
-zsh -c "zplug install"
+zsh -c "source ~/.zshrc"

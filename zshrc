@@ -15,10 +15,11 @@ zplug "zsh-users/zsh-history-substring-search", defer:3
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
 if ! zplug check --verbose; then
-    printf "Install zplug plugins? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
+  zplug install
+    # printf "Install zplug plugins? [y/N]: "
+    # if read -q; then
+    #     echo; zplug install
+    # fi
 fi
 
 # zplug load --verbose
