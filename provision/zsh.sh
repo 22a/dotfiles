@@ -5,4 +5,4 @@ echo '# homebrew zsh\n/usr/local/bin/zsh' >> /etc/shells
 chsh -s /usr/local/bin/zsh
 
 # install zsh plugins
-zplug install
+zsh -c "zplug install"
