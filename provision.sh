@@ -6,6 +6,8 @@ sudo -v
 # update existing `sudo` time stamp until `provision.sh` has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-for file in $PWD/provision/*; do
-  [ -f "$file" ] && [ -x "$file" ] && "$file"
-done
+bash -x provision/brew.sh
+bash -x provision/zsh.sh
+bash -x provision/neovim.sh
+bash -x provision/symlinks.sh
+bash -x provision/macos.sh
