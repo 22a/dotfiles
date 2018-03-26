@@ -28,6 +28,8 @@ zplug load
 # up and down arrows for history substring search
 bindkey "^[[A" history-substring-search-up
 bindkey "^[[B" history-substring-search-down
+# bindkey -s "^P" '~/dotfiles/scripts/ctrlp.sh\n'
+bindkey -s "^P" 'ctrlp\n'
 
 # vi bindings instead of emacs at terminal
 bindkey -v
@@ -44,14 +46,13 @@ setopt INC_APPEND_HISTORY
 # add timestamps to history
 setopt EXTENDED_HISTORY
 
-# 10ms escape
-KEYTIMEOUT=1
-
-# source FZF
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# ZSH uses the KEYTIMEOUT parameter to determine how long to wait for additional characters in sequence. Default is 40 (400 ms).
+KEYTIMEOUT=1 # 10 ms
 
 # use rg for fzf
 export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/*'"
+# source FZF
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # source yarn globals
 export PATH="$PATH:`yarn global bin`"
@@ -61,12 +62,17 @@ export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"
 # source local executables
 export PATH="$PATH:$HOME/.local/bin"
 
-# new tmux session with random name
-function tn () {
-  tmux new -s $(~/dotfiles/scripts/random_word.sh)
-}
+
+# load asdf and completions
+source $HOME/.asdf/asdf.sh
+source $HOME/.asdf/completions/asdf.bash
 
 # Aliases
 source ~/.aliases
 # Private aliases (that I don't want to check into git)
 source ~/.priv_aliases
+
+# new tmux session with random name
+function tn () {
+  tmux new -s $(~/dotfiles/scripts/random_word.sh)
+}
