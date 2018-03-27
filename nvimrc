@@ -68,6 +68,7 @@ Plug 'derekwyatt/vim-scala'
 Plug 'rust-lang/rust.vim'
 Plug 'rgrinberg/vim-ocaml'
 Plug 'martinda/jenkinsfile-vim-syntax'
+Plug 'fatih/vim-go'
 
 " junegunn 🙏
 " see contents of registers real quick

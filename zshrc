@@ -68,6 +68,12 @@ export PATH="$PATH:$HOME/.local/bin"
 export PATH=$HOME/.rbenv/bin:$PATH
 eval "$(rbenv init -)"
 
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+
+export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+export MANPATH="/usr/local/opt/gnu-sed/libexec/gnuman:$MANPATH"
+
 # new tmux session with random name
 tn () {
   tmux new -s $(~/dotfiles/scripts/random_word.sh)
