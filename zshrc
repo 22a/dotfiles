@@ -26,6 +26,7 @@ zplug load # --verbose
 # up and down arrows for history substring search
 bindkey "^[[A" history-substring-search-up
 bindkey "^[[B" history-substring-search-down
+bindkey -s "^P" 'ctrlp\n'
 
 # vi mode?
 bindkey -v
@@ -86,6 +87,7 @@ alias v="nvim"
 alias vi="nvim"
 alias vim="nvim"
 alias emacs="nvim"
+alias ctrlp="nvim \$(fzf --preview 'head -100 {}')"
 
 # tmux
 alias tns="tmux new -s"
