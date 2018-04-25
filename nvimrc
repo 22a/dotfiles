@@ -245,10 +245,8 @@ let g:jsdoc_allow_input_prompt = 1
 " Linting
 "----------------------
 let g:ale_linters = {
-      \'javascript': ['standard']
+      \'javascript': ['eslint']
       \}
-" let g:ale_sign_error = '👺'
-" let g:ale_sign_warning = '😕'
 
 "----------------------
 " Key Bindings
