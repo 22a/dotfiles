@@ -62,11 +62,6 @@ export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"
 # source local executables
 export PATH="$PATH:$HOME/.local/bin"
 
-
-# load asdf and completions
-source $HOME/.asdf/asdf.sh
-source $HOME/.asdf/completions/asdf.bash
-
 # Aliases
 source ~/.aliases
 # Private aliases (that I don't want to check into git)
@@ -76,3 +71,7 @@ source ~/.priv_aliases
 function tn () {
   tmux new -s $(~/dotfiles/scripts/random_word.sh)
 }
+
+if [ -f ~/.profile ]; then
+  source ~/.profile
+fi

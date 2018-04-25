@@ -43,6 +43,7 @@ Plug 'othree/yajs.vim', { 'for': 'javascript' }
 Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
 Plug '1995eaton/vim-better-javascript-completion', { 'for': 'javascript' }
 Plug 'mxw/vim-jsx', { 'for': ['javascript', 'jsx'] }
+Plug 'joukevandermaas/vim-ember-hbs'
 
 " Elixir
 Plug 'elixir-lang/vim-elixir'
@@ -410,9 +411,11 @@ set noshowmode " don't show the plain mode text (we use airline)
 set laststatus=2
 let g:airline_theme='base16_spacemacs'
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
-let g:webdevicons_enable_airline_tabline = 1
-let g:webdevicons_enable_airline_statusline = 1
+" let g:airline_powerline_fonts = 1
+" let g:webdevicons_enable_airline_tabline = 1
+" let g:webdevicons_enable_airline_statusline = 1
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = ''
 
 
 "----------------------
