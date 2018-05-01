@@ -239,7 +239,7 @@ let g:jsdoc_allow_input_prompt = 1
 " Linting
 "----------------------
 let g:ale_linters = {
-      \'javascript': ['standard']
+      \'javascript': ['eslint']
       \}
 
 "----------------------
