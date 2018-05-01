@@ -26,9 +26,11 @@ zplug load # --verbose
 # up and down arrows for history substring search
 bindkey "^[[A" history-substring-search-up
 bindkey "^[[B" history-substring-search-down
+
+# save me from myself, htting ^P is engrained in my muscle memory now
 bindkey -s "^P" 'ctrlp\n'
 
-# vi mode?
+# vi keybindings for repl text input
 bindkey -v
 
 # command history please
