@@ -96,6 +96,11 @@ alias la="ls -lA"
 alias ll="la"
 alias lk="la -S"
 
+# ripgrep
+alias rg="rg --smart-case"
+
 # dotfile editing
 alias nvimrc="$EDITOR ~/dotfiles/nvimrc"
 alias zshrc="$EDITOR ~/dotfiles/zshrc"
+
+alias s="script/server"
