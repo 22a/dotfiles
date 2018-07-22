@@ -27,7 +27,6 @@ brew "neovim"
 brew "python"
 brew "python@2"
 brew "reattach-to-user-namespace"
-brew "redis"
 brew "ripgrep"
 brew "rust", link: false
 brew "tmux"
