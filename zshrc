@@ -15,11 +15,8 @@ zplug "zsh-users/zsh-history-substring-search", defer:3
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
 if ! zplug check --verbose; then
+  echo "Installing zplug plugins..."
   zplug install
-    # printf "Install zplug plugins? [y/N]: "
-    # if read -q; then
-    #     echo; zplug install
-    # fi
 fi
 
 # zplug load --verbose
@@ -28,10 +25,11 @@ zplug load
 # up and down arrows for history substring search
 bindkey "^[[A" history-substring-search-up
 bindkey "^[[B" history-substring-search-down
-# bindkey -s "^P" '~/dotfiles/scripts/ctrlp.sh\n'
+
+# save me from myself, htting ^P is engrained in my muscle memory now
 bindkey -s "^P" 'ctrlp\n'
 
-# vi bindings instead of emacs at terminal
+# vi keybindings for repl text input
 bindkey -v
 
 # command history please
@@ -66,6 +64,12 @@ export PATH="$PATH:$HOME/.local/bin"
 source ~/.aliases
 # Private aliases (that I don't want to check into git)
 source ~/.priv_aliases
+
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+
+export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+export MANPATH="/usr/local/opt/gnu-sed/libexec/gnuman:$MANPATH"
 
 # new tmux session with random name
 function tn () {

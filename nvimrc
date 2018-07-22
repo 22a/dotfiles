@@ -61,10 +61,12 @@ Plug 'plasticboy/vim-markdown'
 Plug 'othree/html5.vim'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'ekalinin/Dockerfile.vim'
-Plug 'elzr/vim-json', { 'for': 'json' }
+Plug 'elzr/vim-json'
+Plug 'tpope/vim-rails'
+Plug 'mxw/vim-jsx'
 Plug 'rust-lang/rust.vim'
-Plug 'rgrinberg/vim-ocaml'
-Plug 'martinda/jenkinsfile-vim-syntax'
+Plug 'fatih/vim-go'
+Plug 'joukevandermaas/vim-ember-hbs'
 
 " junegunn 🙏
 " see contents of registers real quick
