@@ -59,6 +59,8 @@ alias gcf="gcam --reuse-message HEAD"
 alias gcm="git commit --message"
 # git checkout
 alias gco="git checkout"
+# git checkout branch interactive
+alias gcoi="gb | fzf -m | xargs git checkout"
 # git log
 alias gl="git log --topo-order --pretty=format:'%C(bold)Commit:%C(reset) %C(green)%H%C(red)%d%n%C(bold)Author:%C(reset) %C(cyan)%an <%ae>%n%C(bold)Date:%C(reset)   %C(blue)%ai (%ar)%C(reset)%n%+B'"
 alias glog="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"
@@ -72,6 +74,8 @@ alias gws="git status --short"
 alias gpa="gls | xargs -P8 -I{} sh -c 'git -C {} pull --all && git -C {} checkout master; git -C {} pull; git -C {} checkout stable; git -C {} pull; echo {}'"
 # git set remote
 alias gsr="git remote set-url origin"
+# git merge master
+alias gmm="gco master; git pull; gco -; git merge master --no-edit"
 
 # misc
 alias brewu="brew -v update; brew upgrade --force-bottle --cleanup; brew cleanup; brew cask cleanup; brew doctor; brew prune;"
@@ -104,3 +108,6 @@ alias nvimrc="$EDITOR ~/dotfiles/nvimrc"
 alias zshrc="$EDITOR ~/dotfiles/zshrc"
 
 alias s="script/server"
+alias sup="script/update"
+alias t="script/test"
+alias n="git pull; sup; s"
