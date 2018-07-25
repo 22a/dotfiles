@@ -67,9 +67,10 @@ eval "$(rbenv init -)"
 export PATH=$HOME/.pilot/bin:$PATH
 eval $(pilot env)
 
-# activate nvm
+# activate nvm + load completion
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 # source yarn globals
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
