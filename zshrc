@@ -1,5 +1,6 @@
 # zplug directory created by brew
 export ZPLUG_HOME=/usr/local/opt/zplug
+
 source $ZPLUG_HOME/init.zsh
 
 zplug "22a/purest"
@@ -19,18 +20,17 @@ if ! zplug check --verbose; then
   zplug install
 fi
 
-# zplug load --verbose
 zplug load
+
+# vi keybindings for repl text input
+bindkey -v
 
 # up and down arrows for history substring search
 bindkey "^[[A" history-substring-search-up
 bindkey "^[[B" history-substring-search-down
 
-# save me from myself, htting ^P is engrained in my muscle memory now
+# save me from myself, hitting ^P is engrained in my muscle memory now
 bindkey -s "^P" 'ctrlp\n'
-
-# vi keybindings for repl text input
-bindkey -v
 
 # command history please
 HISTFILE=~/.zhistory
@@ -48,9 +48,16 @@ setopt EXTENDED_HISTORY
 KEYTIMEOUT=1 # 10 ms
 
 # use rg for fzf
-export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/*'"
-# source FZF
+export FZF_DEFAULT_COMMAND="rg --files --hidden --glob \!.git"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+# source fzf binary, completions, and keybindings
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+function tn () {
+  # new tmux session with random name
+  tmux new -s $(~/dotfiles/scripts/random_word.sh)
+}
 
 # source yarn globals
 export PATH="$PATH:`yarn global bin`"
@@ -60,22 +67,9 @@ export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"
 # source local executables
 export PATH="$PATH:$HOME/.local/bin"
 
+# activate rbenv
+eval "$(rbenv init -)"
+
 # Aliases
 source ~/.aliases
-# Private aliases (that I don't want to check into git)
-source ~/.priv_aliases
-
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
-
-export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
-export MANPATH="/usr/local/opt/gnu-sed/libexec/gnuman:$MANPATH"
-
-# new tmux session with random name
-function tn () {
-  tmux new -s $(~/dotfiles/scripts/random_word.sh)
-}
-
-if [ -f ~/.profile ]; then
-  source ~/.profile
-fi
+source ~/.aliases.priv
