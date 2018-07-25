@@ -3,9 +3,8 @@ export ZPLUG_HOME=/usr/local/opt/zplug
 
 source $ZPLUG_HOME/init.zsh
 
-zplug "22a/purest"
-zplug "djui/alias-tips"
 zplug "mafredri/zsh-async"
+zplug "22a/purest"
 zplug "modules/completion", from:prezto
 zplug "paulirish/git-open", as:plugin
 zplug "plugins/colored-man-pages", from:oh-my-zsh
@@ -58,9 +57,6 @@ function tn () {
   # new tmux session with random name
   tmux new -s $(~/dotfiles/scripts/random_word.sh)
 }
-
-# source local executables
-export PATH="$PATH:$HOME/.local/bin"
 
 export INTERCOM_USER=`cat ~/.intercom_user`
 
