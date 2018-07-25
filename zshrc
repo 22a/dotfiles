@@ -59,16 +59,24 @@ function tn () {
   tmux new -s $(~/dotfiles/scripts/random_word.sh)
 }
 
-# source yarn globals
-export PATH="$PATH:`yarn global bin`"
-# pls yarn
-export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"
-
 # source local executables
 export PATH="$PATH:$HOME/.local/bin"
 
+export INTERCOM_USER=`cat ~/.intercom_user`
+
 # activate rbenv
 eval "$(rbenv init -)"
+
+# activate pilot
+export PATH=$HOME/.pilot/bin:$PATH
+eval $(pilot env)
+
+# activate nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+# source yarn globals
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 # Aliases
 source ~/.aliases
