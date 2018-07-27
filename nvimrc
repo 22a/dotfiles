@@ -39,15 +39,19 @@ Plug 'tpope/vim-repeat'
 Plug 'maksimr/vim-jsbeautify'
 
 " Javascript
-Plug 'othree/yajs.vim'
-Plug 'othree/es.next.syntax.vim'
-Plug '1995eaton/vim-better-javascript-completion'
-Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript'] }
+Plug 'othree/yajs.vim', { 'for': 'javascript' }
+Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
+Plug '1995eaton/vim-better-javascript-completion', { 'for': 'javascript' }
+Plug 'mxw/vim-jsx', { 'for': ['javascript', 'jsx'] }
+Plug 'joukevandermaas/vim-ember-hbs'
 
-" Typescript
-Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-Plug 'Quramy/tsuquyomi'
-Plug 'HerringtonDarkholme/yats.vim'
+" Elixir
+Plug 'elixir-lang/vim-elixir'
+Plug 'slashmili/alchemist.vim'
+
+" Ruby
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-rails'
 
 " Markdown
 Plug 'godlygeek/tabular'
@@ -56,8 +60,6 @@ Plug 'plasticboy/vim-markdown'
 " Other Languages
 Plug 'othree/html5.vim'
 Plug 'cakebaker/scss-syntax.vim'
-Plug 'elixir-lang/vim-elixir'
-Plug 'slashmili/alchemist.vim'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'elzr/vim-json'
 Plug 'tpope/vim-rails'
@@ -70,7 +72,8 @@ Plug 'joukevandermaas/vim-ember-hbs'
 " see contents of registers real quick
 Plug 'junegunn/vim-peekaboo'
 " fuzzy file search
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install'  } | Plug 'junegunn/fzf.vim'
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
 " tranquil poetry mode
 Plug 'junegunn/goyo.vim'
 " emoji, the blood of life
@@ -79,15 +82,13 @@ Plug 'junegunn/vim-emoji'
 " pretty colours
 Plug 'chriskempson/base16-vim'
 
-" font icon yokeys
-Plug 'ryanoasis/vim-devicons'
-
 " Directory exploration
 Plug 'justinmk/vim-dirvish'
 
 " Status Bar + Buffer Bar
 Plug 'vim-airline/vim-airline'
-Plug '22a/vim-airline-themes'
+" Plug '22a/vim-airline-themes'
+Plug 'vim-airline/vim-airline-themes'
 
 " visual indentation levels
 Plug 'nathanaelkane/vim-indent-guides'
@@ -101,9 +102,6 @@ Plug 'tmux-plugins/vim-tmux'
 
 " speed grep things
 Plug 'mhinz/vim-grepper'
-
-" hex colours inline
-Plug 'chrisbra/Colorizer'
 
 " numbered search matches
 Plug 'henrik/vim-indexed-search'
@@ -159,25 +157,26 @@ set nobackup
 set noswapfile
 set nowritebackup
 
-" soft-tabs
-set expandtab
-set smarttab
-set tabstop=2
-set shiftwidth=2
-set autoindent
+" tabs, etc
+set expandtab " spaces, not tabs !!!
+set autoindent " have a go at auto indenting even when no filetype set
+set tabstop=2 " represent tabs as 2 spaces
+set shiftwidth=2  " tab key enters two spaces"
+set softtabstop=2 " backspace deletes two spaces
+" set smarttab
 
-" / is v powerful
-set hlsearch
-set incsearch
+" / searching
+set hlsearch " highlight matches
+set incsearch " incrementally show matches as we type
 set ignorecase
-set smartcase
+set smartcase " if we've explicitly typed an uppercase, become case sensitive
 
-" key repeat delay?
-set ttimeoutlen=0
+" 0 delay between keys
+set timeoutlen=1000 ttimeoutlen=0
 
-" shame
+" disable all bells
+set vb t_vb=
 set noerrorbells
-set visualbell
 
 " scroll padding
 set scrolloff=15
@@ -187,7 +186,8 @@ set sidescrolloff=15
 set splitright
 set splitbelow
 
-" incremental things
+" incremental command result display
+" (show the result of :%s/foo/bar/g as we type it)
 set inccommand=nosplit
 
 " Default peekaboo window
@@ -211,7 +211,7 @@ let g:tern#arguments = ['--persistent']
 
 set completeopt=longest,menuone,preview
 autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " make supertab close the tern preview
 let g:SuperTabClosePreviewOnPopupClose = 1
@@ -247,7 +247,7 @@ let g:ale_linters = {
 "----------------------
 " Key Bindings
 "----------------------
-" Cold turkey is best turkey, arrow keys are slow
+" disable arrow keys in insert, normal, and visual mode
 for prefix in ['i', 'n', 'v']
   for key in ['<Up>', '<Down>', '<Left>', '<Right>']
     exe prefix . "noremap " . key . " <Nop>"
@@ -257,7 +257,7 @@ endfor
 " Ctrl-P for fzf
 nnoremap <C-p> :FZF<CR>
 
-" no EX mode thank you very much
+" disable EX mode
 nnoremap Q <NOP>
 
 " easier split nav
@@ -266,7 +266,7 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
-" hide pesky hls
+" disable search highlighting with escape
 noremap <silent> <Esc> :noh<CR><Esc>
 
 " swap 0 and ^. 0 now goes to the first non-blank character of a line
@@ -288,13 +288,14 @@ noremap <silent> j gj
 " fingers are difficult, make all typos work
 command! Wq wq
 command! WQ wq
-command! W w !sudo tee %
+command! W w
 command! Q q
+
+" :wsudo to save files if we've accidentally opened them read only
+command! Wsudo w !sudo tee %
 
 " shorten the speed grep command
 cnoreabbrev Rg GrepperRg
-
-" command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 
 " beautify things quickly
 command! Jsbeautify call JsBeautify()
@@ -302,17 +303,17 @@ command! Jsonbeautify call JsonBeautify()
 command! Htmlbeautify call HtmlBeautify()
 command! Cssbeautify call CSSBeautify()
 
-
 "----------------------
 " Leader Commands
 "----------------------
 
 " civ4 victory by space-race
+" (use space key as leader)
 let mapleader = "\<Space>"
 
-" Easily make changes to vimrc
+" Easily reload vimrc
 nnoremap <Leader>R :so ~/.config/nvim/init.vim<CR>
-" Easily do plugin things
+" Easily manage plugins
 nnoremap <Leader>PI :PlugInstall<CR>
 nnoremap <Leader>PU :PlugUpdate<CR>
 nnoremap <Leader>PC :PlugClean<CR>
@@ -327,24 +328,24 @@ nnoremap <Leader>tw :call TrimWhitespace()<CR>
 nnoremap <Leader>rf :call RenameFile()<cr>
 
 " fast edit nvim rc
-nnoremap <Leader>rc :e ~/dotfiles/nvimrc<CR>
+nnoremap <Leader>rc :e ~/.config/nvim/init.vim<CR>
 
 " ye, system clip pls
 set clipboard=unnamed
 
-"  yank to system clipboard without motion
+" yank to system clipboard without motion
 nnoremap <Leader>y "+y
-"  yank line to system clipboard
+" yank line to system clipboard
 nnoremap <Leader>yl "+yy
-"  yank file to system clipboard
+" yank file to system clipboard
 nnoremap <Leader>yf gg"+yG
-"  paste from system clipboard
+" paste from system clipboard
 nnoremap <Leader>p "+p
 
 " Toggle cases
 nnoremap <Leader>t g~
 nnoremap <Leader>tc ~h
-nnoremap <Leader>tiw g~iw
+nnoremap <Leader>tW g~iw
 nnoremap <Leader>tl g~~
 
 " writing files is too slow
@@ -358,36 +359,34 @@ nnoremap <Leader>C :bd!<CR>
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>Q :q!<CR>
 
-" no distractions mode
+" grepping
 nnoremap <leader>g :Grepper -tool rg<CR>
 nnoremap <leader>G :Grepper -tool rg -buffers<cr>
 nnoremap <leader>* :Grepper -tool rg -cword -noprompt<cr>
 
-" easy toggle things
+" easy toggle wrap, spell, and paste
 nnoremap <Leader>W :set wrap!<CR>
 nnoremap <Leader>S :set spell!<CR>
 nnoremap <Leader>P :set paste!<CR>
 
-" jsdoc
-nnoremap <Leader>jd :JsDoc<CR>
-
 "----------------------
-" Colour Things
+" Colour :art:
 "----------------------
 
 " true colours awwww yeeee
 set termguicolors
 colorscheme base16-spacemacs
 
-" show filthy whitespace in white
+" show superfluous whitespace in white
 highlight ExtraWhitespace guibg=white
 
-" 80 is a number that people care about
+" mart the 80th char on a line
+" (because 80 is a number that people care about)
 set colorcolumn=80
 
 " indent guide colors
-" base16 bg is #1F2022, so i've just bumped up to #222426 and #242628
 let g:indent_guides_auto_colors = 0
+" base16 bg is #1F2022, so i've just bumped up to #222426 and #242628
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#242628
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#222426
 
@@ -410,13 +409,15 @@ map ` :EasyBuffer<CR>
 "----------------------
 " Status Bar
 "----------------------
-set noshowmode " don't show the plain mode text when we have fancy
+set noshowmode " don't show the plain mode text (we use airline)
 set laststatus=2
 let g:airline_theme='base16_spacemacs'
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
-let g:webdevicons_enable_airline_tabline = 1
-let g:webdevicons_enable_airline_statusline = 1
+" let g:airline_powerline_fonts = 1
+" let g:webdevicons_enable_airline_tabline = 1
+" let g:webdevicons_enable_airline_statusline = 1
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = ''
 
 
 "----------------------
