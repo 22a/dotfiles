@@ -392,6 +392,8 @@
 			<string></string>
 		</dict>
 	</dict>
+	<key>HideTab</key>
+	<true/>
 	<key>HotkeyMigratedFromSingleToMulti</key>
 	<true/>
 	<key>LoadPrefsFromCustomFolder</key>
@@ -437,7 +439,7 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>269 136 796 473 0 0 1280 777 </string>
+	<string>204 182 1018 447 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>0 68 1280 709 0 0 1280 777 </string>
 	<key>NeverWarnAboutShortLivedSessions_10A7AC91-4850-402F-9418-EB1ACB7019D0</key>
@@ -1211,7 +1213,9 @@
 	<key>ShowPaneTitles</key>
 	<true/>
 	<key>TabStyle</key>
-	<integer>3</integer>
+	<integer>1</integer>
+	<key>TabViewType</key>
+	<integer>0</integer>
 	<key>UseBorder</key>
 	<false/>
 	<key>WordCharacters</key>
