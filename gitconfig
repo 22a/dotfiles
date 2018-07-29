@@ -9,18 +9,9 @@
 [alias]
   undo-commit = reset --soft HEAD^
   unstage = reset HEAD --
-  # show latest tag: git lt
-  lt = describe --abbrev=0 --tags
-  # delete tag: git dt <tag name>
-  dt = tag --delete
-  # delete remote tag: git drt <tag name>
-  drt = push --delete origin
 
 [commit]
   gpgsign = true
-
-[gpg]
-  program = gpg2
 
 [pull]
   default = current
