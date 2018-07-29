@@ -82,7 +82,7 @@ defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
 # Prevent Photos from opening automatically when devices are plugged in
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
-# Disable the all too sensitive backswipe on trackpads
+# Disable the all too sensitive backswipe on trackpads for Chrome
 defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
 
 # Disable key press and hold in vscode so that we can use vi mode hjkl movements
