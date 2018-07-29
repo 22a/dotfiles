@@ -53,11 +53,6 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # source fzf binary, completions, and keybindings
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-function tn () {
-  # new tmux session with random name
-  tmux new -s $(~/dotfiles/scripts/random_word.sh)
-}
-
 export INTERCOM_USER=`cat ~/.intercom_user`
 
 # activate rbenv
@@ -65,7 +60,9 @@ eval "$(rbenv init -)"
 
 # activate pilot
 export PATH=$HOME/.pilot/bin:$PATH
-eval $(pilot env)
+if command -v pilot; then;
+  eval $(pilot env)
+fi
 
 # activate nvm + load completion
 export NVM_DIR="$HOME/.nvm"
@@ -74,6 +71,11 @@ export NVM_DIR="$HOME/.nvm"
 
 # source yarn globals
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+function tn () {
+  # new tmux session with random name
+  tmux new -s $(~/dotfiles/scripts/random_word.sh)
+}
 
 # Aliases
 source ~/.aliases
