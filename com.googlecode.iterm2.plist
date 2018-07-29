@@ -397,7 +397,7 @@
 	<key>LoadPrefsFromCustomFolder</key>
 	<true/>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/dotfiles/iterm2</string>
+	<string>~/dotfiles</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
 	<string>{712, 448}</string>
 	<key>NSQuotedKeystrokeBinding</key>
@@ -436,24 +436,10 @@
 		<key>TB Is Shown</key>
 		<integer>1</integer>
 	</dict>
-	<key>NSWindow Frame NSFontPanel</key>
-	<string>2415 -88 445 77 1680 -390 2560 1417 </string>
-	<key>NSWindow Frame SUStatusFrame</key>
-	<string>629 595 400 129 0 0 1680 1027 </string>
-	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>970 788 620 392 0 0 2560 1417 </string>
-	<key>NSWindow Frame SessionsPreferences</key>
-	<string>1949 -81 606 456 1680 -220 2560 1417 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>477 482 796 473 0 0 2560 1417 </string>
-	<key>NSWindow Frame UKCrashReporter</key>
-	<string>782 290 592 584 0 0 2560 1417 </string>
+	<string>269 136 796 473 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 103 2540 1314 0 0 2560 1417 </string>
-	<key>NSWindow Frame iTerm Window 1</key>
-	<string>2560 -591 1440 2537 2560 -591 1440 2537 </string>
-	<key>NSWindow Frame iTerm Window 2</key>
-	<string>20 80 2540 1337 0 0 2560 1417 </string>
+	<string>0 68 1280 709 0 0 1280 777 </string>
 	<key>NeverWarnAboutShortLivedSessions_10A7AC91-4850-402F-9418-EB1ACB7019D0</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_10A7AC91-4850-402F-9418-EB1ACB7019D0_selection</key>
@@ -1158,26 +1144,13 @@
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
 	<key>NoSyncInstallationId</key>
-	<string>BA65B868-959F-43A8-BB00-09F7E802613C</string>
-	<key>NoSyncLastTipTime</key>
-	<real>517138711.68952799</real>
+	<string>2BF28DBA-1705-4CDD-8B8F-ECD91322A678</string>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
 	<integer>0</integer>
-	<key>NoSyncPermissionToShowTip</key>
-	<true/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
-	<real>516536360.52045703</real>
-	<key>NoSyncTipsDisabled</key>
-	<true/>
-	<key>NoSyncTipsToNotShow</key>
-	<array>
-		<string>000</string>
-		<string>0000</string>
-		<string>0001</string>
-		<string>0002</string>
-	</array>
+	<real>554505739.170753</real>
 	<key>OpenArrangementAtStartup</key>
 	<false/>
 	<key>OpenNoWindowsAtStartup</key>
@@ -1216,7 +1189,9 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/peter/dotfiles/iterm2</string>
+	<string>/Users/peter/dotfiles</string>
+	<key>PromptOnQuit</key>
+	<true/>
 	<key>QuitWhenAllWindowsClosed</key>
 	<true/>
 	<key>SUEnableAutomaticChecks</key>
@@ -1224,11 +1199,11 @@
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/final.xml?shard=4</string>
+	<string>https://iterm2.com/appcasts/final.xml?shard=67</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-03-22T06:52:14Z</date>
+	<date>2018-07-29T19:04:43Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowBookmarkName</key>
@@ -1237,8 +1212,6 @@
 	<true/>
 	<key>TabStyle</key>
 	<integer>3</integer>
-	<key>UKCrashReporterLastCrashReportDate</key>
-	<real>1518778112</real>
 	<key>UseBorder</key>
 	<false/>
 	<key>WordCharacters</key>
@@ -1250,6 +1223,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.1.5</string>
+	<string>3.1.7</string>
 </dict>
 </plist>
