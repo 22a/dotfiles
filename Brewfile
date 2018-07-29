@@ -8,6 +8,7 @@ brew "bat"
 brew "coreutils"
 brew "openssl"
 brew "elixir"
+brew "fd"
 brew "fzf"
 brew "git"
 brew "gnupg", link: false
