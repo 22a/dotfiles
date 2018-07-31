@@ -82,8 +82,22 @@ defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
 # Prevent Photos from opening automatically when devices are plugged in
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
-# Disable the all too sensitive backswipe on trackpads
+# Disable the all too sensitive backswipe on trackpads for Chrome
 defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
 
 # Disable key press and hold in vscode so that we can use vi mode hjkl movements
 defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+
+# Wicked speedy key repeat, reasonable delay before repeat begins
+defaults write NSGlobalDomain KeyRepeat -int 1
+defaults write NSGlobalDomain InitialKeyRepeat -int 25
+
+# Enable subpixel font rendering on non-Apple displays
+defaults write NSGlobalDomain AppleFontSmoothing -int 1
+
+# Avoid creating .DS_Store files on network or USB volumes
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+
+# Show battery percent in menu bar
+defaults write com.apple.menuextra.battery ShowPercent -string "YES"

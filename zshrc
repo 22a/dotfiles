@@ -28,20 +28,58 @@ bindkey -v
 bindkey "^[[A" history-substring-search-up
 bindkey "^[[B" history-substring-search-down
 
-# save me from myself, hitting ^P is engrained in my muscle memory now
-bindkey -s "^P" 'ctrlp\n'
+# pretend we have fzf everywhere
+bindkey -s "^P" "nvim \$(fzf --preview 'head -100 {}')\n"
 
-# command history please
+export EDITOR='nvim'
+export VISUAL='nvim'
+export PAGER='less'
+export BROWSER='open'
+
+if [[ -z "$LANG" ]]; then
+  export LANG='en_IE.UTF-8'
+fi
+
+# Ensure path arrays do not contain duplicates.
+typeset -gU cdpath fpath mailpath path
+
+# Set the list of directories that Zsh searches for programs.
+path=(
+  /usr/local/{bin,sbin}
+  $path
+)
+
+# Set the default Less options
+# -g (Highlight only last match for searches)
+# -w (Highlight first new line after forward-screen)
+# -i (Ignore case in searches)
+# -q (Quiet the terminal bell)
+# -r (Raw control chars)
+# -M (Set long prompt style)
+# -S (Chop long lines)
+# -X (Disable screen clearing)
+# -F (Exit if content fits on one screen)
+export LESS='-g -w -i -q -r -M -S -X -F'
+
+# set zsh command history file
 HISTFILE=~/.zhistory
-HISTSIZE=100000
-SAVEHIST=100000
-setopt APPEND_HISTORY
-setopt SHARE_HISTORY
-setopt HIST_REDUCE_BLANKS
-# share history between sessions
-setopt INC_APPEND_HISTORY
-# add timestamps to history
+# let it grow big
+HISTSIZE=10000000
+SAVEHIST=$HISTSIZE
+# Write the history file in the ":start:elapsed;command" format
 setopt EXTENDED_HISTORY
+# Write to the history file immediately, not when the shell exits
+setopt INC_APPEND_HISTORY
+# Share history between all sessions
+setopt SHARE_HISTORY
+# Expire duplicate entries first when trimming history
+setopt HIST_EXPIRE_DUPS_FIRST
+# Don't record an entry that was just recorded again (different to `setopt HIST_IGNORE_ALL_DUPS` which deletes old history entries if the new entry is a duplicate)
+setopt HIST_IGNORE_DUPS
+# Remove superfluous blanks before recording entry.
+setopt HIST_REDUCE_BLANKS
+# Don't execute immediately upon history expansion.
+setopt HIST_VERIFY
 
 # ZSH uses the KEYTIMEOUT parameter to determine how long to wait for additional characters in sequence. Default is 40 (400 ms).
 KEYTIMEOUT=1 # 10 ms
@@ -53,11 +91,6 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # source fzf binary, completions, and keybindings
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-function tn () {
-  # new tmux session with random name
-  tmux new -s $(~/dotfiles/scripts/random_word.sh)
-}
-
 export INTERCOM_USER=`cat ~/.intercom_user`
 
 # activate rbenv
@@ -65,7 +98,9 @@ eval "$(rbenv init -)"
 
 # activate pilot
 export PATH=$HOME/.pilot/bin:$PATH
-eval $(pilot env)
+if command -v pilot; then;
+  eval $(pilot env)
+fi
 
 # activate nvm + load completion
 export NVM_DIR="$HOME/.nvm"
@@ -74,6 +109,11 @@ export NVM_DIR="$HOME/.nvm"
 
 # source yarn globals
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+function tn () {
+  # new tmux session with random name
+  tmux new -s $(~/dotfiles/scripts/random_word.sh)
+}
 
 # Aliases
 source ~/.aliases
