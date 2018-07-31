@@ -91,9 +91,9 @@ defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
 # Show ip, hostname, etc. in the clock at login
 sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
 
-# Speedy key repeat
+# Wicked speedy key repeat, reasonable delay before repeat begins
 defaults write NSGlobalDomain KeyRepeat -int 1
-defaults write NSGlobalDomain InitialKeyRepeat -int 20
+defaults write NSGlobalDomain InitialKeyRepeat -int 25
 
 # Enable subpixel font rendering on non-Apple displays
 defaults write NSGlobalDomain AppleFontSmoothing -int 1
@@ -102,4 +102,5 @@ defaults write NSGlobalDomain AppleFontSmoothing -int 1
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
+# Show battery percent in menu bar
 defaults write com.apple.menuextra.battery ShowPercent -string "YES"
