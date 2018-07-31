@@ -1,7 +1,5 @@
-[user]
-  email = meehanp2@tcd.ie
-  name = Peter Meehan
-  signingkey = DF7C74AFDC99DF7C
+[include]
+  path = .gituser
 
 [core]
   editor = nvim
