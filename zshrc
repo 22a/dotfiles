@@ -62,18 +62,25 @@ path=(
 # -F (Exit if content fits on one screen)
 export LESS='-g -w -i -q -r -M -S -X -F'
 
-# command history please
+# set zsh command history file
 HISTFILE=~/.zhistory
-HISTSIZE=100000
-SAVEHIST=100000
-setopt APPEND_HISTORY
-setopt SHARE_HISTORY
-setopt HIST_REDUCE_BLANKS
-# share history between sessions
-setopt INC_APPEND_HISTORY
-# add timestamps to history
+# let it grow big
+HISTSIZE=10000000
+SAVEHIST=$HISTSIZE
+# Write the history file in the ":start:elapsed;command" format
 setopt EXTENDED_HISTORY
-
+# Write to the history file immediately, not when the shell exits
+setopt INC_APPEND_HISTORY
+# Share history between all sessions
+setopt SHARE_HISTORY
+# Expire duplicate entries first when trimming history
+setopt HIST_EXPIRE_DUPS_FIRST
+# Don't record an entry that was just recorded again (different to `setopt HIST_IGNORE_ALL_DUPS` which deletes old history entries if the new entry is a duplicate)
+setopt HIST_IGNORE_DUPS
+# Remove superfluous blanks before recording entry.
+setopt HIST_REDUCE_BLANKS
+# Don't execute immediately upon history expansion.
+setopt HIST_VERIFY
 
 # ZSH uses the KEYTIMEOUT parameter to determine how long to wait for additional characters in sequence. Default is 40 (400 ms).
 KEYTIMEOUT=1 # 10 ms
