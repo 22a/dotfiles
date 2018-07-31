@@ -50,10 +50,17 @@ path=(
   $path
 )
 
-# Set the default Less options.
-# Mouse-wheel scrolling has been disabled by -X (disable screen clearing).
-# Remove -X and -F (exit if the content fits on one screen) to enable it.
-export LESS='-F -g -i -M -R -S -w -X -z-4'
+# Set the default Less options
+# -g (Highlight only last match for searches)
+# -w (Highlight first new line after forward-screen)
+# -i (Ignore case in searches)
+# -q (Quiet the terminal bell)
+# -r (Raw control chars)
+# -M (Set long prompt style)
+# -S (Chop long lines)
+# -X (Disable screen clearing)
+# -F (Exit if content fits on one screen)
+export LESS='-g -w -i -q -r -M -S -X -F'
 
 # command history please
 HISTFILE=~/.zhistory
@@ -66,6 +73,7 @@ setopt HIST_REDUCE_BLANKS
 setopt INC_APPEND_HISTORY
 # add timestamps to history
 setopt EXTENDED_HISTORY
+
 
 # ZSH uses the KEYTIMEOUT parameter to determine how long to wait for additional characters in sequence. Default is 40 (400 ms).
 KEYTIMEOUT=1 # 10 ms
