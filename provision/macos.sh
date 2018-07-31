@@ -88,9 +88,6 @@ defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
 # Disable key press and hold in vscode so that we can use vi mode hjkl movements
 defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
 
-# Show ip, hostname, etc. in the clock at login
-sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
-
 # Wicked speedy key repeat, reasonable delay before repeat begins
 defaults write NSGlobalDomain KeyRepeat -int 1
 defaults write NSGlobalDomain InitialKeyRepeat -int 25

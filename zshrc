@@ -31,14 +31,13 @@ bindkey "^[[B" history-substring-search-down
 # pretend we have fzf everywhere
 bindkey -s "^P" "nvim \$(fzf --preview 'head -100 {}')\n"
 
-
 export EDITOR='nvim'
 export VISUAL='nvim'
 export PAGER='less'
 export BROWSER='open'
 
 if [[ -z "$LANG" ]]; then
-  export LANG='en_GB.UTF-8'
+  export LANG='en_IE.UTF-8'
 fi
 
 # Ensure path arrays do not contain duplicates.
