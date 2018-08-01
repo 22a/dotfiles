@@ -1,18 +1,28 @@
-![snoopWoop](https://upload.wikimedia.org/wikipedia/commons/3/37/Female_dalmatian_head_shot.jpg)
-# Dotfiles
-### aka. Spooky Wizard Incantation Configuration
+<img
+  src="https://user-images.githubusercontent.com/7144173/43552691-6fec96a4-95e3-11e8-8bb3-51bcc6d5e77f.jpg"
+  width="500px"
+  alt="Cute dalmatian"
+  title="A cute dog with coat full of dots"
+  align="right"
+/>
 
-My spooky configuration of zsh, tmux, and neovim.
+# [22a's](https://github.com/22a) dotfiles
+
+#### aka. Spooky Lizard Incantation Configuration
+
+This repo contains configuration files for [neovim](https://github.com/neovim/neovim), [zsh](https://github.com/zsh-users/zsh), [tmux](https://github.com/tmux/tmux), [iTerm2](https://github.com/gnachman/iTerm2), and [macOS](https://www.apple.com/ie/macos) as well as provision scripts to bootstrap a new machine to create an adequately pleasant development environment.
+
 
 ## Prerequisites
 
-These dotfiles have been designed solely for neovim in iTerm2 on macOS. For \*nix / regular vim support check out the [linus branch](https://github.com/22a/dotfiles/tree/linus).
+* An expensive apple computer*
+
+  \* My personal and work machines are all macs so these dotfiles have been tailored specifically for neovim in iTerm2 on macOS. For \*nix and/or [vim](https://github.com/vim/vim) (not neo) support check out the [legacy linus branch](https://github.com/22a/dotfiles/tree/linus).
+
 
 ## Warnings
 
-The install script has been setup with a fresh macOS install in mind, it assumes a blank canvas. **It will forcibly symlink over your dotfiles** if you let it.
-
-I have tested this on macOS Sierra 10.12.3, brew had a falling out with sierra at the beginning and may do the same with future versions of OSX.
+The provision scripts have been written with a fresh macOS install in mind, it assumes a blank canvas. **It will forcibly symlink over your dotfiles** if you let it.
 
 
 ## Installation
@@ -20,41 +30,69 @@ I have tested this on macOS Sierra 10.12.3, brew had a falling out with sierra a
 Install the xcode command line tools:
 ```bash
 xcode-select --install
+# Click accept, accept, etc.
 ```
-Click accept, accept, etc.
 
 Clone this repo:
 ```bash
-git clone https://github.com/22a/dotfiles.git
+git clone https://github.com/22a/dotfiles.git;
+cd dotfiles
 ```
 
-Run the install scripts:
+Run the provision scripts:
 ```bash
-cd dotfiles; make
+./scripts/provision/all.sh
 ```
 
-### Other misc bits that haven't been automated yet:
-* git config
+### Things you'll have to set up manually
 
-### Things to do manually
+* Generate a new ssh key
 
-#### Generate ssh + gpg keypairs, Configure ssh-agent + gpgtools
+    ```bash
+    ssh-keygen -t rsa -b 4096 -C "your@email.ie"
+    ```
 
-#### Disable spotlight keyboard shortcuts, Set alfred keyboard shortcut
-`System Preferences... -> Keyboard -> Shortcuts -> Spotlight -> Untick both`
+    * Add it to ssh-agent
 
-#### Tell iTerm2 to use the config file in `iterm2/`
-Open iTerm and set the iterm preferences directory:
-```
-General -> Preferences -> Load preferences from a custom foler or URL
-```
-Then close iTerm entirely: `cmd + alt + q` and open it again.
+        ```bash
+        ssh-add -K ~/.ssh/id_rsa
+        ```
+    * Add it to GitHub
+        [https://github.com/settings/keys](https://github.com/settings/keys)
 
-#### Change the dotfiles remote
-If you decided to clone this repo over HTTPS as opposed to SSH (because setting up ssh keys in plain old terminal is no fun) you'll want to change the repo's remote.
+* Update the remote for this repo so we can push changes
 
-```
-git remote set-url origin git@github.com:22a/dotfiles.git
-```
+    ```bash
+    git remote set-url origin git@github.com:22a/dotfiles.git
+    ```
 
-## More readme bits + screenshots coming at some point...
+* Import gpg key to gpg-suite
+
+* populate `~/.gituser` file
+    ```gitconfig
+    [user]
+      email = your@email.ie
+      name = Peter Meehan
+      signingkey = DEADBEEFDEADBEEFDEADBEEFDEADBEEFDEADBEEF
+    ```
+    where `signingkey` is the fingerprint for your gpg key, visible under `gpg --list-keys`
+
+
+* Disable spotlight keyboard shortcuts
+
+  ```
+  System Preferences... -> Keyboard -> Shortcuts -> Spotlight -> Untick both
+  ```
+
+* Point Alfred preferences directory to dropbox sync
+
+
+* Tell iTerm2 to use the config file in the root of this repo
+  ```
+  General -> Preferences -> Load preferences from a custom foler or URL
+  ```
+  Then close iTerm entirely: `cmd + alt + q`, and open it again
+
+* Remove guest user
+
+* Add more desktop spaces
