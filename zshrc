@@ -91,6 +91,7 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # source fzf binary, completions, and keybindings
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# work stuff, avert your gaze
 export INTERCOM_USER=$(cat ~/.intercom_user)
 export AWS_DEFAULT_REGION="us-east-1"
 source $(which assume-role)
@@ -108,7 +109,7 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 # activate pilot
 export PATH=$HOME/.pilot/bin:$PATH
-if [ -x "$(command -v foo)" ]; then;
+if [ -x "$(command -v pilot)" ]; then;
   eval $(pilot env)
 fi
 
