@@ -91,16 +91,12 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # source fzf binary, completions, and keybindings
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export INTERCOM_USER=`cat ~/.intercom_user`
+export INTERCOM_USER=$(cat ~/.intercom_user)
+export AWS_DEFAULT_REGION="us-east-1"
+source $(which assume-role)
 
 # activate rbenv
 eval "$(rbenv init -)"
-
-# activate pilot
-export PATH=$HOME/.pilot/bin:$PATH
-if [ -x "$(command -v foo)" ]; then;
-  eval $(pilot env)
-fi
 
 # activate nvm + load completion
 export NVM_DIR="$HOME/.nvm"
@@ -109,6 +105,12 @@ export NVM_DIR="$HOME/.nvm"
 
 # source yarn globals
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+# activate pilot
+export PATH=$HOME/.pilot/bin:$PATH
+if [ -x "$(command -v foo)" ]; then;
+  eval $(pilot env)
+fi
 
 function tn () {
   # new tmux session with random name
