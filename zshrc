@@ -98,7 +98,7 @@ eval "$(rbenv init -)"
 
 # activate pilot
 export PATH=$HOME/.pilot/bin:$PATH
-if command -v pilot; then;
+if [ -x "$(command -v foo)" ]; then;
   eval $(pilot env)
 fi
 
