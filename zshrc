@@ -59,7 +59,8 @@ path=(
 # -S (Chop long lines)
 # -X (Disable screen clearing)
 # -F (Exit if content fits on one screen)
-export LESS='-g -w -i -q -r -M -S -X -F'
+# export LESS='-g -w -i -q -r -M -S -X -F' # ugh this is broken somehow
+export LESS='-F -g -i -M -R -S -w -X -z-4'
 
 # set zsh command history file
 HISTFILE=~/.zhistory

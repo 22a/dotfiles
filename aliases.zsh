@@ -85,6 +85,7 @@ alias hosts="sudo $EDITOR /etc/hosts"
 alias psg="ps aux | head -n 1; ps aux | rg"
 alias pyserv="python3 -m http.server"
 alias j="z"
+alias fix="git diff --name-only | uniq | xargs $EDITOR"
 
 # clumsy fingers
 alias ..="cd .."
