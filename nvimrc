@@ -257,6 +257,11 @@ endfor
 " Ctrl-P for fzf
 nnoremap <C-p> :FZF<CR>
 
+" hide fzf status bar (it only says \"FZF")
+autocmd! FileType fzf
+autocmd  FileType fzf set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+
 " disable EX mode
 nnoremap Q <NOP>
 
