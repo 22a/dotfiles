@@ -100,9 +100,6 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tmux-plugins/vim-tmux'
 
-" speed grep things
-Plug 'mhinz/vim-grepper'
-
 " numbered search matches
 Plug 'henrik/vim-indexed-search'
 
@@ -297,9 +294,6 @@ command! Q q
 " :wsudo to save files if we've accidentally opened them read only
 command! Wsudo w !sudo tee %
 
-" shorten the speed grep command
-cnoreabbrev Rg GrepperRg
-
 " beautify things quickly
 command! Jsbeautify call JsBeautify()
 command! Jsonbeautify call JsonBeautify()
@@ -363,14 +357,27 @@ nnoremap <Leader>q :q<CR>
 nnoremap <Leader>Q :q!<CR>
 
 " grepping
-nnoremap <leader>g :Grepper -tool rg<CR>
-nnoremap <leader>G :Grepper -tool rg -buffers<cr>
-nnoremap <leader>* :Grepper -tool rg -cword -noprompt<cr>
+" open a fullscreen interactive grepping window
+nnoremap <leader>g :Rg!<CR>
+" open a small interactive grepping window
+nnoremap <leader>G :Rg<CR>
+" grep the current working dir for the current word under the cursor
+nnoremap <leader>* :Rg <c-r>=expand("<cword>")<CR><CR>
+
+" make :Rg! show a preview of the file
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
 
 " easy toggle wrap, spell, and paste
 nnoremap <Leader>W :set wrap!<CR>
 nnoremap <Leader>S :set spell!<CR>
 nnoremap <Leader>P :set paste!<CR>
+" easily toggle ALE fixing on write
+nnoremap <Leader>F :call ToggleAleFixer()<CR>
 
 "----------------------
 " Colour :art:
@@ -426,6 +433,9 @@ let g:airline#extensions#tabline#left_alt_sep = ''
 "----------------------
 " Helpful Functions
 "----------------------
+function! ToggleAleFixer()
+  let g:ale_fix_on_save = get(g:, 'ale_fix_on_save', 0) ? 0 : 1
+endfunc
 
 function! TrimWhitespace()
   let l = line('.')

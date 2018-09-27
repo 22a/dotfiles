@@ -3,7 +3,7 @@ alias v="nvim"
 alias vi="nvim"
 alias vim="nvim"
 alias emacs="nvim"
-alias ctrlp="nvim \$(fzf --preview 'head -100 {}')"
+alias ctrlp="nvim \$(fzf --preview 'bat --style=plain --color=always {}')"
 
 # tmux
 alias tns="tmux new -s"

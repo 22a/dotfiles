@@ -29,7 +29,8 @@ bindkey "^[[A" history-substring-search-up
 bindkey "^[[B" history-substring-search-down
 
 # pretend we have fzf everywhere
-bindkey -s "^P" "nvim \$(fzf --preview 'head -100 {}')\n"
+bindkey -s "^P" "ctrlp\n"
+
 
 export EDITOR='nvim'
 export VISUAL='nvim'
