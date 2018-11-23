@@ -32,3 +32,6 @@
 
 [credential]
   helper = osxkeychain
+
+[protocol]
+  version = 2
