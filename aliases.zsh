@@ -21,6 +21,9 @@ alias dns="sudo killall -hUP mDNSResponder"
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias digg="dig +nocmd any +multiline +noall +answer"
 
+# curly
+alias hd="curl -s -I"
+
 # docker
 alias dim="docker images"
 alias dprune="docker system prune --all"
