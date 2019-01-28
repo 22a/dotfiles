@@ -1,0 +1,21 @@
+{
+    "editor.fontSize": 14,
+    "telemetry.enableTelemetry": false,
+    "telemetry.enableCrashReporter": false,
+    "editor.tabSize": 2,
+    "editor.renderWhitespace": "boundary",
+    "editor.renderControlCharacters": true,
+    "editor.roundedSelection": false,
+    "editor.scrollBeyondLastLine": false,
+    "editor.tabCompletion": "on",
+    "diffEditor.ignoreTrimWhitespace": false,
+    "editor.minimap.enabled": false,
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.statusBar.feedback.visible": false,
+    "workbench.editor.highlightModifiedTabs": true,
+    "workbench.settings.enableNaturalLanguageSearch": false,
+    "window.restoreWindows": "all"
+}
