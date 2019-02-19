@@ -81,7 +81,7 @@ alias gsr="git remote set-url origin"
 alias gmm="gco master; git pull; gco -; git merge master --no-edit"
 
 # misc
-alias brewu="brew -v update; brew upgrade --force-bottle --cleanup; brew cleanup; brew doctor; brew prune;"
+alias brewu="brew update; brew upgrade --force-bottle; brew cleanup --prune-prefix; brew doctor"
 alias cls="clear; ls"
 alias exs="source ~/.zshrc"
 alias hosts="sudo $EDITOR /etc/hosts"
