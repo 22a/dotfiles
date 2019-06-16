@@ -4,17 +4,29 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
 " Git bits
-Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 
 " Buffer Navigation
 Plug 'troydm/easybuffer.vim'
 
+" \"Auto\" complete
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" let g:coc_node_args = ['--nolazy', '--inspect-brk=6045']
+
+Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-html', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-css', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-emmet', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-pairs', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-lists', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-git', {'do': 'yarn install --frozen-lockfile'}
+Plug '22a/coc-ember', {'do': 'yarn install --frozen-lockfile'}
+
 " less keystrokes
 Plug 'tpope/vim-endwise'
-Plug 'jiangmiao/auto-pairs'
-Plug 'alvan/vim-closetag'
 
 " Linty lint
 Plug 'w0rp/ale'
@@ -24,13 +36,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 
-" Javascript
-Plug 'othree/yajs.vim', { 'for': 'javascript' }
-Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
-Plug '1995eaton/vim-better-javascript-completion', { 'for': 'javascript' }
-Plug 'mxw/vim-jsx', { 'for': ['javascript', 'jsx'] }
-Plug 'joukevandermaas/vim-ember-hbs'
-
 " Elixir
 Plug 'elixir-lang/vim-elixir'
 Plug 'slashmili/alchemist.vim'
@@ -39,19 +44,7 @@ Plug 'slashmili/alchemist.vim'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 
-" Markdown
-Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
-
-" Other Languages
-Plug 'othree/html5.vim'
-Plug 'cakebaker/scss-syntax.vim'
-Plug 'ekalinin/Dockerfile.vim'
-Plug 'elzr/vim-json'
-Plug 'tpope/vim-rails'
-Plug 'mxw/vim-jsx'
-Plug 'rust-lang/rust.vim'
-Plug 'fatih/vim-go'
+" HBS
 Plug 'joukevandermaas/vim-ember-hbs'
 
 " junegunn 🙏
@@ -111,7 +104,7 @@ set synmaxcol=256
 
 set mouse=a
 
-autocmd! bufreadpost *.min.* syntax off
+autocmd BufRead,BufNewFile *.hbs set filetype=handlebars
 
 " spelling is hard
 autocmd BufRead,BufNewFile *.md setlocal spell
@@ -181,13 +174,37 @@ let g:vim_markdown_fenced_languages = ['viml=vim', 'bash=sh']
 " Autocomplete
 "----------------------
 
-set completeopt=longest,menuone,preview
-autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>CheckBackSpace() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" Use <C-j> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <C-j> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Remap for rename current word
+nmap <leader>rw <Plug>(coc-rename)
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
 
 " spelling is nice too
 set complete+=kspell
 
+set completeopt=longest,menuone,preview
 
 "----------------------
 " Snippets
@@ -197,7 +214,7 @@ set complete+=kspell
 "----------------------
 " Linting
 "----------------------
-let g:ale_fixers = ['prettier']
+let g:ale_fixers = { 'javascript': ['prettier'], 'scss': ['prettier'] }
 " Format on Save
 let g:ale_fix_on_save = 1
 
@@ -358,6 +375,7 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#222426
 " hop from file to file without saving
 set hidden
 
+
 " cycle through buffers
 map <Leader><tab> :bn<CR>
 map <Leader>` :bp<CR>
@@ -397,4 +415,9 @@ function! RenameFile()
     exec ':silent !rm ' . old_name
     redraw!
   endif
+endfunction
+
+function! s:CheckBackSpace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
