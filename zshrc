@@ -1,5 +1,5 @@
 # zplug directory created by brew
-export ZPLUG_HOME=/usr/local/opt/zplug
+export ZPLUG_HOME=/home/linuxbrew/.linuxbrew/opt/zplug
 
 source $ZPLUG_HOME/init.zsh
 
@@ -47,6 +47,7 @@ typeset -gU cdpath fpath mailpath path
 # Set the list of directories that Zsh searches for programs.
 path=(
   /usr/local/{bin,sbin}
+  /home/linuxbrew/.linuxbrew/bin
   $path
 )
 

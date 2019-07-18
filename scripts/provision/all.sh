@@ -2,9 +2,7 @@
 
 provision_dir=$(dirname "$0")
 
-bash -x "$provision_dir/brew.sh"
 bash -x "$provision_dir/brewfile.sh"
-bash -x "$provision_dir/macos.sh"
 bash -x "$provision_dir/zsh.sh"
 bash -x "$provision_dir/fzf.sh"
 bash -x "$provision_dir/neovim.sh"

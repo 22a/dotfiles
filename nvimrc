@@ -72,7 +72,7 @@ Plug 'joukevandermaas/vim-ember-hbs'
 " see contents of registers real quick
 Plug 'junegunn/vim-peekaboo'
 " fuzzy file search
-Plug '/usr/local/opt/fzf'
+Plug '/home/linuxbrew/.linuxbrew/opt/fzf'
 Plug 'junegunn/fzf.vim'
 " tranquil poetry mode
 Plug 'junegunn/goyo.vim'
