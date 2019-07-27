@@ -237,7 +237,7 @@ let g:jsdoc_allow_input_prompt = 1
 "----------------------
 " Linting
 "----------------------
-let g:ale_fixers = ['prettier']
+let g:ale_fixers = { 'javascript': ['prettier'], 'scss': ['prettier'] }
 " Format on Save
 let g:ale_fix_on_save = 1
 
