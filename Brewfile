@@ -1,5 +1,4 @@
 tap "coinbase/assume-role"
-tap "homebrew/bundle"
 tap "homebrew/cask"
 brew "awscli"
 brew "bat"
@@ -12,6 +11,7 @@ brew "git"
 brew "htop"
 brew "hub"
 brew "imagemagick"
+brew "mas"
 brew "neovim"
 brew "nginx"
 brew "openssl"
@@ -51,3 +51,7 @@ cask "spotify"
 cask "tunnelblick"
 cask "visual-studio-code"
 cask "vlc"
+mas "Black Out", id: 1319884285
+mas "Contrast", id: 1254981365
+mas "GIF Brewery 3", id: 1081413713
+mas "WireGuard", id: 1451685025
