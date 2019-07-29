@@ -47,6 +47,7 @@ typeset -gU cdpath fpath mailpath path
 # Set the list of directories that Zsh searches for programs.
 path=(
   /usr/local/{bin,sbin}
+  $HOME/bin
   $path
 )
 
@@ -94,7 +95,8 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # work stuff, avert your gaze
-export INTERCOM_USER=$(cat ~/.intercom_user)
+export USER=$(cat ~/.intercom_username)
+export INTERCOM_USER=$(cat ~/.intercom_username)
 export AWS_DEFAULT_REGION="us-east-1"
 source $(which assume-role)
 

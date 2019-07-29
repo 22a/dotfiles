@@ -4,6 +4,7 @@ touch ~/.hushlogin
 touch ~/.aliases.priv
 mkdir -p ~/.config/nvim
 mkdir -p ~/.config/git
+mkdir -p ~/bin
 
 ln -sf "$PWD/nvimrc"      ~/.config/nvim/init.vim
 ln -sf "$PWD/zshrc"       ~/.zshrc
