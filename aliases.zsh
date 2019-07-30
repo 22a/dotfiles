@@ -129,3 +129,5 @@ alias etsf="ember test --server --filter"
 alias n="git pull; sup; s"
 alias ys="yarn install --check-files; rm -rf tmp dist; ember s"
 alias nif="git check-ignore * | tr '\\n' ' ' | xargs rm -rf"
+
+alias percy="perl -pi -e \"s/RUN_PERCY=''/RUN_PERCY='true'/g\" .env; git add .env; gcm \"run percy\"; git push; git revert HEAD --no-edit; git push;"
