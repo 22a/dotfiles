@@ -1,6 +1,8 @@
 # zplug directory created by brew
 export ZPLUG_HOME=/home/linuxbrew/.linuxbrew/opt/zplug
 
+export PURER_HOSTNAME_OVERRIDE="@ws"
+
 source $ZPLUG_HOME/init.zsh
 
 zplug "mafredri/zsh-async"
@@ -95,7 +97,7 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # work stuff, avert your gaze
-export INTERCOM_USER=$(cat ~/.intercom_user)
+export INTERCOM_USER=$(cat ~/.intercom_username)
 export AWS_DEFAULT_REGION="us-east-1"
 source $(which assume-role)
 
