@@ -281,8 +281,7 @@ command! Wsudo w !sudo tee %
 " Leader Commands
 "----------------------
 
-" civ4 victory by space-race
-" (use space key as leader)
+" civ4 victory by space-race (use space key as leader)
 let mapleader = "\<Space>"
 
 " Easily reload vimrc
@@ -348,6 +347,7 @@ nnoremap <Leader>P :set paste!<CR>
 " easily toggle ALE fixing on write
 nnoremap <Leader>F :call ToggleAleFixer()<CR>
 
+
 "----------------------
 " Colour :art:
 "----------------------
@@ -369,7 +369,7 @@ let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#242628
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#222426
 
-"
+
 "----------------------
 " Buffers
 "----------------------
