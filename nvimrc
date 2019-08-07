@@ -32,10 +32,10 @@ Plug 'slashmili/alchemist.vim'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 
-" HBS
+" Typescript
 Plug 'leafgarland/typescript-vim'
 
-" Typescript
+" HBS
 Plug 'joukevandermaas/vim-ember-hbs'
 
 " junegunn 🙏
@@ -95,7 +95,7 @@ set synmaxcol=256
 
 set mouse=a
 
-autocmd BufRead,BufNewFile *.hbs set filetype=handlebars
+autocmd! bufreadpost *.min.* syntax off
 
 " spelling is hard
 autocmd BufRead,BufNewFile *.md setlocal spell
@@ -211,12 +211,14 @@ set complete+=kspell
 
 set completeopt=longest,menuone,preview
 
+
 "----------------------
 " Linting
 "----------------------
 let g:ale_fixers = { 'javascript': ['prettier'], 'scss': ['prettier'] }
 " Format on Save
 let g:ale_fix_on_save = 1
+
 
 "----------------------
 " Key Bindings
