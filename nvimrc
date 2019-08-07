@@ -11,19 +11,7 @@ Plug 'tpope/vim-rhubarb'
 Plug 'troydm/easybuffer.vim'
 
 " \"Auto\" complete
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" let g:coc_node_args = ['--nolazy', '--inspect-brk=6045']
-
-Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-html', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-css', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-emmet', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-pairs', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-lists', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-git', {'do': 'yarn install --frozen-lockfile'}
-Plug '22a/coc-ember', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 
 " less keystrokes
 Plug 'tpope/vim-endwise'
@@ -45,6 +33,9 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 
 " HBS
+Plug 'leafgarland/typescript-vim'
+
+" Typescript
 Plug 'joukevandermaas/vim-ember-hbs'
 
 " junegunn 🙏
@@ -174,6 +165,20 @@ let g:vim_markdown_fenced_languages = ['viml=vim', 'bash=sh']
 " Autocomplete
 "----------------------
 
+let g:coc_global_extensions = [
+  \ 'coc-tsserver',
+  \ 'coc-css',
+  \ 'coc-json',
+  \ 'coc-html',
+  \ 'coc-vimlsp',
+  \ 'coc-highlight',
+  \ 'coc-emmet',
+  \ 'coc-pairs',
+  \ 'coc-snippets',
+  \ 'coc-lists',
+  \ 'coc-git',
+\ ]
+
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
@@ -205,11 +210,6 @@ set signcolumn=yes
 set complete+=kspell
 
 set completeopt=longest,menuone,preview
-
-"----------------------
-" Snippets
-"----------------------
-
 
 "----------------------
 " Linting
