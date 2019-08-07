@@ -111,12 +111,6 @@ export NVM_DIR="$HOME/.nvm"
 # source yarn globals
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
-# activate pilot
-export PATH=$HOME/.pilot/bin:$PATH
-if [ -x "$(command -v pilot)" ]; then;
-  eval $(pilot env)
-fi
-
 function tn () {
   # new tmux session with random name
   tmux new -s $(~/dotfiles/scripts/random_word.sh)

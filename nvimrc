@@ -4,28 +4,17 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
 " Git bits
-Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 
 " Buffer Navigation
 Plug 'troydm/easybuffer.vim'
 
-" Wizard autocompletion
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'  }
-" Emoji autocompletion for commit messages and markdown
-Plug 'fszymanski/deoplete-emoji'
-
-" make tab do all
-Plug 'ervandew/supertab'
-
-" text snippets
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+" \"Auto\" complete
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 
 " less keystrokes
 Plug 'tpope/vim-endwise'
-Plug 'jiangmiao/auto-pairs'
-Plug 'alvan/vim-closetag'
 
 " Linty lint
 Plug 'w0rp/ale'
@@ -35,16 +24,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 
-" JS + Html unmangeling
-Plug 'maksimr/vim-jsbeautify'
-
-" Javascript
-Plug 'othree/yajs.vim', { 'for': 'javascript' }
-Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
-Plug '1995eaton/vim-better-javascript-completion', { 'for': 'javascript' }
-Plug 'mxw/vim-jsx', { 'for': ['javascript', 'jsx'] }
-Plug 'joukevandermaas/vim-ember-hbs'
-
 " Elixir
 Plug 'elixir-lang/vim-elixir'
 Plug 'slashmili/alchemist.vim'
@@ -53,19 +32,10 @@ Plug 'slashmili/alchemist.vim'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 
-" Markdown
-Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
+" Typescript
+Plug 'leafgarland/typescript-vim'
 
-" Other Languages
-Plug 'othree/html5.vim'
-Plug 'cakebaker/scss-syntax.vim'
-Plug 'ekalinin/Dockerfile.vim'
-Plug 'elzr/vim-json'
-Plug 'tpope/vim-rails'
-Plug 'mxw/vim-jsx'
-Plug 'rust-lang/rust.vim'
-Plug 'fatih/vim-go'
+" HBS
 Plug 'joukevandermaas/vim-ember-hbs'
 
 " junegunn 🙏
@@ -87,7 +57,6 @@ Plug 'justinmk/vim-dirvish'
 
 " Status Bar + Buffer Bar
 Plug 'vim-airline/vim-airline'
-" Plug '22a/vim-airline-themes'
 Plug 'vim-airline/vim-airline-themes'
 
 " visual indentation levels
@@ -117,7 +86,6 @@ syntax on
 
 " no folding please
 set nofoldenable
-
 
 " better % skulduggery
 runtime macros/matchit.vim
@@ -160,7 +128,6 @@ set autoindent " have a go at auto indenting even when no filetype set
 set tabstop=2 " represent tabs as 2 spaces
 set shiftwidth=2  " tab key enters two spaces"
 set softtabstop=2 " backspace deletes two spaces
-" set smarttab
 
 " / searching
 set hlsearch " highlight matches
@@ -197,41 +164,52 @@ let g:vim_markdown_fenced_languages = ['viml=vim', 'bash=sh']
 "----------------------
 " Autocomplete
 "----------------------
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#omni#functions= {}
-let g:deoplete#omni#functions.javascript = [
-  \ 'tern#Complete',
-  \ 'jspc#omni'
-\]
-let g:tern#command = ['tern']
-let g:tern#arguments = ['--persistent']
 
-set completeopt=longest,menuone,preview
-autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+let g:coc_global_extensions = [
+  \ 'coc-tsserver',
+  \ 'coc-css',
+  \ 'coc-json',
+  \ 'coc-html',
+  \ 'coc-vimlsp',
+  \ 'coc-highlight',
+  \ 'coc-emmet',
+  \ 'coc-pairs',
+  \ 'coc-snippets',
+  \ 'coc-lists',
+  \ 'coc-git',
+\ ]
 
-" make supertab close the tern preview
-let g:SuperTabClosePreviewOnPopupClose = 1
-" make supertab move down instead of up
-let g:SuperTabDefaultCompletionType = "<c-n>"
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>CheckBackSpace() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" Use <C-j> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <C-j> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Remap for rename current word
+nmap <leader>rw <Plug>(coc-rename)
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
 
 " spelling is nice too
 set complete+=kspell
 
-" C-x, C-u emoji completion :dog:
-set completefunc=emoji#complete
-
-
-"----------------------
-" Snippets
-"----------------------
-
-" Snippet expansion
-let g:UltiSnipsExpandTrigger="<C-j>"
-let g:UltiSnipsJumpForwardTrigger="<C-j>"
-let g:UltiSnipsJumpBackwardTrigger="<C-k>"
-
-let g:jsdoc_allow_input_prompt = 1
+set completeopt=longest,menuone,preview
 
 
 "----------------------
@@ -240,6 +218,7 @@ let g:jsdoc_allow_input_prompt = 1
 let g:ale_fixers = { 'javascript': ['prettier'], 'scss': ['prettier'] }
 " Format on Save
 let g:ale_fix_on_save = 1
+
 
 "----------------------
 " Key Bindings
@@ -283,6 +262,7 @@ tnoremap <Esc> <C-\><C-n>
 noremap <silent> k gk
 noremap <silent> j gj
 
+
 "----------------------
 " Commands
 "----------------------
@@ -296,11 +276,6 @@ command! Q q
 " :wsudo to save files if we've accidentally opened them read only
 command! Wsudo w !sudo tee %
 
-" beautify things quickly
-command! Jsbeautify call JsBeautify()
-command! Jsonbeautify call JsonBeautify()
-command! Htmlbeautify call HtmlBeautify()
-command! Cssbeautify call CSSBeautify()
 
 "----------------------
 " Leader Commands
@@ -366,14 +341,6 @@ nnoremap <leader>G :Rg<CR>
 " grep the current working dir for the current word under the cursor
 nnoremap <leader>* :Rg <c-r>=expand("<cword>")<CR><CR>
 
-" make :Rg! show a preview of the file
-" command! -bang -nargs=* Rg
-"   \ call fzf#vim#grep(
-"   \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-"   \   <bang>0 ? fzf#vim#with_preview('up:60%')
-"   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-"   \   <bang>0)
-
 " easy toggle wrap, spell, and paste
 nnoremap <Leader>W :set wrap!<CR>
 nnoremap <Leader>S :set spell!<CR>
@@ -398,19 +365,18 @@ set colorcolumn=80
 
 " indent guide colors
 let g:indent_guides_auto_colors = 0
-" base16 bg is #1F2022, so i've just bumped up to #222426 and #242628
+" base16 spacemacs bg is #1F2022, so I've just bumped up to #222426 and #242628
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#242628
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#222426
 
-" react jsx highlighting
-let g:jsx_ext_required = 0
-
+"
 "----------------------
 " Buffers
 "----------------------
 
 " hop from file to file without saving
 set hidden
+
 
 " cycle through buffers
 map <Leader><tab> :bn<CR>
@@ -425,9 +391,6 @@ set noshowmode " don't show the plain mode text (we use airline)
 set laststatus=2
 let g:airline_theme='base16_spacemacs'
 let g:airline#extensions#tabline#enabled = 1
-" let g:airline_powerline_fonts = 1
-" let g:webdevicons_enable_airline_tabline = 1
-" let g:webdevicons_enable_airline_statusline = 1
 let g:airline#extensions#tabline#left_sep = ''
 let g:airline#extensions#tabline#left_alt_sep = ''
 
@@ -454,4 +417,9 @@ function! RenameFile()
     exec ':silent !rm ' . old_name
     redraw!
   endif
+endfunction
+
+function! s:CheckBackSpace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
 endfunction

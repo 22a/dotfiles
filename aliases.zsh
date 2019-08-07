@@ -81,9 +81,9 @@ alias gsr="git remote set-url origin"
 alias gmm="gco master; git pull; gco -; git merge master --no-edit"
 
 # old aliases that I need to ween myself off
-alias gws="echo \"######## NOPE, try 'gs' instead\"; echo;"
-alias gwd="echo \"######## NOPE, try 'gd' instead\"; echo;"
-alias gwdc="echo \"######## NOPE, try 'gdc' instead\"; echo;"
+alias gws="gs"
+alias gwd="gd"
+alias gwdc="gdc"
 
 
 alias cl="clear"
