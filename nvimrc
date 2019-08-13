@@ -35,6 +35,10 @@ Plug 'tpope/vim-rails'
 " Typescript
 Plug 'leafgarland/typescript-vim'
 
+" JSX
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+
 " HBS
 Plug 'joukevandermaas/vim-ember-hbs'
 
