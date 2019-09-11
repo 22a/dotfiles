@@ -66,7 +66,6 @@ Plug 'tpope/vim-rails'
 Plug 'mxw/vim-jsx'
 Plug 'rust-lang/rust.vim'
 Plug 'fatih/vim-go'
-Plug 'joukevandermaas/vim-ember-hbs'
 
 " junegunn 🙏
 " see contents of registers real quick
@@ -132,6 +131,7 @@ autocmd! bufreadpost *.min.* syntax off
 " spelling is hard
 autocmd BufRead,BufNewFile *.md setlocal spell
 autocmd FileType gitcommit setlocal spell
+autocmd FileType html.handlebars setlocal commentstring={{!--\%s\--}}
 
 " command line bits
 set showcmd
@@ -221,7 +221,6 @@ set complete+=kspell
 " C-x, C-u emoji completion :dog:
 set completefunc=emoji#complete
 
-
 "----------------------
 " Snippets
 "----------------------
@@ -232,7 +231,6 @@ let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 
 let g:jsdoc_allow_input_prompt = 1
-
 
 "----------------------
 " Linting
