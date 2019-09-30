@@ -3,6 +3,7 @@
 
 [core]
   editor = nvim
+  hooksPath = ~/.config/git/global-hooks
 
 [alias]
   undo-commit = reset --soft HEAD^
