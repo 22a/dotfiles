@@ -35,6 +35,9 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 
+" Networked clipboard sync
+Plug 'wincent/vim-clipper'
+
 " JS + Html unmangeling
 Plug 'maksimr/vim-jsbeautify'
 
@@ -329,6 +332,8 @@ nnoremap <Leader>rc :e ~/.config/nvim/init.vim<CR>
 
 " ye, system clip pls
 set clipboard=unnamed
+
+call clipper#set_invocation('nc 10.0.0.2 8377')
 
 " yank to system clipboard without motion
 nnoremap <Leader>y "+y
