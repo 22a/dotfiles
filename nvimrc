@@ -201,8 +201,8 @@ let g:vim_markdown_fenced_languages = ['viml=vim', 'bash=sh']
 " Autocomplete
 "----------------------
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#omni#functions= {}
-let g:deoplete#omni#functions.javascript = [
+let g:deoplete#custom#var = {}
+let g:deoplete#custom#var.javascript = [
   \ 'tern#Complete',
   \ 'jspc#omni'
 \]
@@ -238,7 +238,14 @@ let g:jsdoc_allow_input_prompt = 1
 "----------------------
 " Linting
 "----------------------
-let g:ale_fixers = { 'javascript': ['prettier'], 'scss': ['prettier'] }
+" let g:ale_linters_explicit = 1
+let g:ale_fixers = {
+\ 'typescript': ['prettier'],
+\ 'javascript': ['prettier'],
+\ 'scss': ['prettier'],
+\ 'ruby': ['rubocop'],
+\}
+let g:ale_ruby_rubocop_executable = 'bundle'
 " Format on Save
 let g:ale_fix_on_save = 1
 
@@ -369,13 +376,8 @@ nnoremap <leader>G :Rg<CR>
 " grep the current working dir for the current word under the cursor
 nnoremap <leader>* :Rg <c-r>=expand("<cword>")<CR><CR>
 
-" make :Rg! show a preview of the file
-" command! -bang -nargs=* Rg
-"   \ call fzf#vim#grep(
-"   \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-"   \   <bang>0 ? fzf#vim#with_preview('up:60%')
-"   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-"   \   <bang>0)
+" Disable FZF preview window
+let g:fzf_preview_window = ''
 
 " easy toggle wrap, spell, and paste
 nnoremap <Leader>W :set wrap!<CR>
@@ -457,4 +459,20 @@ function! RenameFile()
     exec ':silent !rm ' . old_name
     redraw!
   endif
+endfunction
+
+function! RunClosestEmberTestToCursor()
+  let current_linenum = line('.')
+  let current_filename = expand('%')
+  exec ':split | resize 10 | term script/test-cli ' . current_filename . ':' . current_linenum
+endfunction
+
+function! RunEmberTestsInFile()
+  let current_filename = expand('%')
+  exec ':split | resize 10 | term script/test-cli --reporter=dot ' . current_filename
+endfunction
+
+function! RunEmberTestsInFileV()
+  let current_filename = expand('%')
+  exec ':vsplit | term script/test-cli ' . current_filename
 endfunction

@@ -50,6 +50,7 @@ typeset -gU cdpath fpath mailpath path
 path=(
   /usr/local/{bin,sbin}
   /home/linuxbrew/.linuxbrew/bin
+  ~/go/bin
   $path
 )
 

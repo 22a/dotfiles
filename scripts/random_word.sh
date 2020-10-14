@@ -8,4 +8,4 @@
 # rnum=$((RANDOM*RANDOM%$lines+1));
 # sed -n "$rnum p" $WORDFILE;
 
-echo "beans"
+echo "bönor"
