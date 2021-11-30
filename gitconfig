@@ -11,6 +11,7 @@
 
 [pull]
   default = current
+	rebase = false
 
 [push]
   default = current

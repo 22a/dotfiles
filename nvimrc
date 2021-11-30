@@ -26,9 +26,10 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'tpope/vim-endwise'
 Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
+Plug 'joukevandermaas/vim-ember-hbs'
 
 " Linty lint
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 
 " Text swizzeling
 Plug 'tpope/vim-surround'
@@ -46,7 +47,10 @@ Plug 'othree/yajs.vim', { 'for': 'javascript' }
 Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
 Plug '1995eaton/vim-better-javascript-completion', { 'for': 'javascript' }
 Plug 'mxw/vim-jsx', { 'for': ['javascript', 'jsx'] }
-Plug 'joukevandermaas/vim-ember-hbs'
+
+" TS
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 
 " Elixir
 Plug 'elixir-lang/vim-elixir'
@@ -61,12 +65,12 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 
 " Other Languages
+" Plug 'vim-scripts/HTML-AutoCloseTag'
 Plug 'othree/html5.vim'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'elzr/vim-json'
 Plug 'tpope/vim-rails'
-Plug 'mxw/vim-jsx'
 Plug 'rust-lang/rust.vim'
 Plug 'fatih/vim-go'
 
@@ -119,7 +123,6 @@ syntax on
 
 " no folding please
 set nofoldenable
-
 
 " better % skulduggery
 runtime macros/matchit.vim
@@ -209,6 +212,8 @@ let g:deoplete#custom#var.javascript = [
 let g:tern#command = ['tern']
 let g:tern#arguments = ['--persistent']
 
+let g:closetag_filenames = '*.html,*.hbs'
+
 set completeopt=longest,menuone,preview
 autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -242,6 +247,7 @@ let g:jsdoc_allow_input_prompt = 1
 let g:ale_fixers = {
 \ 'typescript': ['prettier'],
 \ 'javascript': ['prettier'],
+\ 'handlebars': ['prettier'],
 \ 'scss': ['prettier'],
 \ 'ruby': ['rubocop'],
 \}
@@ -260,7 +266,7 @@ for prefix in ['i', 'n', 'v']
 endfor
 
 " Ctrl-P for fzf
-nnoremap <C-p> :FZF<CR>
+nnoremap <C-p> :FZF!<CR>
 
 " hide fzf status bar (it only says \"FZF")
 autocmd! FileType fzf
@@ -368,9 +374,19 @@ nnoremap <Leader>C :bd!<CR>
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>Q :q!<CR>
 
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+
 " grepping
 " open a fullscreen interactive grepping window
-nnoremap <leader>g :Rg!<CR>
+nnoremap <leader>g :RG<CR>
 " open a small interactive grepping window
 nnoremap <leader>G :Rg<CR>
 " grep the current working dir for the current word under the cursor

@@ -127,3 +127,7 @@ function tn () {
 # Aliases
 source ~/.aliases
 source ~/.aliases.priv
+
+export HOMEBREW_GITHUB_API_TOKEN=$(cat ~/.intercom_github_api_token | tr -d '\n')
+
+alias assume-role='function(){eval $(hammer assume-role $@);}'

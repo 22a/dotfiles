@@ -8,4 +8,4 @@
 # rnum=$((RANDOM*RANDOM%$lines+1));
 # sed -n "$rnum p" $WORDFILE;
 
-echo "bönor"
+echo "själv"
