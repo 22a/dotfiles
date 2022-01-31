@@ -2,17 +2,12 @@
 alias v="nvim"
 alias vi="nvim"
 alias vim="nvim"
-alias emacs="nvim"
-alias ctrlp="nvim \$(fzf --preview 'bat --style=plain --color=always {}')"
 
 # tmux
 alias tns="tmux new -s"
 alias tls="tmux ls"
 alias ta="tmux a"
 alias tks="tmux kill-session -t"
-
-# tree
-alias tree="tree -a -I 'node_modules*|.git*'"
 
 # flush dns cache
 alias dns="sudo killall -hUP mDNSResponder"
@@ -85,9 +80,6 @@ alias gws="gs"
 alias gwd="gd"
 alias gwdc="gdc"
 
-
-alias cl="clear"
-
 # misc
 alias brewu="brew update; brew upgrade --force-bottle; brew cleanup --prune-prefix; brew doctor"
 alias cls="clear; ls"
@@ -101,9 +93,6 @@ alias fix="git diff --name-only | uniq | xargs $EDITOR"
 # clumsy fingers
 alias ..="cd .."
 alias cd..="cd .."
-
-# brew cask
-alias cask="brew cask"
 
 # listing
 alias ls="gls -Fh --color --group-directories-first"
@@ -119,6 +108,7 @@ alias rg="rg --smart-case"
 alias nvimrc="$EDITOR ~/dotfiles/nvimrc"
 alias zshrc="$EDITOR ~/dotfiles/zshrc"
 
+# work util
 alias s="script/server"
 alias sup="script/update"
 alias t="script/test"
@@ -128,7 +118,5 @@ alias etf="ember test --filter"
 alias etsf="ember test --server --filter"
 alias n="git pull; sup; s"
 alias ys="yarn install --check-files; rm -rf tmp dist; ember s"
-alias nif="git check-ignore * | tr '\\n' ' ' | xargs rm -rf"
-
 alias percy="perl -pi -e \"s/RUN_PERCY=''/RUN_PERCY='true'/g\" .env; git add .env; gcm \"run percy\"; git push; git revert HEAD --no-edit; git push;"
 alias ws="hammer workspace --vpn -u $(cat ~/.intercom_username)"

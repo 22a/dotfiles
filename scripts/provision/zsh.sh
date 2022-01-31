@@ -1,5 +1,5 @@
 #!/bin/bash
 
-# use brew zsh instead of bash
-echo '/usr/local/bin/zsh' | sudo tee -a /etc/shells
-chsh -s /usr/local/bin/zsh
+# use brew zsh instead of macos default zsh
+echo "$(which zsh)" | sudo tee -a /etc/shells
+chsh -s "$(which zsh)"

@@ -1,6 +1,4 @@
-# zplug directory created by brew
-export ZPLUG_HOME=/usr/local/opt/zplug
-
+export ZPLUG_HOME=$(brew --prefix)/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
 zplug "mafredri/zsh-async"
@@ -65,7 +63,7 @@ path=(
 export LESS='-F -g -i -M -R -S -w -X -z-4'
 
 # set zsh command history file
-HISTFILE=~/.zhistory
+HISTFILE=~/.zsh_history
 # let it grow big
 HISTSIZE=10000000
 SAVEHIST=$HISTSIZE
@@ -87,18 +85,8 @@ setopt HIST_VERIFY
 # ZSH uses the KEYTIMEOUT parameter to determine how long to wait for additional characters in sequence. Default is 40 (400 ms).
 KEYTIMEOUT=1 # 10 ms
 
-# use rg for fzf
-export FZF_DEFAULT_COMMAND="rg --files --hidden --glob \!.git"
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-
 # source fzf binary, completions, and keybindings
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# work stuff, avert your gaze
-export USER=$(cat ~/.intercom_username)
-export INTERCOM_USER=$(cat ~/.intercom_username)
-export AWS_DEFAULT_REGION="us-east-1"
-source $(which assume-role)
 
 # activate rbenv
 eval "$(rbenv init -)"
@@ -113,8 +101,13 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 function tn () {
   # new tmux session with random name
-  tmux new -s $(~/dotfiles/scripts/random_word.sh)
+  tmux new -s "yo"
 }
+
+# work stuff, avert your gaze
+export USER=$(cat ~/.intercom_username)
+export INTERCOM_USER=$(cat ~/.intercom_username)
+export AWS_DEFAULT_REGION="us-east-1"
 
 # Aliases
 source ~/.aliases

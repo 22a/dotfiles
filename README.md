@@ -55,7 +55,7 @@ Run the provision scripts:
     * Add it to ssh-agent
 
         ```bash
-        ssh-add -K ~/.ssh/id_rsa
+        ssh-add --apple-use-keychain ~/.ssh/id_rsa
         ```
     * Add it to GitHub
         ```bash

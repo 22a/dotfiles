@@ -1,7 +1,7 @@
 "----------------------
 " Plugins
 "----------------------
-call plug#begin('~/.local/share/nvim/plugged')
+call plug#begin()
 
 " Git bits
 Plug 'tpope/vim-fugitive'
@@ -11,15 +11,13 @@ Plug 'tpope/vim-rhubarb'
 Plug 'troydm/easybuffer.vim'
 
 " \"Auto\" complete
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" less keystrokes
-Plug 'tpope/vim-endwise'
-
-" Linty lint
+" Linting + Fixing
 Plug 'w0rp/ale'
 
 " Text swizzeling
+Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
@@ -32,11 +30,9 @@ Plug 'slashmili/alchemist.vim'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 
-" Typescript
-Plug 'leafgarland/typescript-vim'
-
-" JSX
+" JS + TS + JSX
 Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
 Plug 'mxw/vim-jsx'
 
 " HBS
@@ -46,12 +42,9 @@ Plug 'joukevandermaas/vim-ember-hbs'
 " see contents of registers real quick
 Plug 'junegunn/vim-peekaboo'
 " fuzzy file search
-Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 " tranquil poetry mode
 Plug 'junegunn/goyo.vim'
-" emoji, the blood of life
-Plug 'junegunn/vim-emoji'
 
 " pretty colours
 Plug 'chriskempson/base16-vim'
@@ -76,15 +69,30 @@ Plug 'tmux-plugins/vim-tmux'
 " numbered search matches
 Plug 'henrik/vim-indexed-search'
 
-" editor config
-Plug 'editorconfig/editorconfig-vim'
-
 call plug#end()
 
 
 "----------------------
-" General Wizardry
+" General
 "----------------------
+
+" civ4 victory by space-race (use space key as leader)
+let mapleader = "\<Space>"
+
+" hop from file to file without saving
+set hidden
+
+" files
+set nobackup
+set nowritebackup
+set noswapfile
+
+" You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
 filetype off
 syntax on
 
@@ -94,8 +102,8 @@ set nofoldenable
 " better % skulduggery
 runtime macros/matchit.vim
 
-" Only highlight the first 120 columns, no more minified spookery
-set synmaxcol=256
+" Only highlight the first 1024 columns, no more minified spookery
+set synmaxcol=1024
 
 set mouse=a
 
@@ -115,22 +123,16 @@ set wildignorecase
 set backspace=indent,eol,start
 
 " gutter
-set relativenumber
 set number
 
 " cursor
 set cursorline
 
-" files
-set nobackup
-set noswapfile
-set nowritebackup
-
 " tabs, etc
-set expandtab " spaces, not tabs !!!
+set expandtab " spaces, not tabs
 set autoindent " have a go at auto indenting even when no filetype set
 set tabstop=2 " represent tabs as 2 spaces
-set shiftwidth=2  " tab key enters two spaces"
+set shiftwidth=2  " tab key enters two spaces
 set softtabstop=2 " backspace deletes two spaces
 
 " / searching
@@ -150,7 +152,7 @@ set noerrorbells
 set scrolloff=15
 set sidescrolloff=15
 
-" sane vim split directions
+" better vim split directions
 set splitright
 set splitbelow
 
@@ -161,13 +163,19 @@ set inccommand=nosplit
 " Default peekaboo window
 let g:peekaboo_window = 'vertical botright 30new'
 
-let g:vim_markdown_conceal = 0
-let g:vim_markdown_fenced_languages = ['viml=vim', 'bash=sh']
-
 
 "----------------------
 " Autocomplete
 "----------------------
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("nvim-0.5.0") || has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
 
 let g:coc_global_extensions = [
   \ 'coc-tsserver',
@@ -177,6 +185,7 @@ let g:coc_global_extensions = [
   \ 'coc-vimlsp',
   \ 'coc-highlight',
   \ 'coc-emmet',
+  \ 'coc-ember',
   \ 'coc-pairs',
   \ 'coc-snippets',
   \ 'coc-lists',
@@ -184,36 +193,58 @@ let g:coc_global_extensions = [
 \ ]
 
 " Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
-      \ <SID>CheckBackSpace() ? "\<TAB>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-" Use <C-j> to confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <C-j> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
-" Remap for rename current word
-nmap <leader>rw <Plug>(coc-rename)
+" Use <c-j> to trigger completion.
+inoremap <silent><expr> <c-j> coc#refresh()
 
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-" You will have bad experience for diagnostic messages when it's default 4000.
-set updatetime=300
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-" don't give |ins-completion-menu| messages.
-set shortmess+=c
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
-" always show signcolumns
-set signcolumn=yes
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-" spelling is nice too
-set complete+=kspell
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
 
-set completeopt=longest,menuone,preview
+" Symbol renaming
+nmap <leader>rn <Plug>(coc-rename)
+
+" Add (Neo)Vim's native statusline support.
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline.
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 
 "----------------------
@@ -284,9 +315,6 @@ command! Wsudo w !sudo tee %
 "----------------------
 " Leader Commands
 "----------------------
-
-" civ4 victory by space-race (use space key as leader)
-let mapleader = "\<Space>"
 
 " Easily reload vimrc
 nnoremap <Leader>R :so ~/.config/nvim/init.vim<CR>
@@ -363,7 +391,7 @@ colorscheme base16-spacemacs
 " show superfluous whitespace in white
 highlight ExtraWhitespace guibg=white
 
-" mart the 80th char on a line
+" mark the 80th char on a line
 " (because 80 is a number that people care about)
 set colorcolumn=80
 
@@ -377,10 +405,6 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#222426
 "----------------------
 " Buffers
 "----------------------
-
-" hop from file to file without saving
-set hidden
-
 
 " cycle through buffers
 map <Leader><tab> :bn<CR>
@@ -421,9 +445,4 @@ function! RenameFile()
     exec ':silent !rm ' . old_name
     redraw!
   endif
-endfunction
-
-function! s:CheckBackSpace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
