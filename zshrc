@@ -105,9 +105,11 @@ function tn () {
 }
 
 # work stuff, avert your gaze
-export USER=$(cat ~/.intercom_username)
 export INTERCOM_USER=$(cat ~/.intercom_username)
 export AWS_DEFAULT_REGION="us-east-1"
+export PATH=/opt/homebrew/bin:$PATH
+export PILOT_USE_INTERSTACK_V2=true
+eval $(pilot env)
 
 # Aliases
 source ~/.aliases

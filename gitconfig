@@ -10,7 +10,7 @@
   unstage = reset HEAD --
 
 [commit]
-  gpgsign = true
+  ; gpgsign = true
 
 [pull]
   default = current
