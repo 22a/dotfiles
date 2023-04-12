@@ -1,10 +1,29 @@
 ############################################
+# p10k - a customizable prompt, seems neat
+# https://github.com/romkatv/powerlevel10k
+############################################
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+
+############################################
 # ZIM - used for zsh plugin management
 # https://github.com/zimfw/zimfw
 ############################################
 
 # let zim use its `degit` tool for downloading plugins instead of git
 zstyle ':zim:zmodule' use 'degit'
+# let zim's input module expand ../../.. automatically
+zstyle ':zim:input' double-dot-expand yes
+# Set a custom prefix for the generated aliases. The default is 'G'.
+zstyle ':zim:git' aliases-prefix 'g'
+
 # Set zim config directory
 export ZIM_HOME=~/.zim
 # Download zimfw plugin manager if missing
@@ -21,47 +40,22 @@ source ${ZIM_HOME}/init.zsh
 
 
 ############################################
-# History config
+# User config
 ############################################
+
+HISTFILE=~/.zsh_history
+HISTSIZE=10000000
+SAVEHIST=$HISTSIZE
 
 # ZSH uses the KEYTIMEOUT parameter to determine how long to wait for
 # additional characters in sequence. Default is 40 (400 ms).
 KEYTIMEOUT=1 # 10 ms
-# set zsh command history file
-HISTFILE=~/.zsh_history
-# let it grow big
-HISTSIZE=10000000
-SAVEHIST=$HISTSIZE
-# Write the history file in the ":start:elapsed;command" format
-setopt EXTENDED_HISTORY
-# Write to the history file immediately, not when the shell exits
-setopt INC_APPEND_HISTORY
-# Share history between all sessions
-setopt SHARE_HISTORY
-# Expire duplicate entries first when trimming history
-setopt HIST_EXPIRE_DUPS_FIRST
-# Don't record an entry that was just recorded again (different to
-# `setopt HIST_IGNORE_ALL_DUPS` which deletes old history entries if
-# the new entry is a duplicate)
-setopt HIST_IGNORE_DUPS
-# Remove superfluous blanks before recording entry.
-setopt HIST_REDUCE_BLANKS
-# Don't execute immediately upon history expansion.
-setopt HIST_VERIFY
-
-
-############################################
-# User config
-############################################
 
 export EDITOR='nvim'
 export VISUAL='nvim'
 export PAGER='less'
 export BROWSER='open'
 export LC_ALL='en_IE.UTF-8'
-
-# Set the default Less options
-export LESS='-F -g -i -M -R -S -w -X -z-4'
 
 # Aliases
 source ~/.aliases
@@ -70,12 +64,12 @@ source ~/.aliases.priv
 # Set editor default keymap to emacs (`-e`) or vi (`-v`)
 bindkey -v
 
-# up and down arrows for history substring search
-bindkey "^[[A" history-substring-search-up
-bindkey "^[[B" history-substring-search-down
-
 # make Ctrl+P in zsh do the same as it does in vim
 bindkey -s "^P" "nvim -c 'Telescope find_files'\n"
+
+# up and down arrows for history substring search
+for key ('^[[A' ${terminfo[kcuu1]}) bindkey ${key} history-substring-search-up
+for key ('^[[B' ${terminfo[kcud1]}) bindkey ${key} history-substring-search-down
 
 # Ensure path arrays do not contain duplicates
 typeset -gU cdpath fpath mailpath path
@@ -97,15 +91,6 @@ eval "$(rbenv init -)"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-
-
-############################################
-# p10k - a customizable prompt, seems neat
-# https://github.com/romkatv/powerlevel10k
-############################################
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 
 ############################################
