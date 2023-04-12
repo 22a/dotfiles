@@ -4,6 +4,7 @@ alias vi="nvim"
 alias vim="nvim"
 
 # tmux
+alias tn="tmux new -s 🍓"
 alias tns="tmux new -s"
 alias tls="tmux ls"
 alias ta="tmux a"
@@ -14,9 +15,9 @@ alias dns="sudo killall -hUP mDNSResponder"
 
 # dig wrappers
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
-alias digg="dig +nocmd any +multiline +noall +answer"
+alias ns="dig +nocmd any +multiline +noall +answer"
 
-# curly
+# http headers
 alias hd="curl -s -I"
 
 # docker
@@ -41,10 +42,6 @@ alias gb="git branch"
 alias gbc="git branch | grep \* | cut -d ' ' -f2"
 # git branch set upstream
 alias gbsu="git branch --set-upstream-to=origin/\$(gbc) \$(gbc)"
-# git branch delete
-alias gbd="gb -d"
-# git branch delete forcefully
-alias gbD="gb -D"
 # git branch delete interactive
 alias gbdi="gb | fzf -m | xargs git branch -d"
 # git branch delete interactive forcefully
@@ -63,17 +60,17 @@ alias gco="git checkout"
 alias gcoi="gb | fzf -m | xargs git checkout"
 # git log
 alias gl="git log --topo-order --pretty=format:'%C(bold)Commit:%C(reset) %C(green)%H%C(red)%d%n%C(bold)Author:%C(reset) %C(cyan)%an <%ae>%n%C(bold)Date:%C(reset)   %C(blue)%ai (%ar)%C(reset)%n%+B'"
-alias glog="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"
+alias glt="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"
 # git diff
 alias gd="git diff --no-ext-diff --patch-with-stat"
 # git diff cached
 alias gdc="gwd --cached"
 # git status
 alias gs="git status --short"
-# git set remote
-alias gsr="git remote set-url origin"
 # git merge master
 alias gmm="gco master; git pull; gco -; git merge master --no-edit"
+# git rebase against master
+alias grm="gco master; git pull; gco -; git rebase master"
 
 # old aliases that I need to ween myself off
 alias gws="gs"
@@ -89,10 +86,7 @@ alias psg="ps aux | head -n 1; ps aux | rg"
 alias pyserv="python3 -m http.server"
 alias j="z"
 alias fix="git diff --name-only | uniq | xargs $EDITOR"
-
-# clumsy fingers
-alias ..="cd .."
-alias cd..="cd .."
+alias cmv="gcm \"\`node -e \"console.log(require('./package.json').version)\"\`\""
 
 # listing
 alias ls="gls -Fh --color --group-directories-first"
@@ -119,4 +113,4 @@ alias etsf="ember test --server --filter"
 alias n="git pull; sup; s"
 alias ys="yarn install --check-files; rm -rf tmp dist; ember s"
 alias percy="perl -pi -e \"s/RUN_PERCY=''/RUN_PERCY='true'/g\" .env; git add .env; gcm \"run percy\"; git push; git revert HEAD --no-edit; git push;"
-alias ws="hammer workspace --vpn -u $(cat ~/.intercom_username)"
+alias ws="ssh workspace"

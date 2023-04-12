@@ -26,9 +26,8 @@ bindkey -v
 bindkey "^[[A" history-substring-search-up
 bindkey "^[[B" history-substring-search-down
 
-# pretend we have fzf everywhere
-bindkey -s "^P" "ctrlp\n"
-
+# make Ctrl+P in zsh do the same as it does in vim
+bindkey -s "^P" "nvim -c 'Telescope find_files'\n"
 
 export EDITOR='nvim'
 export VISUAL='nvim'
@@ -46,6 +45,9 @@ typeset -gU cdpath fpath mailpath path
 path=(
   /usr/local/{bin,sbin}
   $HOME/bin
+  $HOME/.yarn/bin
+  $HOME/.config/yarn/global/node_modules/.bin
+  /opt/homebrew/bin:$PATH
   $path
 )
 
@@ -62,6 +64,8 @@ path=(
 # export LESS='-g -w -i -q -r -M -S -X -F' # ugh this is broken somehow
 export LESS='-F -g -i -M -R -S -w -X -z-4'
 
+# ZSH uses the KEYTIMEOUT parameter to determine how long to wait for additional characters in sequence. Default is 40 (400 ms).
+KEYTIMEOUT=1 # 10 ms
 # set zsh command history file
 HISTFILE=~/.zsh_history
 # let it grow big
@@ -82,11 +86,6 @@ setopt HIST_REDUCE_BLANKS
 # Don't execute immediately upon history expansion.
 setopt HIST_VERIFY
 
-# ZSH uses the KEYTIMEOUT parameter to determine how long to wait for additional characters in sequence. Default is 40 (400 ms).
-KEYTIMEOUT=1 # 10 ms
-
-# source fzf binary, completions, and keybindings
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # activate rbenv
 eval "$(rbenv init -)"
@@ -95,21 +94,6 @@ eval "$(rbenv init -)"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-
-# source yarn globals
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-
-function tn () {
-  # new tmux session with random name
-  tmux new -s "yo"
-}
-
-# work stuff, avert your gaze
-export INTERCOM_USER=$(cat ~/.intercom_username)
-export AWS_DEFAULT_REGION="us-east-1"
-export PATH=/opt/homebrew/bin:$PATH
-export PILOT_USE_INTERSTACK_V2=true
-eval $(pilot env)
 
 # Aliases
 source ~/.aliases
