@@ -101,6 +101,7 @@ alias rg="rg --smart-case"
 # dotfile editing
 alias nvimrc="$EDITOR ~/dotfiles/nvimrc"
 alias zshrc="$EDITOR ~/dotfiles/zshrc"
+alias zimrc="$EDITOR ~/dotfiles/zimrc"
 
 # work util
 alias s="script/server"

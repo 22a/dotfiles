@@ -1,70 +1,33 @@
-export ZPLUG_HOME=$(brew --prefix)/opt/zplug
-source $ZPLUG_HOME/init.zsh
+############################################
+# ZIM - used for zsh plugin management
+# https://github.com/zimfw/zimfw
+############################################
 
-zplug "mafredri/zsh-async"
-zplug "22a/purest"
-zplug "modules/completion", from:prezto
-zplug "paulirish/git-open", as:plugin
-zplug "plugins/colored-man-pages", from:oh-my-zsh
-zplug "rupa/z", use:z.sh
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-history-substring-search", defer:3
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
-
-if ! zplug check --verbose; then
-  echo "Installing zplug plugins..."
-  zplug install
+# let zim use its `degit` tool for downloading plugins instead of git
+zstyle ':zim:zmodule' use 'degit'
+# Set zim config directory
+export ZIM_HOME=~/.config/.zim
+# Set zim config directory
+export ZDOTDIR=~/.config
+# Download zimfw plugin manager if missing
+if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
+  curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
+      https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
 fi
-
-zplug load
-
-# vi keybindings for repl text input
-bindkey -v
-
-# up and down arrows for history substring search
-bindkey "^[[A" history-substring-search-up
-bindkey "^[[B" history-substring-search-down
-
-# make Ctrl+P in zsh do the same as it does in vim
-bindkey -s "^P" "nvim -c 'Telescope find_files'\n"
-
-export EDITOR='nvim'
-export VISUAL='nvim'
-export PAGER='less'
-export BROWSER='open'
-
-if [[ -z "$LANG" ]]; then
-  export LANG='en_IE.UTF-8'
+# Install missing modules, and update ${ZIM_HOME}/init.zsh if outdated
+if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
+  source ${ZIM_HOME}/zimfw.zsh init -q
 fi
+# Initialize zim modules
+source ${ZIM_HOME}/init.zsh
 
-# Ensure path arrays do not contain duplicates.
-typeset -gU cdpath fpath mailpath path
 
-# Set the list of directories that Zsh searches for programs.
-path=(
-  /usr/local/{bin,sbin}
-  $HOME/bin
-  $HOME/.yarn/bin
-  $HOME/.config/yarn/global/node_modules/.bin
-  /opt/homebrew/bin:$PATH
-  $path
-)
+############################################
+# History config
+############################################
 
-# Set the default Less options
-# -g (Highlight only last match for searches)
-# -w (Highlight first new line after forward-screen)
-# -i (Ignore case in searches)
-# -q (Quiet the terminal bell)
-# -r (Raw control chars)
-# -M (Set long prompt style)
-# -S (Chop long lines)
-# -X (Disable screen clearing)
-# -F (Exit if content fits on one screen)
-# export LESS='-g -w -i -q -r -M -S -X -F' # ugh this is broken somehow
-export LESS='-F -g -i -M -R -S -w -X -z-4'
-
-# ZSH uses the KEYTIMEOUT parameter to determine how long to wait for additional characters in sequence. Default is 40 (400 ms).
+# ZSH uses the KEYTIMEOUT parameter to determine how long to wait for
+# additional characters in sequence. Default is 40 (400 ms).
 KEYTIMEOUT=1 # 10 ms
 # set zsh command history file
 HISTFILE=~/.zsh_history
@@ -79,7 +42,9 @@ setopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY
 # Expire duplicate entries first when trimming history
 setopt HIST_EXPIRE_DUPS_FIRST
-# Don't record an entry that was just recorded again (different to `setopt HIST_IGNORE_ALL_DUPS` which deletes old history entries if the new entry is a duplicate)
+# Don't record an entry that was just recorded again (different to
+# `setopt HIST_IGNORE_ALL_DUPS` which deletes old history entries if
+# the new entry is a duplicate)
 setopt HIST_IGNORE_DUPS
 # Remove superfluous blanks before recording entry.
 setopt HIST_REDUCE_BLANKS
@@ -87,14 +52,65 @@ setopt HIST_REDUCE_BLANKS
 setopt HIST_VERIFY
 
 
-# activate rbenv
-eval "$(rbenv init -)"
+############################################
+# User config
+############################################
 
-# activate nvm + load completion
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+export EDITOR='nvim'
+export VISUAL='nvim'
+export PAGER='less'
+export BROWSER='open'
+
+if [[ -z "$LANG" ]]; then
+  export LANG='en_IE.UTF-8'
+fi
+
+# Set the default Less options
+export LESS='-F -g -i -M -R -S -w -X -z-4'
 
 # Aliases
 source ~/.aliases
 source ~/.aliases.priv
+
+# vi keybindings for repl text input
+bindkey -v
+
+# up and down arrows for history substring search
+bindkey "^[[A" history-substring-search-up
+bindkey "^[[B" history-substring-search-down
+
+# make Ctrl+P in zsh do the same as it does in vim
+bindkey -s "^P" "nvim -c 'Telescope find_files'\n"
+
+# Ensure path arrays do not contain duplicates
+typeset -gU cdpath fpath mailpath path
+
+# Set the list of directories that zsh searches for programs
+path=(
+  /usr/local/{bin,sbin}
+  /opt/homebrew/bin
+  $HOME/bin
+  $HOME/.yarn/bin
+  $HOME/.config/yarn/global/node_modules/.bin
+  $path
+)
+
+
+############################################
+# p10k - a customizable prompt, seems neat
+# https://github.com/romkatv/powerlevel10k
+############################################
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+
+############################################
+# zprof - zsh profiling
+# uncomment `zmodload` , move to top of file
+# uncomment `zprof` , leave it at the end
+# open a new shell, check out the output
+############################################
+
+# zmodload zsh/zprof
+# zprof
