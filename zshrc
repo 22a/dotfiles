@@ -6,9 +6,7 @@
 # let zim use its `degit` tool for downloading plugins instead of git
 zstyle ':zim:zmodule' use 'degit'
 # Set zim config directory
-export ZIM_HOME=~/.config/.zim
-# Set zim config directory
-export ZDOTDIR=~/.config
+export ZIM_HOME=~/.zim
 # Download zimfw plugin manager if missing
 if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
   curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
@@ -60,10 +58,7 @@ export EDITOR='nvim'
 export VISUAL='nvim'
 export PAGER='less'
 export BROWSER='open'
-
-if [[ -z "$LANG" ]]; then
-  export LANG='en_IE.UTF-8'
-fi
+export LC_ALL='en_IE.UTF-8'
 
 # Set the default Less options
 export LESS='-F -g -i -M -R -S -w -X -z-4'
@@ -72,7 +67,7 @@ export LESS='-F -g -i -M -R -S -w -X -z-4'
 source ~/.aliases
 source ~/.aliases.priv
 
-# vi keybindings for repl text input
+# Set editor default keymap to emacs (`-e`) or vi (`-v`)
 bindkey -v
 
 # up and down arrows for history substring search
@@ -94,6 +89,14 @@ path=(
   $HOME/.config/yarn/global/node_modules/.bin
   $path
 )
+
+# activate rbenv
+eval "$(rbenv init -)"
+
+# activate nvm + load completion
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 
 ############################################

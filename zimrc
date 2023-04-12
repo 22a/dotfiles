@@ -1,8 +1,10 @@
 zmodule agkozak/zsh-z
 zmodule romkatv/powerlevel10k
+zmodule ohmyzsh/ohmyzsh --root plugins/git-auto-fetch
+
+# Modules that care about initialization order:
 zmodule zsh-users/zsh-autosuggestions
-zmodule zsh-users/zsh-syntax-highlighting
-zmodule zsh-users/zsh-history-substring-search
 zmodule zsh-users/zsh-completions --fpath src
 zmodule completion
-zmodule asdf
+zmodule zsh-users/zsh-syntax-highlighting
+zmodule zsh-users/zsh-history-substring-search
