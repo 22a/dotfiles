@@ -258,40 +258,23 @@ local config = {
     -- Plugin entries can also be used to override the default options for plugins as well
     {
       "goolord/alpha-nvim",
-      opts = function(_, opts)
-        -- customize the dashboard header
-        opts.section.header.val = {
-          -- " █████  ███████ ████████ ██████   ██████",
-          -- "██   ██ ██         ██    ██   ██ ██    ██",
-          -- "███████ ███████    ██    ██████  ██    ██",
-          -- "██   ██      ██    ██    ██   ██ ██    ██",
-          -- "██   ██ ███████    ██    ██   ██  ██████",
-          -- " ",
-          -- "    ███    ██ ██    ██ ██ ███    ███",
-          -- "    ████   ██ ██    ██ ██ ████  ████",
-          -- "    ██ ██  ██ ██    ██ ██ ██ ████ ██",
-          -- "    ██  ██ ██  ██  ██  ██ ██  ██  ██",
-          -- "    ██   ████   ████   ██ ██      ██",
-          "██████  ███████ ███████",
-          "██Pee██ ██      ██     ",
-          "██████  █████   █████  ",
-          "██      ██      ██     ",
-          "██      ███████ ███████",
-          " ",
-          "██    ██ ██ ███    ███ ",
-          "██    ██ ██ ████  ████ ",
-          "██    ██ ██ ██ ████ ██ ",
-          " ██  ██  ██ ██  ██  ██ ",
-          "  ████   ██ ██      ██ ",
-        }
-        return opts
-      end,
+      enabled = false,
+      -- opts = function(_, opts)
+      --   -- customize the dashboard header
+      --   opts.section.header.val = {
+      --     "AstroNvim",
+      --   }
+      --   -- hide all the buttons
+      --   opts.section.buttons.val = {}
+      --   opts.config.layout[3].val = 0
+      --   return opts
+      -- end,
     },
     {
       "jose-elias-alvarez/null-ls.nvim",
       opts = function(_, config)
         -- config variable is the default configuration table for the setup function call
-        -- local null_ls = require "null-ls"
+        local null_ls = require "null-ls"
 
         -- Check supported formatters and linters
         -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
@@ -299,7 +282,11 @@ local config = {
         config.sources = {
           -- Set a formatter
           -- null_ls.builtins.formatting.stylua,
-          -- null_ls.builtins.formatting.prettier,
+          null_ls.builtins.formatting.prettier,
+          null_ls.builtins.formatting.rubocop,
+          null_ls.builtins.diagnostics.eslint,
+          null_ls.builtins.diagnostics.shellcheck,
+          null_ls.builtins.diagnostics.stylelint,
         }
         return config -- return final config table
       end,
@@ -333,6 +320,17 @@ local config = {
         -- ensure_installed = { "python" },
       },
     },
+    {
+      "rebelot/heirline.nvim",
+      opts = function(_, opts)
+        opts.winbar = nil
+        return opts
+      end
+    },
+    {
+      "tpope/vim-fugitive",
+      lazy = false,
+    },
     -- Add the community repository of plugin specifications
     "AstroNvim/astrocommunity",
     -- example of imporing a plugin, comment out to use it or add your own
@@ -349,16 +347,18 @@ local config = {
     --   breadcrumbs = " > ",
     --   tab = { "", "" },
     -- },
-    -- -- Customize colors for each element each element has a `_fg` and a `_bg`
-    -- colors = function(colors)
-    --   colors.git_branch_fg = require("astronvim.utils").get_hlgroup "Conditional"
-    --   return colors
-    -- end,
-    -- -- Customize attributes of highlighting in Heirline components
-    -- attributes = {
-    --   -- styling choices for each heirline element, check possible attributes with `:h attr-list`
-    --   git_branch = { bold = true }, -- bold the git branch statusline component
-    -- },
+    -- Customize colors for each element each element has a `_fg` and a `_bg`
+    colors = function(colors)
+      -- colors.git_branch_fg = require("astronvim.utils").get_hlgroup "Conditional"
+      colors.buffer_active_fg = "bg"
+      colors.buffer_active_bg = "fg"
+      return colors
+    end,
+    -- Customize attributes of highlighting in Heirline components
+    attributes = {
+      -- styling choices for each heirline element, check possible attributes with `:h attr-list`
+      buffer_active = { italic = false },
+    },
     -- -- Customize if icons should be highlighted
     -- icon_highlights = {
     --   breadcrumbs = false, -- LSP symbols in the breadcrumbs
