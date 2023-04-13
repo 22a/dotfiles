@@ -323,7 +323,70 @@ local config = {
     {
       "rebelot/heirline.nvim",
       opts = function(_, opts)
+        local utils = require "astronvim.utils"
+        local status = require("astronvim.utils.status")
+        local extend_tbl = utils.extend_tbl
+
         opts.winbar = nil
+
+        opts.tabline = {
+          { -- file tree padding
+            condition = function(self)
+              self.winid = vim.api.nvim_tabpage_list_wins(0)[1]
+              return status.condition.buffer_matches(
+                { filetype = { "aerial", "dapui_.", "neo%-tree", "NvimTree" } },
+                vim.api.nvim_win_get_buf(self.winid)
+              )
+            end,
+            provider = function(self) return string.rep(" ", vim.api.nvim_win_get_width(self.winid) + 1) end,
+            hl = { bg = "tabline_bg" },
+          },
+
+          status.heirline.make_buflist( -- component for each buffer tab
+            status.component.file_info(extend_tbl({
+              file_icon = {
+                condition = function(self) return not self._show_picker end,
+                hl = status.hl.file_icon "tabline",
+              },
+              unique_path = {
+                hl = function(self) return status.hl.get_attributes(self.tab_type .. "_path") end,
+              },
+              -- file_modified = {},
+              padding = { left = 0, right = 1 },
+              hl = function(self)
+                local tab_type = self.tab_type
+                if self._show_picker and self.tab_type ~= "buffer_active" then tab_type = "buffer_visible" end
+                local tab = status.hl.get_attributes(tab_type)
+
+                if vim.bo.modified then
+                  tab.bg = "green"
+                  tab.fg = "white"
+                else
+                  tab.bg = "tabline_bg"
+                end
+                return tab
+                -- return status.hl.get_attributes(tab_type)
+              end,
+              surround = false,
+            }, opts))
+          ),
+
+          status.component.fill { hl = { bg = "tabline_bg" } }, -- fill the rest of the tabline with background color
+
+          { -- tab list
+            condition = function() return #vim.api.nvim_list_tabpages() >= 2 end, -- only show tabs if there are more than one
+            status.heirline.make_tablist { -- component for each tab
+              provider = status.provider.tabnr(),
+              hl = function(self)
+                if vim.bo.modified then
+                  -- use `force` because we need to override the child's hl foreground
+                  return { fg = "cyan", bold = true, force=true }
+                end
+                return status.hl.get_attributes(status.heirline.tab_type(self, "tab"), true)
+              end,
+            },
+          },
+        }
         return opts
       end
     },
@@ -350,8 +413,8 @@ local config = {
     -- Customize colors for each element each element has a `_fg` and a `_bg`
     colors = function(colors)
       -- colors.git_branch_fg = require("astronvim.utils").get_hlgroup "Conditional"
-      colors.buffer_active_fg = "bg"
-      colors.buffer_active_bg = "fg"
+      -- colors.buffer_active_fg = "fg"
+      -- colors.buffer_active_bg = "bg"
       return colors
     end,
     -- Customize attributes of highlighting in Heirline components
