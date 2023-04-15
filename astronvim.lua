@@ -46,6 +46,7 @@ local config = {
       spell = false, -- sets vim.opt.spell
       signcolumn = "auto", -- sets vim.opt.signcolumn to auto
       wrap = false, -- sets vim.opt.wrap
+      swapfile = false, -- sets vim.opt.wrap
     },
     g = {
       mapleader = " ", -- sets vim.g.mapleader
@@ -162,6 +163,15 @@ local config = {
         desc = "Previous buffer",
       },
       ["<C-p>"] = { function() require("telescope.builtin").find_files() end, desc = "Find files" },
+      ["<leader>B"] = { ":Git blame<cr>", desc = "Git Blame" },
+      ["<leader>G"] = {
+        function()
+          require("telescope.builtin").live_grep {
+            additional_args = function(args) return vim.list_extend(args, { "--hidden"}) end,
+          }
+        end,
+        desc = "Find words in all files",
+      },
     },
     t = {
       -- setting a mapping to false will disable it
@@ -280,8 +290,6 @@ local config = {
         -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
         -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
         config.sources = {
-          -- Set a formatter
-          -- null_ls.builtins.formatting.stylua,
           null_ls.builtins.formatting.prettier,
           null_ls.builtins.formatting.rubocop,
           null_ls.builtins.diagnostics.eslint,
@@ -387,11 +395,17 @@ local config = {
             },
           },
         }
+        opts.tabline = nil
+        opts.statusline = nil
         return opts
       end
     },
     {
       "tpope/vim-fugitive",
+      lazy = false,
+    },
+    {
+      "tpope/vim-rhubarb",
       lazy = false,
     },
     -- Add the community repository of plugin specifications
