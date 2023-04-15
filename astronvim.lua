@@ -27,6 +27,7 @@ local config = {
   -- Set colorscheme to use
   colorscheme = "astrodark",
 
+
   -- Add highlight groups in any theme
   highlights = {
     -- init = { -- this table overrides highlights in all themes
@@ -56,6 +57,11 @@ local config = {
       diagnostics_mode = 3, -- set the visibility of diagnostics in the UI (0=off, 1=only show in status line, 2=virtual text off, 3=all on)
       icons_enabled = true, -- disable icons in the UI (disable if no nerd font is available, requires :PackerSync after changing)
       ui_notifications_enabled = true, -- disable notifications when toggling UI elements
+      airline_theme = "base16_spacemacs",
+      ["airline#extensions#tabline#enabled"] = 1,
+      ["airline#extensions#tabline#left_sep"] = " ",
+      ["airline#extensions#tabline#left_alt_sep"] = "",
+      ["airline#extensions#tabline#buffers_label"]= "",
     },
   },
   -- If you need more control, you can use the function()...end notation
@@ -267,18 +273,12 @@ local config = {
 
     -- Plugin entries can also be used to override the default options for plugins as well
     {
+      "rebelot/heirline.nvim",
+      enabled = false,
+    },
+    {
       "goolord/alpha-nvim",
       enabled = false,
-      -- opts = function(_, opts)
-      --   -- customize the dashboard header
-      --   opts.section.header.val = {
-      --     "AstroNvim",
-      --   }
-      --   -- hide all the buttons
-      --   opts.section.buttons.val = {}
-      --   opts.config.layout[3].val = 0
-      --   return opts
-      -- end,
     },
     {
       "jose-elias-alvarez/null-ls.nvim",
@@ -328,123 +328,45 @@ local config = {
         -- ensure_installed = { "python" },
       },
     },
-    {
-      "rebelot/heirline.nvim",
-      opts = function(_, opts)
-        local utils = require "astronvim.utils"
-        local status = require("astronvim.utils.status")
-        local extend_tbl = utils.extend_tbl
 
-        opts.winbar = nil
-
-        opts.tabline = {
-          { -- file tree padding
-            condition = function(self)
-              self.winid = vim.api.nvim_tabpage_list_wins(0)[1]
-              return status.condition.buffer_matches(
-                { filetype = { "aerial", "dapui_.", "neo%-tree", "NvimTree" } },
-                vim.api.nvim_win_get_buf(self.winid)
-              )
-            end,
-            provider = function(self) return string.rep(" ", vim.api.nvim_win_get_width(self.winid) + 1) end,
-            hl = { bg = "tabline_bg" },
-          },
-
-          status.heirline.make_buflist( -- component for each buffer tab
-            status.component.file_info(extend_tbl({
-              file_icon = {
-                condition = function(self) return not self._show_picker end,
-                hl = status.hl.file_icon "tabline",
-              },
-              unique_path = {
-                hl = function(self) return status.hl.get_attributes(self.tab_type .. "_path") end,
-              },
-              -- file_modified = {},
-              padding = { left = 0, right = 1 },
-              hl = function(self)
-                local tab_type = self.tab_type
-                if self._show_picker and self.tab_type ~= "buffer_active" then tab_type = "buffer_visible" end
-                local tab = status.hl.get_attributes(tab_type)
-
-                if vim.bo.modified then
-                  tab.bg = "green"
-                  tab.fg = "white"
-                else
-                  tab.bg = "tabline_bg"
-                end
-                return tab
-                -- return status.hl.get_attributes(tab_type)
-              end,
-              surround = false,
-            }, opts))
-          ),
-
-          status.component.fill { hl = { bg = "tabline_bg" } }, -- fill the rest of the tabline with background color
-
-          { -- tab list
-            condition = function() return #vim.api.nvim_list_tabpages() >= 2 end, -- only show tabs if there are more than one
-            status.heirline.make_tablist { -- component for each tab
-              provider = status.provider.tabnr(),
-              hl = function(self)
-                if vim.bo.modified then
-                  -- use `force` because we need to override the child's hl foreground
-                  return { fg = "cyan", bold = true, force=true }
-                end
-                return status.hl.get_attributes(status.heirline.tab_type(self, "tab"), true)
-              end,
-            },
-          },
-        }
-        opts.tabline = nil
-        opts.statusline = nil
-        return opts
-      end
-    },
-    {
-      "tpope/vim-fugitive",
-      lazy = false,
-    },
-    {
-      "tpope/vim-rhubarb",
-      lazy = false,
-    },
     -- Add the community repository of plugin specifications
-    "AstroNvim/astrocommunity",
+    -- "AstroNvim/astrocommunity",
     -- example of imporing a plugin, comment out to use it or add your own
     -- available plugins can be found at https://github.com/AstroNvim/astrocommunity
 
-    { import = "astrocommunity.colorscheme.catppuccin" },
+    -- { import = "astrocommunity.colorscheme.catppuccin" },
     -- { import = "astrocommunity.completion.copilot-lua-cmp" },
-  },
 
-  -- Customize Heirline options
-  heirline = {
-    -- -- Customize different separators between sections
-    -- separators = {
-    --   breadcrumbs = " > ",
-    --   tab = { "", "" },
-    -- },
-    -- Customize colors for each element each element has a `_fg` and a `_bg`
-    colors = function(colors)
-      -- colors.git_branch_fg = require("astronvim.utils").get_hlgroup "Conditional"
-      -- colors.buffer_active_fg = "fg"
-      -- colors.buffer_active_bg = "bg"
-      return colors
-    end,
-    -- Customize attributes of highlighting in Heirline components
-    attributes = {
-      -- styling choices for each heirline element, check possible attributes with `:h attr-list`
-      buffer_active = { italic = false },
+    {
+      "tpope/vim-fugitive",
+      event = "VeryLazy",
+      -- lazy = false,
     },
-    -- -- Customize if icons should be highlighted
-    -- icon_highlights = {
-    --   breadcrumbs = false, -- LSP symbols in the breadcrumbs
-    --   file_icon = {
-    --     winbar = false, -- Filetype icon in the winbar inactive windows
-    --     statusline = true, -- Filetype icon in the statusline
-    --     tabline = true, -- Filetype icon in the tabline
-    --   },
-    -- },
+    {
+      "tpope/vim-rhubarb",
+      event = "VeryLazy",
+      -- lazy = false,
+    },
+    {
+      "vim-airline/vim-airline",
+      lazy = false,
+    },
+    {
+      "vim-airline/vim-airline-themes",
+      lazy = false,
+      -- :hi airline_c  ctermbg=NONE guibg=NONE
+      -- :hi airline_tabfill ctermbg=NONE guibg=NONE
+    },
+    {
+      "kylechui/nvim-surround",
+      version = "*", -- Use for stability; omit to use `main` branch for the latest features
+      event = "VeryLazy",
+      config = function()
+        require("nvim-surround").setup({
+          -- Configuration here, or leave empty to use defaults
+        })
+      end
+    },
   },
 
   -- This function is run last and is a good place to configuring
