@@ -15,22 +15,9 @@ local config = {
   -- set vim options here (vim.<first_key>.<second_key> = value)
   options = {
     opt = {
-      relativenumber = true, -- sets vim.opt.relativenumber
-      number = true, -- sets vim.opt.number
-      spell = false, -- sets vim.opt.spell
-      signcolumn = "auto", -- sets vim.opt.signcolumn to auto
-      wrap = false, -- sets vim.opt.wrap
-      swapfile = false, -- sets vim.opt.swapfile
+      swapfile = false,
     },
     g = {
-      mapleader = " ", -- sets vim.g.mapleader
-      autoformat_enabled = true, -- enable or disable auto formatting at start (lsp.formatting.format_on_save must be enabled)
-      -- cmp_enabled = true, -- enable completion at start
-      -- autopairs_enabled = true, -- enable autopairs at start
-      -- diagnostics_mode = 3, -- set the visibility of diagnostics in the UI (0=off, 1=only show in status line, 2=virtual text off, 3=all on)
-      icons_enabled = true, -- disable icons in the UI (disable if no nerd font is available, requires :PackerSync after changing)
-      ui_notifications_enabled = true, -- disable notifications when toggling UI elements
-
       -- vim-airline config
       airline_theme = "transparent",
       ["airline#extensions#tabline#enabled"] = 1,
@@ -86,35 +73,20 @@ local config = {
   },
 
   plugins = {
-    -- Config overrides of default AstroNvim plugin setup
+    -- Fully disabling a few of AstroNvim's default plugins
     {
+      -- using vim-airline instead, i don't want to need to write 2k loc
+      -- of config to reimplement what i'm used to (modified)
       "rebelot/heirline.nvim",
       enabled = false,
     },
     {
+      -- not a fan of splash screens
       "goolord/alpha-nvim",
-      -- enabled = false,
-      opts = function(_, opts)
-        emacs = [[
-▓█████  ███▄ ▄███▓ ▄▄▄       ▄████▄    ██████
-▓█   ▀ ▓██▒▀█▀ ██▒▒████▄    ▒██▀ ▀█  ▒██    ▒
-▒███   ▓██    ▓██░▒██  ▀█▄  ▒▓█    ▄ ░ ▓██▄
-▒▓█  ▄ ▒██    ▒██ ░██▄▄▄▄██ ▒▓▓▄ ▄██▒  ▒   ██▒
-░▒████▒▒██▒   ░██▒ ▓█   ▓██▒▒ ▓███▀ ░▒██████▒▒
-░░ ▒░ ░░ ▒░   ░  ░ ▒▒   ▓▒█░░ ░▒ ▒  ░▒ ▒▓▒ ▒ ░
- ░ ░  ░░  ░      ░  ▒   ▒▒ ░  ░  ▒   ░ ░▒  ░ ░
-   ░   ░      ░     ░   ▒   ░        ░  ░  ░
-   ░  ░       ░         ░  ░░ ░            ░
-]]
-        opts.section.buttons.val = {}
-        opts.section.header.val = {}
-        opts.config.layout[3].val = 0
-        for line in emacs:gmatch("([^\n]*)\n?") do
-          table.insert(opts.section.header.val, line)
-        end
-        return opts
-      end,
+      enabled = false,
     },
+
+    -- Config overrides of AstroNvim's default plugins
     {
       "jose-elias-alvarez/null-ls.nvim",
       opts = function(_, config)
@@ -170,7 +142,15 @@ local config = {
     },
     -- { import = "astrocommunity.completion.copilot-lua-cmp" },
 
-    -- Personal config of plugins not included in AstroNvim
+    -- Personal config for plugins not included in AstroNvim
+    {
+      "vim-airline/vim-airline",
+      lazy = false,
+    },
+    {
+      "vim-airline/vim-airline-themes",
+      lazy = false,
+    },
     {
       "tpope/vim-fugitive",
       event = "VeryLazy",
@@ -184,22 +164,11 @@ local config = {
       event = "VeryLazy",
     },
     {
-      "vim-airline/vim-airline",
-      lazy = false,
-    },
-    {
-      "vim-airline/vim-airline-themes",
-      lazy = false,
-    },
-    {
       "kylechui/nvim-surround",
       event = "VeryLazy",
-      config = function() require("nvim-surround").setup() end
+      config = function() require("nvim-surround").setup() end,
     },
   },
-
-  polish = function()
-  end,
 }
 
 return config
