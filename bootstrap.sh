@@ -4,7 +4,12 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 all () {
   echo "$SCRIPT_DIR"
-  echo all;
+  shell;
+  homebrew;
+  brewfile;
+  neovim;
+  nvm;
+  symlinks;
 }
 
 brewfile () {
@@ -32,11 +37,7 @@ neovim () {
 nvm () {
   echo nvm;
   # # install node version manager
-  # curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-}
-
-rbenv () {
-  echo rbenv;
+  # curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 }
 
 symlinks () {
@@ -67,7 +68,6 @@ case "$1" in
   --homebrew) homebrew;;
   --neovim) neovim;;
   --nvm) nvm;;
-  --rbenv) rbenv;;
   --shell) shell;;
   --symlinks) symlinks;;
   *) echo "unexpected arg: $1"; exit 1;;
