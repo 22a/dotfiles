@@ -18,6 +18,13 @@ brewfile () {
   # brew bundle
 }
 
+docker_from_scratch () {
+  echo docker_from_scratch;
+  apt-get update;
+  apt-get upgrade;
+  apt-get install build-essential procps curl file git;
+}
+
 homebrew () {
   echo homebrew;
   # install homebrew
@@ -65,6 +72,7 @@ shell () {
 case "$1" in
   --all) all;;
   --brewfile) brewfile;;
+  --docker-from-scratch) docker_from_scratch;;
   --homebrew) homebrew;;
   --neovim) neovim;;
   --nvm) nvm;;
