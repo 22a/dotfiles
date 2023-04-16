@@ -57,7 +57,8 @@ local config = {
       diagnostics_mode = 3, -- set the visibility of diagnostics in the UI (0=off, 1=only show in status line, 2=virtual text off, 3=all on)
       icons_enabled = true, -- disable icons in the UI (disable if no nerd font is available, requires :PackerSync after changing)
       ui_notifications_enabled = true, -- disable notifications when toggling UI elements
-      airline_theme = "base16_spacemacs",
+
+      airline_theme = "transparent",
       ["airline#extensions#tabline#enabled"] = 1,
       ["airline#extensions#tabline#left_sep"] = " ",
       ["airline#extensions#tabline#left_alt_sep"] = "",
@@ -80,67 +81,67 @@ local config = {
   },
 
   -- Extend LSP configuration
-  lsp = {
-    -- enable servers that you already have installed without mason
-    servers = {
-      -- "pyright"
-    },
-    formatting = {
-      -- control auto formatting on save
-      format_on_save = {
-        enabled = true, -- enable or disable format on save globally
-        allow_filetypes = { -- enable format on save for specified filetypes only
-          -- "go",
-        },
-        ignore_filetypes = { -- disable format on save for specified filetypes
-          -- "python",
-        },
-      },
-      disabled = { -- disable formatting capabilities for the listed language servers
-        -- "lua_ls",
-      },
-      timeout_ms = 1000, -- default format timeout
-      -- filter = function(client) -- fully override the default formatting function
-      --   return true
-      -- end
-    },
-    -- easily add or disable built in mappings added during LSP attaching
-    mappings = {
-      n = {
-        -- ["<leader>lf"] = false -- disable formatting keymap
-      },
-    },
-    -- add to the global LSP on_attach function
-    -- on_attach = function(client, bufnr)
-    -- end,
-
-    -- override the LSP setup handler function based on server name
-    -- setup_handlers = {
-    --   -- first function changes the default setup handler
-    --   function(server, opts) require("lspconfig")[server].setup(opts) end,
-    --   -- keys for a specific server name will be used for that LSP
-    --   lua_ls = function(server, opts)
-    --     -- custom lua_ls setup handler
-    --     require("lspconfig")["lua_ls"].setup(opts)
-    --   end,
-    -- },
-
-    -- Add overrides for LSP server settings, the keys are the name of the server
-    config = {
-      -- example for addings schemas to yamlls
-      -- yamlls = { -- override table for require("lspconfig").yamlls.setup({...})
-      --   settings = {
-      --     yaml = {
-      --       schemas = {
-      --         ["http://json.schemastore.org/github-workflow"] = ".github/workflows/*.{yml,yaml}",
-      --         ["http://json.schemastore.org/github-action"] = ".github/action.{yml,yaml}",
-      --         ["http://json.schemastore.org/ansible-stable-2.9"] = "roles/tasks/*.{yml,yaml}",
-      --       },
-      --     },
-      --   },
-      -- },
-    },
-  },
+  -- lsp = {
+  --   -- enable servers that you already have installed without mason
+  --   servers = {
+  --     -- "pyright"
+  --   },
+  --   formatting = {
+  --     -- control auto formatting on save
+  --     format_on_save = {
+  --       enabled = true, -- enable or disable format on save globally
+  --       allow_filetypes = { -- enable format on save for specified filetypes only
+  --         -- "go",
+  --       },
+  --       ignore_filetypes = { -- disable format on save for specified filetypes
+  --         -- "python",
+  --       },
+  --     },
+  --     disabled = { -- disable formatting capabilities for the listed language servers
+  --       -- "lua_ls",
+  --     },
+  --     timeout_ms = 1000, -- default format timeout
+  --     -- filter = function(client) -- fully override the default formatting function
+  --     --   return true
+  --     -- end
+  --   },
+  --   -- easily add or disable built in mappings added during LSP attaching
+  --   mappings = {
+  --     n = {
+  --       -- ["<leader>lf"] = false -- disable formatting keymap
+  --     },
+  --   },
+  --   -- add to the global LSP on_attach function
+  --   -- on_attach = function(client, bufnr)
+  --   -- end,
+  --
+  --   -- override the LSP setup handler function based on server name
+  --   -- setup_handlers = {
+  --   --   -- first function changes the default setup handler
+  --   --   function(server, opts) require("lspconfig")[server].setup(opts) end,
+  --   --   -- keys for a specific server name will be used for that LSP
+  --   --   lua_ls = function(server, opts)
+  --   --     -- custom lua_ls setup handler
+  --   --     require("lspconfig")["lua_ls"].setup(opts)
+  --   --   end,
+  --   -- },
+  --
+  --   -- Add overrides for LSP server settings, the keys are the name of the server
+  --   config = {
+  --     -- example for addings schemas to yamlls
+  --     -- yamlls = { -- override table for require("lspconfig").yamlls.setup({...})
+  --     --   settings = {
+  --     --     yaml = {
+  --     --       schemas = {
+  --     --         ["http://json.schemastore.org/github-workflow"] = ".github/workflows/*.{yml,yaml}",
+  --     --         ["http://json.schemastore.org/github-action"] = ".github/action.{yml,yaml}",
+  --     --         ["http://json.schemastore.org/ansible-stable-2.9"] = "roles/tasks/*.{yml,yaml}",
+  --     --       },
+  --     --     },
+  --     --   },
+  --     -- },
+  --   },
+  -- },
 
   -- Mapping data with "desc" stored directly by vim.keymap.set().
   --
@@ -162,7 +163,7 @@ local config = {
       -- quick save
       -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
       ["<leader><Tab>"] = {
-        function() require("astronvim.utils.buffer").nav(vim.v.count > 0 and vim.v.count or 1) end, desc = "Next buffer" 
+        function() require("astronvim.utils.buffer").nav(vim.v.count > 0 and vim.v.count or 1) end, desc = "Next buffer"
       },
       ["<leader>`"] = {
         function() require("astronvim.utils.buffer").nav(-(vim.v.count > 0 and vim.v.count or 1)) end,
@@ -300,6 +301,31 @@ local config = {
       end,
     },
     {
+      "nvim-neo-tree/neo-tree.nvim",
+      opts = {
+        filesystem = {
+          filtered_items = {
+            visible = true,
+            hide_dotfiles = false,
+            hide_gitignored = true,
+            never_show = { -- uses glob style patterns
+              ".git",
+            },
+          },
+        },
+        window = {
+          width = 40,
+        },
+        sources = {
+          "filesystem",
+        },
+        source_selector = {
+          winbar = false,
+          statusline = false
+        }
+      },
+    },
+    {
       "nvim-treesitter/nvim-treesitter",
       opts = {
         -- ensure_installed = { "lua" },
@@ -354,8 +380,10 @@ local config = {
     {
       "vim-airline/vim-airline-themes",
       lazy = false,
-      -- :hi airline_c  ctermbg=NONE guibg=NONE
-      -- :hi airline_tabfill ctermbg=NONE guibg=NONE
+    },
+    {
+      "lukoshkin/trailing-whitespace",
+      lazy = false,
     },
     {
       "kylechui/nvim-surround",
