@@ -6,7 +6,7 @@ local config = {
   updater = {
     remote = "origin", -- remote to use
     channel = "stable", -- "stable" or "nightly"
-    version = "v3.*", -- "latest", tag name, or regex search like "v1.*" to only do updates before v2 (STABLE ONLY)
+    version = "v3.*", -- "latest", tag name, or regex search like "v1.*" (STABLE ONLY)
   },
 
   -- Set colorscheme to use
