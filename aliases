@@ -52,7 +52,8 @@ alias gdc="gwd --cached"
 alias rg="rg --smart-case"
 
 # dotfile editing
-alias nvimrc="$EDITOR ~/dotfiles/nvimrc"
+alias tmuxrc="$EDITOR ~/dotfiles/tmux.conf"
+alias nvimrc="$EDITOR ~/dotfiles/init.lua"
 alias zshrc="$EDITOR ~/dotfiles/zshrc"
 alias zimrc="$EDITOR ~/dotfiles/zimrc"
 
