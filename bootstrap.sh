@@ -14,8 +14,8 @@ all () {
 
 brewfile () {
   echo brewfile;
-  # # install our brew bundle (`Brewfile`)
-  # brew bundle
+  # install our brew bundle (`Brewfile`)
+  brew bundle
 }
 
 docker_from_scratch () {
