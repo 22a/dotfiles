@@ -1,4 +1,7 @@
+#!/usr/bin/env bash
+
 # Many aliases are now provided by zim's modules
+# TODO: decide if I like this idea
 # https://github.com/zimfw/git
 # https://github.com/zimfw/utility
 
