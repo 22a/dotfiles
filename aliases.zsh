@@ -8,7 +8,7 @@ alias vi="nvim"
 alias vim="nvim"
 
 # tmux
-alias tn="tmux new -s '·'"
+alias tn="tmux new -s ' '"
 alias tns="tmux new -s"
 alias tls="tmux ls"
 alias ta="tmux a"
