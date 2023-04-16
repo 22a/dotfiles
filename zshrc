@@ -78,6 +78,7 @@ typeset -gU cdpath fpath mailpath path
 path=(
   /usr/local/{bin,sbin}
   /opt/homebrew/bin
+  /home/linuxbrew/.linuxbrew/bin/brew
   $HOME/bin
   $HOME/.yarn/bin
   $HOME/.config/yarn/global/node_modules/.bin
