@@ -23,7 +23,15 @@ local config = {
       ["airline#extensions#tabline#enabled"] = 1,
       ["airline#extensions#tabline#left_sep"] = " ",
       ["airline#extensions#tabline#left_alt_sep"] = "",
-      ["airline#extensions#tabline#buffers_label"]= "",
+      ["airline#extensions#tabline#buffers_label"] = "",
+      ["airline_extensions"] = {"branch", "tabline"},
+      ["airline_section_y"] = "",
+      ["airline_symbols"] = {
+        branch = '',
+        colnr = ' ',
+        linenr = ' ',
+        maxlinenr = '',
+      },
     },
   },
 
@@ -153,7 +161,8 @@ local config = {
     },
     {
       "tpope/vim-fugitive",
-      event = "VeryLazy",
+      lazy = false,
+      -- event = "VeryLazy", -- breaks airline's branch extension, so we load eagerly
     },
     {
       "tpope/vim-rhubarb",
