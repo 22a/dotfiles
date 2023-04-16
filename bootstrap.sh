@@ -4,9 +4,9 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 all () {
   echo "$SCRIPT_DIR"
-  shell;
   homebrew;
   brewfile;
+  shell;
   neovim;
   nvm;
   symlinks;
