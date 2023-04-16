@@ -13,6 +13,20 @@ fi
 
 
 ############################################
+# $PATH
+############################################
+path=(
+  /usr/local/{bin,sbin}
+  /opt/homebrew/bin
+  /home/linuxbrew/.linuxbrew/bin
+  $HOME/bin
+  $HOME/.yarn/bin
+  $HOME/.config/yarn/global/node_modules/.bin
+  $path
+)
+
+
+############################################
 # ZIM - used for zsh plugin management
 # https://github.com/zimfw/zimfw
 ############################################
@@ -55,7 +69,6 @@ export EDITOR='nvim'
 export VISUAL='nvim'
 export PAGER='less'
 export BROWSER='open'
-export LC_ALL='en_IE.UTF-8'
 
 # Aliases
 source ~/.aliases
@@ -73,17 +86,6 @@ for key ('^[[B' ${terminfo[kcud1]}) bindkey ${key} history-substring-search-down
 
 # Ensure path arrays do not contain duplicates
 typeset -gU cdpath fpath mailpath path
-
-# Set the list of directories that zsh searches for programs
-path=(
-  /usr/local/{bin,sbin}
-  /opt/homebrew/bin
-  /home/linuxbrew/.linuxbrew/bin/brew
-  $HOME/bin
-  $HOME/.yarn/bin
-  $HOME/.config/yarn/global/node_modules/.bin
-  $path
-)
 
 # activate rbenv
 eval "$(rbenv init -)"
