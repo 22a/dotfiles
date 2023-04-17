@@ -58,13 +58,13 @@ symlinks () {
   touch ~/.aliases.priv
   mkdir -p ~/.config/nvim/lua/user
 
-  ln -sf "$SCRIPT_DIR/aliases"      ~/.aliases
-  ln -sf "$SCRIPT_DIR/gitconfig"    ~/.gitconfig
-  ln -sf "$SCRIPT_DIR/init.lua"     ~/.config/nvim/lua/user/init.lua
-  ln -sf "$SCRIPT_DIR/lockfile.lua" ~/.config/nvim/lua/lazy_snapshot.lua
-  ln -sf "$SCRIPT_DIR/tmux.conf"    ~/.tmux.conf
-  ln -sf "$SCRIPT_DIR/zimrc"        ~/.zimrc
-  ln -sf "$SCRIPT_DIR/zshrc"        ~/.zshrc
+  ln -sf "$SCRIPT_DIR/aliases"        ~/.aliases
+  ln -sf "$SCRIPT_DIR/gitconfig"      ~/.gitconfig
+  ln -sf "$SCRIPT_DIR/init.lua"       ~/.config/nvim/lua/user/init.lua
+  ln -sf "$SCRIPT_DIR/lazy-lock.json" ~/.config/nvim/lazy-lock.json
+  ln -sf "$SCRIPT_DIR/tmux.conf"      ~/.tmux.conf
+  ln -sf "$SCRIPT_DIR/zimrc"          ~/.zimrc
+  ln -sf "$SCRIPT_DIR/zshrc"          ~/.zshrc
 }
 
 shell () {

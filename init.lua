@@ -4,14 +4,12 @@
 local config = {
   -- Configure AstroNvim updates
   updater = {
-    remote = "origin", -- remote to use
+    remote = "origin",  -- remote to use
     channel = "stable", -- "stable" or "nightly"
-    version = "v3.*", -- "latest", tag name, or regex search like "v1.*" (STABLE ONLY)
+    version = "v3.*",   -- "latest", tag name, or regex search like "v1.*" (STABLE ONLY)
   },
-
   -- Set colorscheme to use
   colorscheme = "catppuccin",
-
   -- set vim options here (vim.<first_key>.<second_key> = value)
   options = {
     opt = {
@@ -24,7 +22,7 @@ local config = {
       ["airline#extensions#tabline#left_sep"] = " ",
       ["airline#extensions#tabline#left_alt_sep"] = "",
       ["airline#extensions#tabline#buffers_label"] = "",
-      ["airline_extensions"] = {"branch", "tabline"},
+      ["airline_extensions"] = { "branch", "tabline" },
       ["airline_section_y"] = "",
       ["airline_symbols"] = {
         branch = '',
@@ -34,7 +32,6 @@ local config = {
       },
     },
   },
-
   mappings = {
     n = {
       ["<leader><Tab>"] = {
@@ -48,7 +45,7 @@ local config = {
       ["<leader>G"] = {
         function()
           require("telescope.builtin").live_grep {
-            additional_args = function(args) return vim.list_extend(args, { "--hidden"}) end,
+            additional_args = function(args) return vim.list_extend(args, { "--hidden" }) end,
           }
         end,
         desc = "Find words in all files",
@@ -68,7 +65,6 @@ local config = {
         ":set wrap!<cr>",
         desc = "Toggle wrap"
       },
-
       ["<C-p>"] = {
         function() require("telescope.builtin").find_files() end,
         desc = "Find files"
@@ -79,7 +75,9 @@ local config = {
       },
     },
   },
-
+  lazy = {
+    lockfile = vim.fn.stdpath "config" .. "/lazy-lock.json",
+  },
   plugins = {
     -- Fully disabling a few of AstroNvim's default plugins
     {
@@ -136,6 +134,54 @@ local config = {
           statusline = false
         }
       },
+    },
+    {
+      "nvim-telescope/telescope.nvim",
+      opts = function()
+        local actions = require("telescope.actions")
+        local action_state = require("telescope.actions.state")
+        local get_icon = require("astronvim.utils").get_icon
+
+        local mm = {
+          -- emable telescope multiselect
+          ["<CR>"] = function(pb)
+            local picker = action_state.get_current_picker(pb)
+            local multi = picker:get_multi_selection()
+            actions.select_default(pb) -- the normal enter behaviour
+            for _, j in pairs(multi) do
+              if j.path ~= nil then    -- is it a file -> open it as well:
+                vim.cmd(string.format("%s %s", "edit", j.path))
+              end
+            end
+          end,
+          ["<C-j>"] = actions.move_selection_next,
+          ["<C-k>"] = actions.move_selection_previous,
+        }
+
+        return {
+          defaults = {
+            selection_caret = string.format("%s ", get_icon "Selected"),
+            path_display = { "truncate" },
+            sorting_strategy = "ascending",
+            layout_config = {
+              horizontal = {
+                prompt_position = "top",
+                preview_width = 0.55,
+              },
+              vertical = {
+                mirror = false,
+              },
+              width = 0.95,
+              height = 0.95,
+              preview_cutoff = 120,
+            },
+            mappings = {
+              i = mm,
+              n = mm
+            },
+          },
+        }
+      end,
     },
 
     -- AstroNvim "community" plugin monorepo, see https://github.com/AstroNvim/astrocommunity
