@@ -74,7 +74,7 @@ LspInstall
     git remote set-url origin git@github.com:22a/dotfiles.git
     ```
 - Import gpg key to gpg-suite
-- populate `~/.gituser` file
+- Populate `~/.gituser` file
     ```gitconfig
     [user]
       email = your@email.ie
