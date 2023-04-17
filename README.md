@@ -18,10 +18,13 @@ The bootstrap script has been written with a fresh install in mind, it assumes a
 
 ## Installation
 
-[If on mac] Install the xcode command line tools:
+Install system specific build tools homebrew will need:
 ```bash
+# macOS, this opens gui dialogs, click accept, etc.
 xcode-select --install
-# Click accept, accept, etc.
+
+# ~unix
+sudo apt-get install build-essential
 ```
 
 Clone this repo:
@@ -39,7 +42,18 @@ Run the bootstrap script:
 ./bootstrap.sh --all
 ```
 
-Relaunch your terminal, it'll load the [zim](https://github.com/zimfw/zimfw) packages and run the [p10k](https://github.com/romkatv/powerlevel10k) first-run setup configuration.
+## Post-install configuration
+
+Relaunch your terminal, it'll load the [zim](https://github.com/zimfw/zimfw) packages and run the [p10k](https://github.com/romkatv/powerlevel10k) first-run setup configuration. This sets the prompt, for which I use:
+- `Lean`, `Unicode`, `256 colors`, no time, `One line`, `Compact`, `Few icons`, `Concise`, no transient prompt, `(2) Quiet` to instant prompt.
+
+Open `nvim` and install treesitter grammars, debugging adapters, and lanugage servers:
+```viml
+TSInstall
+DapInstall
+LspInstall
+" eg. LspInstall tsserver ember tailwindcss cssls html jsonls bashls lua_ls
+```
 
 ### Things you'll have to set up manually
 
