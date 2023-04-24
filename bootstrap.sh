@@ -43,7 +43,6 @@ homebrew () {
 }
 
 neovim () {
-  git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
   # install neovim python module
   pip3 install neovim
 }
@@ -56,11 +55,11 @@ nvm () {
 symlinks () {
   touch ~/.hushlogin
   touch ~/.aliases.priv
-  mkdir -p ~/.config/nvim/lua/user
+  mkdir -p ~/.config/nvim/
 
   ln -sf "$SCRIPT_DIR/aliases"        ~/.aliases
   ln -sf "$SCRIPT_DIR/gitconfig"      ~/.gitconfig
-  ln -sf "$SCRIPT_DIR/init.lua"       ~/.config/nvim/lua/user/init.lua
+  ln -sf "$SCRIPT_DIR/init.lua"       ~/.config/nvim/init.lua
   ln -sf "$SCRIPT_DIR/lazy-lock.json" ~/.config/nvim/lazy-lock.json
   ln -sf "$SCRIPT_DIR/tmux.conf"      ~/.tmux.conf
   ln -sf "$SCRIPT_DIR/zimrc"          ~/.zimrc
