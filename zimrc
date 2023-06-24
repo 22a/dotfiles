@@ -3,6 +3,7 @@ zmodule input
 zmodule utility
 zmodule environment
 zmodule agkozak/zsh-z
+zmodule paulirish/git-open
 zmodule romkatv/powerlevel10k
 zmodule ohmyzsh/ohmyzsh --root plugins/git-auto-fetch
 

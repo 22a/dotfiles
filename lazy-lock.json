@@ -7,7 +7,7 @@
   "astrotheme": { "branch": "main", "commit": "f262d705b35d01cf0ecf631c364bc8c9954153a1" },
   "better-escape.nvim": { "branch": "master", "commit": "426d29708064d5b1bfbb040424651c92af1f3f64" },
   "bufdelete.nvim": { "branch": "master", "commit": "8933abc09df6c381d47dc271b1ee5d266541448e" },
-  "catppuccin": { "branch": "main", "commit": "fa9a4465672fa81c06b23634c0f04f6a5d622211" },
+  "catppuccin": { "branch": "main", "commit": "939be5f7fcbc15abeaad9214bb253a4551f6f6e6" },
   "cmp-buffer": { "branch": "main", "commit": "3022dbc9166796b644a841a02de8dd1cc1d311fa" },
   "cmp-nvim-lsp": { "branch": "main", "commit": "0e6b2ed705ddcff9738ec4ea838141654f12eeef" },
   "cmp-path": { "branch": "main", "commit": "91ff86cd9c29299a64f968ebb45846c485725f23" },

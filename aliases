@@ -79,8 +79,8 @@ alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias ns="dig +nocmd any +multiline +noall +answer"
 
 # work util
-alias s="script/server --hybrid"
-alias sup="script/update --hybrid"
+alias s="script/server"
+alias sup="script/update"
 alias t="script/test"
 alias se="source script/env"
 alias e="git pull; yarn; yarn start"
