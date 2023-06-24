@@ -27,6 +27,8 @@ vim.keymap.set("n", "<leader>c", "<cmd>bdelete<cr>", { desc = "Close buffer" })
 vim.keymap.set("n", "<leader>C", "<cmd>bdelete!<cr>", { desc = "Close buffer (forcefully)" })
 vim.keymap.set("n", "<leader>q", "<cmd>q<cr>", { desc = "Quit" })
 vim.keymap.set("n", "<leader>Q", "<cmd>q!<cr>", { desc = "Quit (forcefully)" })
+vim.keymap.set("n", "<leader>y", '"+y', { desc = "Yank to system clipboard (forcefully)" })
+vim.keymap.set("n", "<leader>p", '"+p', { desc = "Put from system clipboard (forcefully)" })
 
 vim.keymap.set("n", "<leader>F", "<cmd>Telescope<cr>", { desc = "Telescope" })
 vim.keymap.set("n", "<C-p>", function() require("telescope.builtin").find_files() end, { desc = "Find file" })
@@ -45,7 +47,7 @@ vim.keymap.set("n", "<leader>B", "<cmd>Git blame<cr>", { desc = "Git blame" })
 vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Neotree" })
 vim.keymap.set("n", "<leader>bo", "<cmd>GBrowse<cr>", { desc = "Git Browse (GitHub)" })
 vim.keymap.set("n", "<leader>g", function() require("telescope.builtin").live_grep() end, { desc = "Grep" })
-vim.keymap.set("n", "<leader>g",
+vim.keymap.set("n", "<leader>G",
   function()
     require("telescope.builtin").live_grep {
       additional_args = function(args) return vim.list_extend(args, { "--hidden", "--no-ignore" }) end,
@@ -72,6 +74,8 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.scrolloff = 12
 vim.opt.sidescrolloff = 12
+vim.opt.clipboard = 'unnamed,unnamedplus'
+
 
 -- vim-airline config
 vim.g.airline_theme = "transparent"
@@ -87,10 +91,6 @@ vim.g["airline_symbols"] = {
   linenr = ' ',
   maxlinenr = '',
 }
-
-
-
-
 
 local plugins = {
   -- Config overrides of AstroNvim's default plugins
@@ -301,6 +301,27 @@ local plugins = {
     name = "catppuccin",
     lazy = false,
   },
+
+  {
+    'numToStr/Comment.nvim',
+    config = function() require('Comment').setup() end
+  },
+
+  {
+    'lewis6991/gitsigns.nvim',
+    config = function() require('gitsigns').setup() end
+  },
+
+  {
+    'lukas-reineke/indent-blankline.nvim',
+    config = function() require('indent_blankline').setup {} end
+  },
+
+  {
+	  'windwp/nvim-autopairs',
+    config = function() require('nvim-autopairs').setup {} end
+  },
+
 
   -- Personal config for plugins not included in AstroNvim
   {

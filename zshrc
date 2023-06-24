@@ -90,10 +90,37 @@ typeset -gU cdpath fpath mailpath path
 # activate rbenv
 eval "$(rbenv init -)"
 
-# activate nvm + load completion
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+# # activate nvm + load completion
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+lazy_load_nvm() {
+  unset -f npm yarn node nvm
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+}
+
+npm() {
+ lazy_load_nvm
+ npm $@
+}
+
+yarn() {
+ lazy_load_nvm
+ yarn $@
+}
+
+node() {
+  lazy_load_nvm
+  node $@
+}
+
+nvm() {
+  lazy_load_nvm
+  nvm $@
+}
 
 
 ############################################
