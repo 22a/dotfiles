@@ -21,8 +21,8 @@ vim.keymap.set("n", "<leader>c", "<cmd>bdelete<cr>", { desc = "Close buffer" })
 vim.keymap.set("n", "<leader>C", "<cmd>bdelete!<cr>", { desc = "Close buffer (forcefully)" })
 vim.keymap.set("n", "<leader>q", "<cmd>q<cr>", { desc = "Quit" })
 vim.keymap.set("n", "<leader>Q", "<cmd>q!<cr>", { desc = "Quit (forcefully)" })
-vim.keymap.set("n", "<leader>y", '"+y', { desc = "Yank to system clipboard (forcefully)" })
-vim.keymap.set("n", "<leader>p", '"+p', { desc = "Put from system clipboard (forcefully)" })
+vim.keymap.set("n", "<leader>y", '"+y', { desc = "Yank to system clipboard" })
+vim.keymap.set("n", "<leader>p", '"+p', { desc = "Put from system clipboard" })
 
 vim.keymap.set("n", "<C-p>", function() require("telescope.builtin").find_files() end, { desc = "Find file" })
 vim.keymap.set("n", "<leader>F", "<cmd>Telescope<cr>", { desc = "Telescope" })
@@ -39,6 +39,7 @@ vim.keymap.set("n", "<leader>q", "<cmd>q<cr>", { desc = "Quit" })
 vim.keymap.set("n", "<leader>W", "<cmd>set wrap!<cr>", { desc = "Toggle wrap" })
 vim.keymap.set("n", "<leader>B", "<cmd>Git blame<cr>", { desc = "Git blame" })
 vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Neotree" })
+vim.keymap.set("n", "<leader>d", "<cmd>TroubleToggle<cr>", { desc = "Diagnostics" })
 vim.keymap.set("n", "<leader>bo", "<cmd>GBrowse<cr>", { desc = "Git Browse (GitHub)" })
 vim.keymap.set("n", "<leader>g", function() require("telescope.builtin").live_grep() end, { desc = "Grep" })
 vim.keymap.set("n", "<leader>G",
@@ -276,6 +277,16 @@ local plugins = {
         },
       }
     end
+  },
+
+  {
+    "folke/trouble.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    },
   },
 
   {
