@@ -86,26 +86,6 @@ vim.g["airline_symbols"] = {
 }
 
 local plugins = {
-  -- Config overrides of AstroNvim's default plugins
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    config = function()
-      local null_ls = require "null-ls"
-      null_ls.setup({
-        -- List of supported formatters and linters:
-        -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
-        -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
-        sources = {
-          null_ls.builtins.formatting.prettier,
-          null_ls.builtins.formatting.rubocop,
-          null_ls.builtins.diagnostics.eslint,
-          null_ls.builtins.diagnostics.shellcheck,
-          null_ls.builtins.diagnostics.stylelint,
-        }
-      })
-    end,
-  },
-
   {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v2.x",
@@ -196,22 +176,57 @@ local plugins = {
   },
 
   {
+    "jose-elias-alvarez/null-ls.nvim",
+    config = function()
+      local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+      local null_ls = require "null-ls"
+      null_ls.setup({
+        sources = {
+          null_ls.builtins.diagnostics.eslint,
+          null_ls.builtins.diagnostics.shellcheck,
+          null_ls.builtins.diagnostics.stylelint,
+          null_ls.builtins.formatting.prettier,
+          null_ls.builtins.formatting.rubocop,
+          null_ls.builtins.formatting.stylelint,
+        },
+        on_attach = function(client, bufnr)
+          if client.supports_method("textDocument/formatting") then
+            vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+            vim.api.nvim_create_autocmd("BufWritePre", {
+              group = augroup,
+              buffer = bufnr,
+              callback = function() vim.lsp.buf.format({async = false}) end,
+            })
+          end
+        end,
+      })
+    end,
+  },
+
+  {
     'VonHeikemen/lsp-zero.nvim',
     branch = 'v2.x',
     dependencies = {
       -- LSP Support
-      {'neovim/nvim-lspconfig'},
-      { 'williamboman/mason.nvim', build = ":MasonUpdate"},
-      {'williamboman/mason-lspconfig.nvim'},
+      { 'neovim/nvim-lspconfig' },
+      { 'williamboman/mason.nvim', build = ':MasonUpdate' },
+      { 'williamboman/mason-lspconfig.nvim' },
 
       -- Autocompletion
-      {'hrsh7th/nvim-cmp'},     -- Required
-      {'hrsh7th/cmp-nvim-lsp'}, -- Required
-      {'L3MON4D3/LuaSnip'},     -- Required
+      { 'L3MON4D3/LuaSnip' },
+      { 'saadparwaiz1/cmp_luasnip'},
+      { 'hrsh7th/nvim-cmp' },
+      { 'hrsh7th/cmp-path' },
+      { 'hrsh7th/cmp-cmdline' },
+      { 'hrsh7th/cmp-buffer' },
+      { 'hrsh7th/cmp-nvim-lsp' },
+      { 'hrsh7th/cmp-nvim-lua', ft = { 'lua' } },
+      { 'hrsh7th/cmp-nvim-lsp-signature-help' },
+      { 'onsails/lspkind-nvim' },
     },
     config = function ()
       local lsp = require('lsp-zero').preset({})
-      lsp.on_attach(function(_client, bufnr)
+      lsp.on_attach(function(_, bufnr)
         lsp.default_keymaps({buffer = bufnr})
       end)
       lsp.setup()
@@ -236,7 +251,14 @@ local plugins = {
 
           ['<C-h>'] = cmp_action.luasnip_jump_backward(),
           ['<C-l>'] = cmp_action.luasnip_jump_forward(),
-        }
+        },
+        sources = {
+          { name = 'path' },
+          { name = 'nvim_lsp' },
+          { name = 'buffer', keyword_length = 3 },
+          { name = 'luasnip', keyword_length = 2 },
+          { name = "copilot", group_index = 2 },
+        },
       })
 
       require("mason-lspconfig").setup {
@@ -255,9 +277,14 @@ local plugins = {
       }
     end
   },
+
   {
     "nvim-treesitter/nvim-treesitter",
-    dependencies = { "windwp/nvim-ts-autotag", "JoosepAlviste/nvim-ts-context-commentstring" },
+    dependencies = {
+      "windwp/nvim-ts-autotag",
+      "JoosepAlviste/nvim-ts-context-commentstring"
+    },
+    build = ":TSUpdateSync",
     cmd = {
       "TSBufDisable",
       "TSBufEnable",
@@ -273,25 +300,19 @@ local plugins = {
       "TSUpdate",
       "TSUpdateSync",
     },
-    build = ":TSUpdate",
-    opts = {
-      highlight = {
-        enable = true,
-        disable = function(_, bufnr) return vim.api.nvim_buf_line_count(bufnr) > 10000 end,
-      },
-      incremental_selection = { enable = true },
-      indent = { enable = true },
-      autotag = { enable = true },
-      context_commentstring = { enable = true, enable_autocmd = false },
-      ensure_installed = {
-        "ember"
-      },
-    },
-  },
-
-  { "catppuccin/nvim",
-    name = "catppuccin",
-    lazy = false,
+    config = function ()
+      require('nvim-treesitter.configs').setup {
+        ensure_installed = "all",
+        highlight = {
+          enable = true,
+          disable = function(_, bufnr) return vim.api.nvim_buf_line_count(bufnr) > 10000 end,
+        },
+        indent = { enable = true },
+        autotag = { enable = true },
+        incremental_selection = { enable = true },
+        context_commentstring = { enable = true, enable_autocmd = false },
+      }
+    end
   },
 
   {
@@ -318,7 +339,11 @@ local plugins = {
     }
   },
 
-  -- Personal config for plugins not included in AstroNvim
+  { "catppuccin/nvim",
+    name = "catppuccin",
+    lazy = false,
+  },
+
   {
     "folke/neodev.nvim",
     lazy = false,
@@ -336,7 +361,6 @@ local plugins = {
   {
     "tpope/vim-fugitive",
     lazy = false,
-    -- event = "VeryLazy", -- breaks airline's branch extension, so we load eagerly
   },
 
   {
@@ -355,35 +379,31 @@ local plugins = {
     config = function() require("nvim-surround").setup() end,
   },
 
-  -- { -- https://github.com/harrisoncramer/nvim/blob/main/lua/plugins/copilot.lua
-  --   "zbirenbaum/copilot.lua",
-  --   cmd = "Copilot",
-  --   event = "InsertEnter",
-  --   dependencies = "zbirenbaum/copilot-cmp",
-  --   config = function()
-  --     require("copilot").setup({
-  --       panel = {
-  --         enabled = false
-  --       },
-  --       suggestion = {
-  --         auto_trigger = false,
-  --       }
-  --     })
-  --     require("copilot_cmp").setup({
-  --       formatters = {
-  --         insert_text = require("copilot_cmp.format").remove_existing
-  --       },
-  --     })
-  --   end
-  -- },
+  { -- https://github.com/harrisoncramer/nvim/blob/main/lua/plugins/copilot.lua
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    dependencies = {
+      "zbirenbaum/copilot-cmp"
+    },
+    config = function()
+      require("copilot").setup({
+        panel = {
+          enabled = false
+        },
+        suggestion = {
+          auto_trigger = false,
+        }
+      })
+      require("copilot_cmp").setup({
+        formatters = {
+          insert_text = require("copilot_cmp.format").remove_existing
+        },
+      })
+    end
+  },
 }
 
-
-require("lazy").setup(plugins, {
-  -- defaults = {
-  --   lazy = true,
-  -- }
-})
+require("lazy").setup(plugins, {})
 
 vim.cmd.colorscheme "catppuccin"
-
