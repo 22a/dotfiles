@@ -1,13 +1,7 @@
 -- Install lazy.nvim if it doesn't exist
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
+  vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath,
   })
 end
 vim.opt.rtp:prepend(lazypath)
@@ -30,8 +24,8 @@ vim.keymap.set("n", "<leader>Q", "<cmd>q!<cr>", { desc = "Quit (forcefully)" })
 vim.keymap.set("n", "<leader>y", '"+y', { desc = "Yank to system clipboard (forcefully)" })
 vim.keymap.set("n", "<leader>p", '"+p', { desc = "Put from system clipboard (forcefully)" })
 
-vim.keymap.set("n", "<leader>F", "<cmd>Telescope<cr>", { desc = "Telescope" })
 vim.keymap.set("n", "<C-p>", function() require("telescope.builtin").find_files() end, { desc = "Find file" })
+vim.keymap.set("n", "<leader>F", "<cmd>Telescope<cr>", { desc = "Telescope" })
 vim.keymap.set("n", "<leader>fb", function() require("telescope.builtin").buffers() end, { desc = "Find buffer" })
 vim.keymap.set("n", "<leader>fc", function() require("telescope.builtin").commands() end, { desc = "Find vim command" })
 vim.keymap.set("n", "<leader>ff", function() require("telescope.builtin").find_files { hidden = true, no_ignore = true } end, { desc = "Find file (hidden + ignored)" })
@@ -39,8 +33,8 @@ vim.keymap.set("n", "<leader>fr", function() require("telescope.builtin").regist
 vim.keymap.set("n", "<leader>ft", function() require("telescope.builtin").colorscheme { enable_preview = true } end, { desc = "Find theme (colorscheme)" })
 vim.keymap.set("n", "<leader>*", function() require("telescope.builtin").grep_string() end, { desc = "Find word under cursor" })
 
-vim.keymap.set("n", "<leader>`", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
 vim.keymap.set("n", "<leader><Tab>", "<cmd>bnext<cr>", { desc = "Next buffer" })
+vim.keymap.set("n", "<leader>`", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
 vim.keymap.set("n", "<leader>q", "<cmd>q<cr>", { desc = "Quit" })
 vim.keymap.set("n", "<leader>W", "<cmd>set wrap!<cr>", { desc = "Toggle wrap" })
 vim.keymap.set("n", "<leader>B", "<cmd>Git blame<cr>", { desc = "Git blame" })
@@ -75,7 +69,6 @@ vim.opt.smartcase = true
 vim.opt.scrolloff = 12
 vim.opt.sidescrolloff = 12
 vim.opt.clipboard = 'unnamed,unnamedplus'
-
 
 -- vim-airline config
 vim.g.airline_theme = "transparent"
@@ -118,21 +111,25 @@ local plugins = {
     branch = "v2.x",
     dependencies = {
       "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons",
       "MunifTanjim/nui.nvim",
     },
     cmd = "Neotree",
     init = function() vim.g.neo_tree_remove_legacy_commands = true end,
     config = function ()
       require("neo-tree").setup({
+        enable_git_status = true,
         filesystem = {
           filtered_items = {
             visible = true,
-            hide_dotfiles = false,
-            hide_gitignored = true,
             never_show = { -- uses glob style patterns
               ".git",
             },
           },
+          follow_current_file = true,
+        },
+        buffers = {
+          follow_current_file = true,
         },
         window = {
           width = 40,
@@ -166,7 +163,7 @@ local plugins = {
           local multi = picker:get_multi_selection()
           actions.select_default(pb) -- the normal enter behaviour
           for _, j in pairs(multi) do
-            if j.path ~= nil then    -- is it a file -> open it as well:
+            if j.path ~= nil then -- is it a file -> open it as well:
               vim.cmd(string.format("%s %s", "edit", j.path))
             end
           end
@@ -203,14 +200,9 @@ local plugins = {
     branch = 'v2.x',
     dependencies = {
       -- LSP Support
-      {'neovim/nvim-lspconfig'},             -- Required
-      {                                      -- Optional
-        'williamboman/mason.nvim',
-        build = function()
-          pcall(vim.cmd, 'MasonUpdate')
-        end,
-      },
-      {'williamboman/mason-lspconfig.nvim'}, -- Optional
+      {'neovim/nvim-lspconfig'},
+      { 'williamboman/mason.nvim', build = ":MasonUpdate"},
+      {'williamboman/mason-lspconfig.nvim'},
 
       -- Autocompletion
       {'hrsh7th/nvim-cmp'},     -- Required
@@ -219,7 +211,7 @@ local plugins = {
     },
     config = function ()
       local lsp = require('lsp-zero').preset({})
-      lsp.on_attach(function(client, bufnr)
+      lsp.on_attach(function(_client, bufnr)
         lsp.default_keymaps({buffer = bufnr})
       end)
       lsp.setup()
@@ -318,10 +310,13 @@ local plugins = {
   },
 
   {
-	  'windwp/nvim-autopairs',
-    config = function() require('nvim-autopairs').setup {} end
+    'windwp/nvim-autopairs',
+    event = "InsertEnter",
+    opts = { -- this is equalent to setup({}) function
+      disable_filetype = { "TelescopePrompt" },
+      enable_check_bracket_line = false,
+    }
   },
-
 
   -- Personal config for plugins not included in AstroNvim
   {
@@ -359,6 +354,28 @@ local plugins = {
     event = "VeryLazy",
     config = function() require("nvim-surround").setup() end,
   },
+
+  -- { -- https://github.com/harrisoncramer/nvim/blob/main/lua/plugins/copilot.lua
+  --   "zbirenbaum/copilot.lua",
+  --   cmd = "Copilot",
+  --   event = "InsertEnter",
+  --   dependencies = "zbirenbaum/copilot-cmp",
+  --   config = function()
+  --     require("copilot").setup({
+  --       panel = {
+  --         enabled = false
+  --       },
+  --       suggestion = {
+  --         auto_trigger = false,
+  --       }
+  --     })
+  --     require("copilot_cmp").setup({
+  --       formatters = {
+  --         insert_text = require("copilot_cmp.format").remove_existing
+  --       },
+  --     })
+  --   end
+  -- },
 }
 
 
