@@ -130,7 +130,7 @@ local plugins = {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
     dependencies = {
-      { "nvim-telescope/telescope-fzf-native.nvim", enabled = vim.fn.executable "make" == 1, build = "make" },
+      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' }
     },
     opts = function()
       local actions = require("telescope.actions")
@@ -416,5 +416,6 @@ local plugins = {
 }
 
 require("lazy").setup(plugins, {})
+require("telescope").load_extension("fzf")
 
 vim.cmd.colorscheme "catppuccin"

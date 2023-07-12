@@ -44,8 +44,7 @@ Run the bootstrap script:
 
 ## Post-install configuration
 
-Relaunch your terminal, it'll load the [zim](https://github.com/zimfw/zimfw) packages and run the [p10k](https://github.com/romkatv/powerlevel10k) first-run setup configuration. This sets the prompt, for which I use:
-- `Lean`, `Unicode`, `256 colors`, no time, `One line`, `Compact`, `Few icons`, `Concise`, no transient prompt, `(2) Quiet` to instant prompt.
+Relaunch your terminal, it'll load the [zim](https://github.com/zimfw/zimfw) packages.
 
 Open `nvim` and install treesitter grammars, debugging adapters, and lanugage servers:
 ```viml
