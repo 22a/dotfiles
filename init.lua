@@ -130,7 +130,6 @@ local plugins = {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
     dependencies = {
-      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' }
     },
     opts = function()
       local actions = require("telescope.actions")
@@ -295,20 +294,9 @@ local plugins = {
       "windwp/nvim-ts-autotag",
       "JoosepAlviste/nvim-ts-context-commentstring"
     },
+    lazy = false,
     build = ":TSUpdateSync",
     cmd = {
-      "TSBufDisable",
-      "TSBufEnable",
-      "TSBufToggle",
-      "TSDisable",
-      "TSEnable",
-      "TSToggle",
-      "TSInstall",
-      "TSInstallInfo",
-      "TSInstallSync",
-      "TSModuleInfo",
-      "TSUninstall",
-      "TSUpdate",
       "TSUpdateSync",
     },
     config = function ()
@@ -359,6 +347,7 @@ local plugins = {
     "folke/neodev.nvim",
     lazy = false,
   },
+
   {
     "vim-airline/vim-airline",
     lazy = false,
@@ -416,6 +405,5 @@ local plugins = {
 }
 
 require("lazy").setup(plugins, {})
-require("telescope").load_extension("fzf")
 
 vim.cmd.colorscheme "catppuccin"

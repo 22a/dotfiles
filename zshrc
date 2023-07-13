@@ -73,40 +73,17 @@ for key ('^[[B' ${terminfo[kcud1]}) bindkey ${key} history-substring-search-down
 # Ensure path arrays do not contain duplicates
 typeset -gU cdpath fpath mailpath path
 
-# activate rbenv
-eval "$(rbenv init -)"
+
+# asdf completions
+source $(brew --prefix asdf)/libexec/asdf.sh
+
+# # activate rbenv
+# eval "$(rbenv init -)"
 
 # # activate nvm + load completion
 # export NVM_DIR="$HOME/.nvm"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-
-lazy_load_nvm() {
-  unset -f npm yarn node nvm
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-}
-
-npm() {
- lazy_load_nvm
- npm $@
-}
-
-yarn() {
- lazy_load_nvm
- yarn $@
-}
-
-node() {
-  lazy_load_nvm
-  node $@
-}
-
-nvm() {
-  lazy_load_nvm
-  nvm $@
-}
 
 # volta
 export VOLTA_HOME="$HOME/.volta"
