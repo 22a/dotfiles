@@ -58,7 +58,6 @@ alias zshrc="$EDITOR ~/dotfiles/zshrc"
 alias zimrc="$EDITOR ~/dotfiles/zimrc"
 
 # misc
-alias j="z"
 alias cls="clear; ls"
 alias exs="source ~/.zshrc"
 alias hosts="sudo $EDITOR /etc/hosts"

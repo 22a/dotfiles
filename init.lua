@@ -24,7 +24,7 @@ vim.keymap.set("n", "<leader>Q", "<cmd>q!<cr>", { desc = "Quit (forcefully)" })
 vim.keymap.set("n", "<leader>y", '"+y', { desc = "Yank to system clipboard" })
 vim.keymap.set("n", "<leader>p", '"+p', { desc = "Put from system clipboard" })
 
-vim.keymap.set("n", "<C-p>", function() require("telescope.builtin").find_files() end, { desc = "Find file" })
+vim.keymap.set("n", "<C-p>", function() require("telescope.builtin").find_files { hidden = true } end, { desc = "Find file (hidden + ignored)" })
 vim.keymap.set("n", "<leader>F", "<cmd>Telescope<cr>", { desc = "Telescope" })
 vim.keymap.set("n", "<leader>fb", function() require("telescope.builtin").buffers() end, { desc = "Find buffer" })
 vim.keymap.set("n", "<leader>fc", function() require("telescope.builtin").commands() end, { desc = "Find vim command" })
@@ -41,7 +41,14 @@ vim.keymap.set("n", "<leader>B", "<cmd>Git blame<cr>", { desc = "Git blame" })
 vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Neotree" })
 vim.keymap.set("n", "<leader>d", "<cmd>TroubleToggle<cr>", { desc = "Diagnostics" })
 vim.keymap.set("n", "<leader>bo", "<cmd>GBrowse<cr>", { desc = "Git Browse (GitHub)" })
-vim.keymap.set("n", "<leader>g", function() require("telescope.builtin").live_grep() end, { desc = "Grep" })
+-- vim.keymap.set("n", "<leader>g", function() require("telescope.builtin").live_grep() end, { desc = "Grep" })
+vim.keymap.set("n", "<leader>g",
+  function()
+    require("telescope.builtin").live_grep {
+      additional_args = function(args) return vim.list_extend(args, { "--hidden" }) end,
+    }
+  end
+, { desc = "Grep (hidden + ignored)" })
 vim.keymap.set("n", "<leader>G",
   function()
     require("telescope.builtin").live_grep {
@@ -152,6 +159,7 @@ local plugins = {
 
       return {
         defaults = {
+          file_ignore_patterns = { ".git/" },
           path_display = { "truncate" },
           sorting_strategy = "ascending",
           layout_config = {

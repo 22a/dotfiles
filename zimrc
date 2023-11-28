@@ -2,7 +2,6 @@ zmodule git
 zmodule input
 zmodule utility
 zmodule environment
-zmodule agkozak/zsh-z
 zmodule paulirish/git-open
 zmodule sindresorhus/pure --source async.zsh --source pure.zsh
 zmodule ohmyzsh/ohmyzsh --root plugins/git-auto-fetch

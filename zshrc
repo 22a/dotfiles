@@ -77,6 +77,9 @@ typeset -gU cdpath fpath mailpath path
 # asdf completions
 source $(brew --prefix asdf)/libexec/asdf.sh
 
+# zoxide (rupa/z) setup
+eval "$(zoxide init --cmd j zsh)"
+
 # # activate rbenv
 # eval "$(rbenv init -)"
 
@@ -92,6 +95,27 @@ export PATH="$VOLTA_HOME/bin:$PATH"
 # volta pnpm ff
 export VOLTA_FEATURE_PNPM=1
 
+repos() {
+  local dirs_to_run_in=(
+    "$HOME/src/embercom"
+    "$HOME/src/pulse"
+    "$HOME/src/embercom-composer"
+    "$HOME/src/embercom-prosemirror-composer"
+    "$HOME/src/intersection"
+    "$HOME/src/billing-admin"
+  )
+  local full_command="$@"
+  for dir in "${dirs_to_run_in[@]}"; do
+    if [[ -d "$dir" ]]; then
+      echo "${dir##*/}"
+      (cd "$dir" && eval "$full_command")
+    else
+      echo "Directory '$dir' does not exist."
+    fi
+  done
+}
+
+#
 ############################################
 # zprof - zsh profiling
 # uncomment `zmodload` , move to top of file

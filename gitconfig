@@ -14,7 +14,8 @@
 
 [pull]
   default = current
-	ff = only
+  rebase = true
+  no-ff = true
 
 [push]
   default = current
