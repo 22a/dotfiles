@@ -275,6 +275,7 @@ local plugins = {
           "rust_analyzer",
           "tsserver",
           "ember",
+          "glint",
           "tailwindcss",
           "cssls",
           "html",

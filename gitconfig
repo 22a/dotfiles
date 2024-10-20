@@ -14,8 +14,6 @@
 
 [pull]
   default = current
-  rebase = true
-  no-ff = true
 
 [push]
   default = current
@@ -38,3 +36,6 @@
 
 [protocol]
   version = 2
+
+[init]
+  defaultBranch = main

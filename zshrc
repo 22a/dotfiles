@@ -4,7 +4,6 @@
 path=(
   /usr/local/{bin,sbin}
   /opt/homebrew/bin
-  /home/linuxbrew/.linuxbrew/bin
   $HOME/bin
   $HOME/.yarn/bin
   $HOME/.config/yarn/global/node_modules/.bin
@@ -73,7 +72,6 @@ for key ('^[[B' ${terminfo[kcud1]}) bindkey ${key} history-substring-search-down
 # Ensure path arrays do not contain duplicates
 typeset -gU cdpath fpath mailpath path
 
-
 # asdf completions
 source $(brew --prefix asdf)/libexec/asdf.sh
 
@@ -87,33 +85,6 @@ eval "$(zoxide init --cmd j zsh)"
 # export NVM_DIR="$HOME/.nvm"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-
-# volta
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
-
-# volta pnpm ff
-export VOLTA_FEATURE_PNPM=1
-
-repos() {
-  local dirs_to_run_in=(
-    "$HOME/src/embercom"
-    "$HOME/src/pulse"
-    "$HOME/src/embercom-composer"
-    "$HOME/src/embercom-prosemirror-composer"
-    "$HOME/src/intersection"
-    "$HOME/src/billing-admin"
-  )
-  local full_command="$@"
-  for dir in "${dirs_to_run_in[@]}"; do
-    if [[ -d "$dir" ]]; then
-      echo "${dir##*/}"
-      (cd "$dir" && eval "$full_command")
-    else
-      echo "Directory '$dir' does not exist."
-    fi
-  done
-}
 
 #
 ############################################

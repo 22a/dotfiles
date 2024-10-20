@@ -47,6 +47,7 @@ alias gcoi="git branch | fzf -m | xargs git checkout"
 alias gwd="git diff --no-ext-diff --patch-with-stat"
 # git diff cached
 alias gdc="gwd --cached"
+alias gwdc="gwd --cached"
 
 # ripgrep
 alias rg="rg --smart-case"
@@ -81,10 +82,7 @@ alias ns="dig +nocmd any +multiline +noall +answer"
 alias s="script/server"
 alias sup="script/update"
 alias t="script/test"
-alias se="source script/env"
-alias e="git pull; yarn; yarn start"
 alias n="git pull; sup; s"
-alias ws="ssh workspace"
 alias gmm="gco master; git pull; gco -; git merge master --no-edit"
 alias grm="gco master; git pull; gco -; git rebase master"
 alias gmmn="gco main; git pull; gco -; git merge main --no-edit"
