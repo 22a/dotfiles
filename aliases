@@ -1,40 +1,23 @@
 #!/usr/bin/env bash
-
-# Many aliases are now provided by zim's modules
-# TODO: decide if I like this idea
-# https://github.com/zimfw/git
-# https://github.com/zimfw/utility
-
-# neovim
-alias v="nvim"
-alias vi="nvim"
-alias vim="nvim"
-
-# tmux
-alias tn="tmux new -s ' '"
-alias tns="tmux new -s"
-alias tls="tmux ls"
-alias ta="tmux a"
-alias tks="tmux kill-session -t"
-
-# docker
-alias dim="docker images"
-alias dprune="docker system prune --all"
-alias dps="docker ps --format \"table {{.Names}}\t{{.Status}}\t{{.ID}}\t{{.Ports}}\""
-alias dpsa="docker ps -a --format \"table {{.Names}}\t{{.Status}}\t{{.ID}}\t{{.Ports}}\""
-alias dpsal="docker ps -a"
-alias dpsl="docker ps"
-alias drm="docker rm"
-alias drmA="docker rm \$(docker ps -a -q)"
-alias drmAf="docker rm -f \$(docker ps -a -q)"
-alias drmi="docker rmi"
-alias drmiA="docker rmi \$(docker images -q)"
-alias dsA="docker stop \$(docker ps -a -q)"
-
-# git branch current
-alias gbc="git branch | grep \* | cut -d ' ' -f2"
-# git commit amend
+# git speed
+alias gwd="git diff --no-ext-diff --patch-with-stat"
+alias gwdc="gwd --cached"
+alias gco="git checkout"
+alias gws="git status --short"
+alias gcm="git commit --message"
 alias gcam="git commit --verbose --amend"
+alias gcf="git commit --amend --reuse-message HEAD"
+
+# git speed (more forbidden)
+alias gmm="gco master; git pull; gco -; git merge master --no-edit"
+alias grm="gco master; git pull; gco -; git rebase master"
+alias grom="gco rebase origin/master"
+alias gmmn="gco main; git pull; gco -; git merge main --no-edit"
+alias grmn="gco main; git pull; gco -; git rebase main"
+alias gromn="gco rebase origin/main"
+
+# git current branch
+alias gbc="git branch | grep \* | cut -d ' ' -f2"
 # git branch set upstream
 alias gbsu="git branch --set-upstream-to=origin/\$(gbc) \$(gbc)"
 # git branch delete interactive
@@ -43,47 +26,27 @@ alias gbdi="git branch | fzf -m | xargs git branch -d"
 alias gbDi="git branch | fzf -m | xargs git branch -D"
 # git checkout branch interactive
 alias gcoi="git branch | fzf -m | xargs git checkout"
-# # git diff
-alias gwd="git diff --no-ext-diff --patch-with-stat"
-# git diff cached
-alias gdc="gwd --cached"
-alias gwdc="gwd --cached"
 
-# ripgrep
-alias rg="rg --smart-case"
-
-# dotfile editing
-alias tmuxrc="$EDITOR ~/dotfiles/tmux.conf"
-alias nvimrc="$EDITOR ~/dotfiles/init.lua"
-alias zshrc="$EDITOR ~/dotfiles/zshrc"
-alias zimrc="$EDITOR ~/dotfiles/zimrc"
+# tmux
+alias tn="tmux new -s ' '"
+alias tns="tmux new -s"
+alias tls="tmux ls"
+alias ta="tmux a"
+alias tks="tmux kill-session -t"
 
 # misc
+alias rg="rg --smart-case"
 alias cls="clear; ls"
 alias exs="source ~/.zshrc"
-alias hosts="sudo $EDITOR /etc/hosts"
 alias pyserv="python3 -m http.server"
 alias psg="ps aux | head -n 1; ps aux | rg"
 alias fix="git diff --name-only | uniq | xargs $EDITOR"
 alias cmv="gcm \"\`node -e \"console.log(require('./package.json').version)\"\`\""
 alias brewu="brew update; brew upgrade --force-bottle; brew cleanup --prune-prefix; brew doctor"
-
-# http headers
-alias hd="curl -s -I"
-
-# flush dns cache
 alias dns="sudo killall -hUP mDNSResponder"
-
-# dig wrappers
-alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
-alias ns="dig +nocmd any +multiline +noall +answer"
 
 # work util
 alias s="script/server"
 alias sup="script/update"
 alias t="script/test"
 alias n="git pull; sup; s"
-alias gmm="gco master; git pull; gco -; git merge master --no-edit"
-alias grm="gco master; git pull; gco -; git rebase master"
-alias gmmn="gco main; git pull; gco -; git merge main --no-edit"
-alias grmn="gco main; git pull; gco -; git rebase main"
