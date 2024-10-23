@@ -1,4 +1,3 @@
-zmodule git
 zmodule input
 zmodule utility
 zmodule environment

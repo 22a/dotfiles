@@ -6,8 +6,6 @@ all () {
   homebrew;
   brewfile;
   shell;
-  neovim;
-  nvm;
   symlinks;
 }
 
@@ -42,26 +40,14 @@ homebrew () {
   fi
 }
 
-neovim () {
-  # install neovim python module
-  pip3 install neovim
-}
-
-nvm () {
-  # install node version manager
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
-}
-
 symlinks () {
   touch ~/.hushlogin
   touch ~/.aliases.priv
-  mkdir -p ~/.config/nvim/
 
   ln -sf "$SCRIPT_DIR/aliases"        ~/.aliases
   ln -sf "$SCRIPT_DIR/gitconfig"      ~/.gitconfig
-  ln -sf "$SCRIPT_DIR/init.lua"       ~/.config/nvim/init.lua
-  ln -sf "$SCRIPT_DIR/lazy-lock.json" ~/.config/nvim/lazy-lock.json
   ln -sf "$SCRIPT_DIR/tmux.conf"      ~/.tmux.conf
+  ln -sf "$SCRIPT_DIR/vimrc"          ~/.vimrc
   ln -sf "$SCRIPT_DIR/zimrc"          ~/.zimrc
   ln -sf "$SCRIPT_DIR/zshrc"          ~/.zshrc
 }
@@ -76,8 +62,6 @@ case "$1" in
   --all) all;;
   --brewfile) brewfile;;
   --homebrew) homebrew;;
-  --neovim) neovim;;
-  --nvm) nvm;;
   --shell) shell;;
   --symlinks) symlinks;;
   *) echo "unexpected arg: $1"; exit 1;;

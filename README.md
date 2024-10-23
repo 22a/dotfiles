@@ -8,23 +8,18 @@
 
 # [22a's](https://github.com/22a) dotfiles
 
-#### aka. Spooky Lizard Incantation Configuration
 
-This repo contains configuration files for [neovim](https://github.com/neovim/neovim), [zsh](https://github.com/zsh-users/zsh), [tmux](https://github.com/tmux/tmux), [iTerm2](https://github.com/gnachman/iTerm2), and a script to bootstrap a new machine to create an adequately useful development environment.
+Configuration files for vim, zsh, tmux, and a script to bootstrap a new machine an adequately acceptable state.
+
 ## ⚠ Warnings ⚠
-
 The bootstrap script has been written with a fresh install in mind, it assumes a blank canvas.
 **It will forcibly symlink over your dotfiles** if you let it.
 
 ## Installation
-
 Install system specific build tools homebrew will need:
 ```bash
 # macOS, this opens gui dialogs, click accept, etc.
 xcode-select --install
-
-# ~unix
-sudo apt-get install build-essential
 ```
 
 Clone this repo:
@@ -43,36 +38,25 @@ Run the bootstrap script:
 ```
 
 ## Post-install configuration
-
 Relaunch your terminal, it'll load the [zim](https://github.com/zimfw/zimfw) packages.
 
-Open `nvim` and install treesitter grammars, debugging adapters, and lanugage servers:
-```viml
-TSInstall
-DapInstall
-LspInstall
-" eg. LspInstall tsserver ember tailwindcss cssls html jsonls bashls lua_ls
-```
-
 ### Things you'll have to set up manually
-
 - Generate a new ssh key
     ```bash
-    ssh-keygen -t rsa -b 4096 -C "your@email.ie"
+    ssh-keygen -t ed25519 -C "your@email.ie"
     ```
     - Add it to ssh-agent
         ```bash
-        ssh-add --apple-use-keychain ~/.ssh/id_rsa
+        ssh-add --apple-use-keychain ~/.ssh/id_ed25519\
         ```
-    - Add it to GitHub - [https://github.com/settings/keys](https://github.com/settings/keys)
+    - Add it to GitHub - using `gh`
         ```bash
-        cat ~/.ssh/id_rsa.pub | pbcopy
+        gh auth login
         ```
 - Update the remote for this repo so we can push changes
     ```bash
     git remote set-url origin git@github.com:22a/dotfiles.git
     ```
-- Import gpg key to gpg-suite
 - Populate `~/.gituser` file
     ```gitconfig
     [user]
@@ -86,8 +70,3 @@ LspInstall
 - Remove guest user
 - Set up the default iTerm2 profile with a new colorscheme
   - https://github.com/catppuccin/iterm, specifically [mocha](https://github.com/catppuccin/iterm/blob/main/colors/catppuccin-mocha.itermcolors)
-- Disable spotlight keyboard shortcuts
-  ```
-  System Preferences... -> Keyboard -> Shortcuts -> Spotlight -> Untick both
-  ```
-- Configure Alfred with the `Alfred macOS` theme

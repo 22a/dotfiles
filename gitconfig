@@ -2,15 +2,15 @@
   path = .gituser
 
 [core]
-  editor = nvim
+  editor = vim
   hooksPath = ~/.config/git/global-hooks
+
+[init]
+  defaultBranch = main
 
 [alias]
   undo-commit = reset --soft HEAD^
   unstage = reset HEAD --
-
-[commit]
-  ; gpgsign = true
 
 [pull]
   default = current
@@ -36,6 +36,3 @@
 
 [protocol]
   version = 2
-
-[init]
-  defaultBranch = main
