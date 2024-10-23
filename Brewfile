@@ -24,3 +24,4 @@ cask "tuple"
 cask "vlc"
 mas "Black Out", id: 1319884285
 mas "Contrast", id: 1254981365
+mas "Next Meeting", id: 1017470484
