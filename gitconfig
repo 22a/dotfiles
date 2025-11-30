@@ -3,7 +3,6 @@
 
 [core]
   editor = vim
-  hooksPath = ~/.config/git/global-hooks
 
 [init]
   defaultBranch = main
@@ -14,6 +13,7 @@
 
 [pull]
   default = current
+  rebase = true
 
 [push]
   default = current
